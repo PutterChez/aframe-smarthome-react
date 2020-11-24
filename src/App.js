@@ -56,7 +56,7 @@ class App extends Component {
 
   render() {
     return (
-      <Scene environment="preset: default">
+      <Scene environment="preset: default" style="position: absolute; height: 100%; width: 100%;">
         <Entity
           camera={{ userHeight: 1.6 }}
           look-controls={{ enabled: "true" }}
