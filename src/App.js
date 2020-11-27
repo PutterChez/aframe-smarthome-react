@@ -12,7 +12,7 @@ class App extends Component {
     super(props);
     this.state = {
       lightOn: false,
-      url: 'http://fb82987a45f0.ngrok.io/'
+      url: 'https://fb82987a45f0.ngrok.io/'
     };
     this.toggle = this.toggle.bind(this);
   }
