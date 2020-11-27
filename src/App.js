@@ -61,7 +61,6 @@ class App extends Component {
     return (
       <Scene environment="preset: default" style="position: absolute; height: 100%; width: 100%;">
         <Entity
-          camera={{}}
           look-controls={{ enabled: "true" }}
           wasd-controls={{ enabled: "true" }}
           position={{ x: 0, y: 1.65, z: 0 }}
