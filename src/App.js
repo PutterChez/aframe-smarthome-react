@@ -6,6 +6,7 @@ import React, { Component } from "react";
 
 require("aframe-gui");
 require("aframe-environment-component");
+require("aframe-controller-cursor-component");
 
 class App extends Component {
   constructor(props) {
@@ -60,7 +61,7 @@ class App extends Component {
     return (
       <Scene environment="preset: default" style="position: absolute; height: 100%; width: 100%;">
         <Entity
-          camera
+          camera={{}}
           look-controls={{ enabled: "true" }}
           wasd-controls={{ enabled: "true" }}
           position={{ x: 0, y: 1.65, z: 0 }}
@@ -68,12 +69,19 @@ class App extends Component {
 
         <a-cursor></a-cursor>
 
-          <Entity id="rightHand" static-body="shape: sphere; sphereRadius: 0.02;"
-            vive-controls="hand: right"
+          <Entity 
+            id="rightHand" 
+            static-body="shape: sphere; sphereRadius: 0.02;"
             sphere-collider="objects: .throwable"
-            grab oculus-touch-controls="hand: right">    
+            grab ={{}}
+            oculus-touch-controls="hand: right">
           </Entity>
-          <Entity id="leftHand" controller-cursor oculus-touch-controls="hand: left"></Entity>
+
+          <Entity 
+            id="leftHand" 
+            oculus-touch-controls="hand: left"
+            controller-cursor={{}}
+          ></Entity>
 
         </Entity>
 
