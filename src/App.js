@@ -8,10 +8,12 @@ require("aframe-gui");
 require("aframe-environment-component");
 
 class App extends Component {
-  constructor() {
-    super();
-    this.lightbulbRef = React.createRef();
-    this.state = {lightOn: false};
+  constructor(props) {
+    super(props);
+    this.state = {
+      lightOn: false,
+      url: 'http://fb82987a45f0.ngrok.io/'
+    };
     this.toggle = this.toggle.bind(this);
   }
 
@@ -21,7 +23,7 @@ class App extends Component {
 
   componentDidMount() {
     // GET request using fetch with error handling
-    fetch('http://192.168.4.232:8000', {  mode: 'no-cors' })
+    fetch(this.state.url, {  mode: 'no-cors' })
         .then(async response => {
             const data = await response.json();
 
@@ -43,16 +45,14 @@ class App extends Component {
   async toggle() {
     if(this.state.lightOn){
       console.log("turn off light");
-      await fetch('http://192.168.4.232:8000/light/off', {  mode: 'no-cors' });
+      await fetch(this.state.url + 'light/off', {  mode: 'no-cors' });
       this.setState({lightOn: false});
-      this.lightbulbRef = false;
     }
 
     else{
       console.log("turn on light");
-      await fetch('http://192.168.4.232:8000/light/on', {  mode: 'no-cors' });
+      await fetch(this.state.url + 'light/on', {  mode: 'no-cors' });
       this.setState({lightOn: true});
-      this.lightbulbRef = true;
     }
   }
 
@@ -60,7 +60,7 @@ class App extends Component {
     return (
       <Scene environment="preset: default" style="position: absolute; height: 100%; width: 100%;">
         <Entity
-          camera={{ userHeight: 1.6 }}
+          camera
           look-controls={{ enabled: "true" }}
           wasd-controls={{ enabled: "true" }}
           position={{ x: 0, y: 1.65, z: 0 }}
@@ -146,7 +146,7 @@ class App extends Component {
               
               <Entity
                 id="lightbulbLight"
-                visible={this.lightbulbRef}>
+                visible={this.state.lightOn}>
                 <a-sphere color="blue" radius="69.130" position="-0.176 141.959 0" material="blending:  multiply"></a-sphere>
 
                 <a-light type="point" color="blue" intensity="0.6" light="castShadow: true" decay="1.2" distance="5.0"></a-light>
