@@ -45,12 +45,14 @@ class App extends Component {
       console.log("turn off light");
       await fetch('http://192.168.4.232:8000/light/off', {  mode: 'no-cors' });
       this.setState({lightOn: false});
+      this.lightbulbRef = false;
     }
 
     else{
       console.log("turn on light");
       await fetch('http://192.168.4.232:8000/light/on', {  mode: 'no-cors' });
       this.setState({lightOn: true});
+      this.lightbulbRef = true;
     }
   }
 
@@ -63,7 +65,16 @@ class App extends Component {
           wasd-controls={{ enabled: "true" }}
           position={{ x: 0, y: 1.65, z: 0 }}
         >
-          <a-cursor></a-cursor>
+
+        <a-cursor></a-cursor>
+
+          <a-entity id="rightHand" static-body="shape: sphere; sphereRadius: 0.02;"
+            vive-controls="hand: right"
+            sphere-collider="objects: .throwable"
+            grab oculus-touch-controls="hand: right">    
+          </a-entity>
+          <a-entity id="leftHand" controller-cursor oculus-touch-controls="hand: left"></a-entity>
+
         </Entity>
 
         <a-assets>
@@ -135,7 +146,7 @@ class App extends Component {
               
               <Entity
                 id="lightbulbLight"
-                visible={this.state.lightOn}>
+                visible={this.lightbulbRef}>
                 <a-sphere color="blue" radius="69.130" position="-0.176 141.959 0" material="blending:  multiply"></a-sphere>
 
                 <a-light type="point" color="blue" intensity="0.6" light="castShadow: true" decay="1.2" distance="5.0"></a-light>
