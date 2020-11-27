@@ -68,12 +68,12 @@ class App extends Component {
 
         <a-cursor></a-cursor>
 
-          <a-entity id="rightHand" static-body="shape: sphere; sphereRadius: 0.02;"
+          <Entity id="rightHand" static-body="shape: sphere; sphereRadius: 0.02;"
             vive-controls="hand: right"
             sphere-collider="objects: .throwable"
             grab oculus-touch-controls="hand: right">    
-          </a-entity>
-          <a-entity id="leftHand" controller-cursor oculus-touch-controls="hand: left"></a-entity>
+          </Entity>
+          <Entity id="leftHand" controller-cursor oculus-touch-controls="hand: left"></Entity>
 
         </Entity>
 
