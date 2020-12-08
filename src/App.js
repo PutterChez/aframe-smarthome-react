@@ -57,6 +57,11 @@ class App extends Component {
           ></a-asset-item>
 
           <a-asset-item
+            id="wallPartition"
+            src="cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/wallPartition.gltf"
+          ></a-asset-item>
+
+          <a-asset-item
             id="labModel"
             src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react@v1.0/assets/LabPlan.gltf"
           ></a-asset-item>
