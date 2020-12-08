@@ -58,7 +58,11 @@ class App extends Component {
 
           <a-asset-item
             id="labModel"
-            src="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome@v1.7/LabPlan.gltf"
+            src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react@v1.0/assets/LabPlan.gltf"
+          ></a-asset-item>
+          <a-asset-item
+            id="labWall"
+            src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react@v1.0/assets/Lab.gltf"
           ></a-asset-item>
         </a-assets>
 
@@ -73,6 +77,11 @@ class App extends Component {
           <Entity
             id="lab"
             gltf-model="#labModel"
+            position={{ x: -4, y: 0.11, z: 0 }}
+          />
+          <Entity
+            id="labWall"
+            gltf-model="#labWall"
             position={{ x: -4, y: 0.1, z: 0 }}
           />
 
