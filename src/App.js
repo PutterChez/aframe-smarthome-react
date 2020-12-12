@@ -41,19 +41,19 @@ class App extends Component {
         <a-assets>
           <a-asset-item
             id="tv"
-            src="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome@v1.3/TV_01.gltf"
+            src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/devices/TV_01.gltf"
           ></a-asset-item>
           <a-asset-item
             id="airconModel"
-            src="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome@v1.3/Air%20conditioner%201.gltf"
+            src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/devices/Air%20conditioner%201.gltf"
           ></a-asset-item>
           <a-asset-item
             id="dysonModel"
-            src="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome/scene.gltf"
+            src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/devices/scene.gltf"
           ></a-asset-item>
           <a-asset-item 
             id="lightbulbModel" 
-            src="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome/Lightbulb.gltf"
+            src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/devices/Lightbulb.gltf"
           ></a-asset-item>
 
           <a-asset-item
@@ -73,6 +73,10 @@ class App extends Component {
             src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/deskLecture.gltf"
           ></a-asset-item>
           
+          <a-asset-item
+            id="cabinetModel"
+            src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/cabinet_double.gltf"
+          ></a-asset-item>
           <a-asset-item
             id="shelfModel"
             src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/shelf.gltf"
@@ -410,6 +414,12 @@ class App extends Component {
             gltf-model="#deskLectureModel"
             position="-3.03498 0.06978 -8.076"
             rotation="0 90 0"
+          />
+          <Entity
+            id="cabinet1"
+            gltf-model="#cabinetModel"
+            position="2.1533 0.06978 -7.64441"
+            rotation="0 180 0"
           />
           
 
