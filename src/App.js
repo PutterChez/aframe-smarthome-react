@@ -10,10 +10,57 @@ require("aframe-environment-component");
 require("aframe-controller-cursor-component");
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      url: 'https://ff4827428103.ngrok.io/',
+      deviceList: []
+      // deviceList: [{name: 'lightbulb1', position: '2.04 0.936 -1.5', rotation: '0 90 0', tag: 'ict.HueLight01.onoff'},
+      // {name: 'lightbulb2', position: '2.04 0.936 -3.043', rotation: '0 90 0', tag: 'ict.HueLight02.onoff'}],
+    };
+  }
+
+  async componentDidMount() {
+
+    // GET request using fetch with error handling
+    fetch(this.state.url + 'mock/get/')
+        .then(async response => {
+            const data = await response.json();
+
+            // check for error response
+            if (!response.ok) {
+                // get error message from body or default to response statusText
+                const error = (data && data.message) || response.statusText;
+                return Promise.reject(error);
+            }
+
+            const zodbData = JSON.parse(data)
+            console.log(zodbData);
+
+            // console.log("Name: " + id + "\nLocation: " + zodbData[id].location + "\nRotation: " + zodbData[id].rotation + "\nTag: " +  zodbData[id].tag[0].tags)
+            
+            zodbData.ICTLab.map((devices) => {
+              console.log("TAG: " + devices.tags.tag)
+              this.addDevice(devices.name, devices.location, devices.rotation, devices.tags[0].tag);
+            })
+
+            // this.addDevice(id, zodbData[id].location, zodbData[id].rotation, zodbData[id].tag[0].tags);
+        })
+        .catch(error => {
+            console.error('There was an error!', error);
+        });
+  }
+
+  addDevice(newName, newPosition, newRotation, newTag) {
+    var newDevice = {name: newName, position: newPosition, rotation: newRotation, tag: newTag} 
+    this.setState(prevState => ({
+      deviceList: [...prevState.deviceList, newDevice]
+    }))
+  }
 
   render() {
     return (
-      <Scene environment="preset: default" style="position: absolute; height: 100%; width: 100%;">
+      <Scene environment="preset: default; lighting: none" style={{position: "absolute", height: "100%", width: "100%"}}>
         <Entity
           id="cameraRig"
         >
@@ -126,8 +173,7 @@ class App extends Component {
           position="0.214 3.281 -2.02969"
           intensity="0.2"
           color="white"
-          light="castShadow: true"
-          visible="false"
+          visible="true"
         ></a-light>
 
         <a-light
@@ -471,13 +517,13 @@ class App extends Component {
               gltf-model="#dysonModel"
               position={{ x: 0.9, y: 0, z: -4.3 }}
               rotation={{ x: 0, y: 0, z: 0 }}
-              animation={{property: "rotation", to: "0 115 0", dir: "alternate", loop: "true", dur: "2000"}}
+              animation={{property: "rotation", to: "0 115 0", dir: "alternate", loop: "true", dur: "5000"}}
               />
             <a-gui-button
               id="fanButton"
               width="0.75" height="0.25" 
               position="0.9 1.1 -4.4"
-              // onClick="turnOffFan"
+              // onClick="  "
               value="Toggle Fan"
               font-family="Arial"
               font-size="30px"
@@ -485,7 +531,15 @@ class App extends Component {
             </a-gui-button>
           </Entity>
           
-          <Device></Device>
+          {/* <Device></Device> */}
+          <Entity id="deviceList">
+            {
+              this.state.deviceList.map((item) => (
+                <Device key={item.name} position={item.position} rotation={item.rotation} tag={item.tag}/>
+              ))
+            }
+
+          </Entity>
 
           <Entity
             id="aircon"
