@@ -11,6 +11,7 @@ require("aframe-gui");
 require("aframe-environment-component");
 require("aframe-controller-cursor-component");
 require('aframe-extras');
+require('aframe-event-set-component');
 
 class App extends Component {
   constructor(props) {
@@ -576,10 +577,19 @@ class App extends Component {
             id="book"
             class="throwable"
             gltf-model="#book"
-            position="-0.07672 2 -4.46525"
+            position="-0.07672 1 -4.46525"
             scale="0.5 0.5 0.5"
             shadow={{cast: true}}
           />
+
+          <a-box 
+            dynamic-body={{}}
+            class="throwable"
+            position="-1 1 -4.46525"
+            scale="0.4 0.4 0.4"
+            event-set__1="_event: triggerdown	; material.color: blue"     
+            event-set__2="_event: triggerup ; material.color: red">      
+          </a-box>
         </Entity>
       </Scene>
     );
