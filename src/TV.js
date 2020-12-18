@@ -5,7 +5,7 @@ class Device extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {
-            url: 'https://ff4827428103.ngrok.io/',
+            url: 'https://523619f360bf.ngrok.io/',
             tvOn: false,
             volume: 0,
         };
@@ -47,7 +47,7 @@ class Device extends PureComponent {
                     gltf-model="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome/TV_01.gltf" 
                     
                     scale={{ x: 0.06, y: 0.06 , z: 0.06}}
-                    rotation={{ x: 0, y: -140, z: 0 }}
+                    rotation={this.props.rotation}
                     shadow={{cast: true}}>
                 </Entity>
                 
@@ -59,8 +59,8 @@ class Device extends PureComponent {
                     opacity="0.7" 
                     width="3.5" 
                     height="4.5"
-                    rotation="0 -90 0"
-                    position="0 1 0"
+                    rotation={this.props.rotation}
+                    position="0 1.35 0"
                     scale="0.3 0.3 0.3"
                     >
                     

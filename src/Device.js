@@ -5,7 +5,7 @@ class Device extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {
-            url: 'https://ff4827428103.ngrok.io/',
+            url: 'https://523619f360bf.ngrok.io/',
             lightOn: false,
             pickingColor: false,
             finalColor: "#ffffff",
@@ -18,13 +18,15 @@ class Device extends PureComponent {
     }
 
     async toggle() {
+        console.log("Toggle TAG: " + this.props.tag[0]);
+
         if(this.state.lightOn){
             console.log("turn off light");
 
             const requestOptions = {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ tag: this.props.tag, value: 0 })
+                body: JSON.stringify({ tag: this.props.tag[0].tag, value: 0 })
             };
             fetch(this.state.url + 'mock/sendTag/', requestOptions)
                 this.setState({lightOn: false});
@@ -37,7 +39,7 @@ class Device extends PureComponent {
             const requestOptions = {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ tag: this.props.tag, value: 1 })
+                body: JSON.stringify({ tag: this.props.tag[0].tag, value: 1 })
             };
             fetch(this.state.url + 'mock/sendTag/', requestOptions)
                 this.setState({lightOn: true});
@@ -45,11 +47,25 @@ class Device extends PureComponent {
         }
     }
 
+    async changeColor() {
+        console.log("COLOR TAG: " + this.props.tag[1]);
+        console.log("changle color");
+
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ tag: this.props.tag[1].tag, value: this.state.finalColor })
+        };
+            fetch(this.state.url + 'mock/sendTag/', requestOptions)
+                this.setState({lightOn: false});
+        
+    }
+
     colorPicker() {
         
         if(this.state.pickingColor){
             this.setState({pickingColor: false});
-
+            this.changeColor();
         }
         
         else
@@ -96,7 +112,7 @@ class Device extends PureComponent {
                     gltf-model="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome/Lightbulb.gltf" 
                     
                     scale={{ x: 0.001, y: 0.001 , z: 0.001}}
-                    rotation={{ x: 0, y: 90, z: 0 }}
+                    rotation={this.props.rotation}
                     shadow={{cast: true}}>
 
                     <Entity
