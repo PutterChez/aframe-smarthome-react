@@ -5,9 +5,12 @@ import { Entity, Scene } from "aframe-react";
 import React, { Component } from "react";
 import Device from "./Device";
 
+import "aframe-physics-system/dist/aframe-physics-system"
+
 require("aframe-gui");
 require("aframe-environment-component");
 require("aframe-controller-cursor-component");
+require('aframe-extras');
 
 class App extends Component {
   constructor(props) {
@@ -60,7 +63,7 @@ class App extends Component {
 
   render() {
     return (
-      <Scene environment="preset: default; lighting: none" style={{position: "absolute", height: "100%", width: "100%"}}>
+      <Scene physics="gravity: -1.6" renderer="antialias: true" environment="preset: default; lighting: none" style={{position: "absolute", height: "100%", width: "100%"}}>
         <Entity
           id="cameraRig"
         >
@@ -166,6 +169,11 @@ class App extends Component {
             id="labWall"
             src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react@v1.0/assets/Lab.gltf"
           ></a-asset-item>
+
+          <a-asset-item
+            id="book"
+            src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/CHAHIN_NOTEBOOK.gltf"
+          ></a-asset-item>
         </a-assets>
 
         <a-light
@@ -232,33 +240,39 @@ class App extends Component {
 
 
             <Entity
+              static-body={{}}
               id="deskLecture1"
               gltf-model="#deskLectureModel"
               position="-0.562 0.06 -4.035"
             />
             <Entity
+              static-body={{}}
               id="deskLecture2"
               gltf-model="#deskLectureModel"
               position="-1.762 0.06 -4.035"
             />
             <Entity
+              static-body={{}}
               id="deskLecture3"
               gltf-model="#deskLectureModel"
               position="-2.96 0.06 -4.035"
             />
             <Entity
+              static-body={{}}
               id="deskLectureSec1"
               gltf-model="#deskLectureModel"
               position="-0.504 0.06 -2.204"
               rotation="0 180 0"
             />
             <Entity
+              static-body={{}}
               id="deskLectureSec2"
               gltf-model="#deskLectureModel"
               position="-1.700 0.06 -2.204"
               rotation="0 180 0"
             />
             <Entity
+              static-body={{}}
               id="deskLectureSec3"
               gltf-model="#deskLectureModel"
               position="-3.27678 0.06 -2.5328"
@@ -557,6 +571,15 @@ class App extends Component {
             rotation={{ x: 0, y: 90, z: 0 }}
           />
 
+          <Entity
+            dynamic-body={{}}
+            id="book"
+            class="throwable"
+            gltf-model="#book"
+            position="-0.07672 2 -4.46525"
+            scale="0.5 0.5 0.5"
+            shadow={{cast: true}}
+          />
         </Entity>
       </Scene>
     );
