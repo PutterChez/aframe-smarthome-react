@@ -63,7 +63,7 @@ class App extends Component {
 
   render() {
     return (
-      <Scene physics="gravity: -1.6" renderer="antialias: true" environment="preset: default; lighting: none" style={{position: "absolute", height: "100%", width: "100%"}}>
+      <Scene physics="gravity: -1.6" renderer="antialias: true" environment="preset: default; lighting: none" style="position: absolute; height: 100%; width: 100%;">
         <Entity
           id="cameraRig"
         >
