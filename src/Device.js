@@ -49,6 +49,7 @@ class Device extends PureComponent {
         
         if(this.state.pickingColor){
             this.setState({pickingColor: false});
+
         }
         
         else
@@ -57,7 +58,7 @@ class Device extends PureComponent {
 
     componentToHex(c) {
         var hex = c.toString(16);
-        return hex.length == 1 ? "0" + hex : hex;
+        return hex.length === 1 ? "0" + hex : hex;
     }
 
     rgbToHex(r, g, b) {
@@ -72,14 +73,18 @@ class Device extends PureComponent {
 
         switch(sliderID){
             case 'redSlider':
-                this.state.redColor = value;
+                this.setState({redColor: value});
+                break;
             case 'greenSlider':
-                this.state.greenColor = value;
+                this.setState({greenColor: value});
+                break;
             case 'blueSlider':
-                this.state.blueColor = value;
+                this.setState({blueColor: value});
+                break;
+            default:
         }
 
-        this.setState( {finalColor: this.rgbToHex(this.state.redColor, this.state.blueColor, this.state.greenColor)} );
+        this.setState( {finalColor: this.rgbToHex(this.state.redColor, this.state.greenColor, this.state.blueColor)} );
         console.log(this.state.finalColor);
     }
 
@@ -183,7 +188,7 @@ class Device extends PureComponent {
                         id="redSlider"
                         onClick={this.sliderClick}
                         background-color="red"
-                        percent="0.3"
+                        percent="0.01"
                         margin="0 0 0.05 0"
                     >
                     </a-gui-slider>
@@ -193,7 +198,7 @@ class Device extends PureComponent {
                         id="greenSlider"
                         onClick={this.sliderClick}
                         background-color="green"
-                        percent="0.5"
+                        percent="0.01"
                         margin="0 0 0.05 0"
                     >
                     </a-gui-slider>
@@ -203,7 +208,7 @@ class Device extends PureComponent {
                         id="blueSlider"
                         onClick={this.sliderClick}
                         background-color="blue"
-                        percent="0.5"
+                        percent="0.01"
                         margin="0 0 0.05 0"
                     >
                     </a-gui-slider>
