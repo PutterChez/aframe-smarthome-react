@@ -82,7 +82,8 @@ class App extends Component {
             static-body="shape: sphere; sphereRadius: 0.02;"
             sphere-collider="objects: .throwable"
             grab ={{}}
-            oculus-touch-controls="hand: right">
+            oculus-touch-controls="hand: right"
+            >
           </Entity>
 
           <Entity 

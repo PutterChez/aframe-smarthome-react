@@ -9,12 +9,16 @@ class Device extends PureComponent {
             lightOn: false,
             pickingColor: false,
             finalColor: "#ffffff",
-            redColor: 0,
-            greenColor: 0,
-            blueColor: 0,
+            redColor: "0.5",
+            greenColor: "0.5",
+            blueColor: "0.5",
         };
         this.toggle = this.toggle.bind(this);
         this.colorPicker = this.colorPicker.bind(this);
+
+        this.redRef = React.createRef();
+        this.greenRef = React.createRef();
+        this.blueRef = React.createRef();
     }
 
     async toggle() {
@@ -47,15 +51,18 @@ class Device extends PureComponent {
 
     colorPicker() {
         
-        if(this.state.pickingColor)    
+        if(this.state.pickingColor){
+            console.log("R: " +  this.redRef.current + ", G: " + this.greenRef.current  + ", B: " + this.blueRef.current );
             this.setState({pickingColor: false});
+        }
         
         else
             this.setState({pickingColor: true});
     }
 
-    slider() {
-        console.log("slider test");
+    sliderClick = (e, data) => {
+        // access to e.target here
+        console.log(e.target.getAttribute("data-percent"));
     }
 
     render() {
@@ -155,27 +162,27 @@ class Device extends PureComponent {
 
                     <a-gui-slider
                         width="2.5" height="0.4"
-                        onClick={this.slider}
+                        onClick={this.sliderClick}
                         background-color="red"
-                        percent="0"
+                        percent="0.3"
                         margin="0 0 0.05 0"
                     >
                     </a-gui-slider>
                     
                     <a-gui-slider
                         width="2.5" height="0.4"
-                        onClick={this.slider}
+                        onClick={this.sliderClick}
                         background-color="green"
-                        percent="0"
+                        percent="0.5"
                         margin="0 0 0.05 0"
                     >
                     </a-gui-slider>
 
                     <a-gui-slider
                         width="2.5" height="0.4"
-                        onClick={this.slider}
+                        onClick={this.sliderClick}
                         background-color="blue"
-                        percent="0"
+                        percent="0.5"
                         margin="0 0 0.05 0"
                     >
                     </a-gui-slider>
