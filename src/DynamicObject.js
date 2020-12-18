@@ -21,14 +21,21 @@ class DynamicObject extends PureComponent {
                 gltf-model="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/CHAHIN_NOTEBOOK.gltf"
                 position="-0.07672 1 -4.46525"
                 scale={this.state.scale}
-                event-set__1="_event: onGripOpen; scale: 1 1 1"
             >
             </Entity>
         )
     }
 
     componentDidMount() {
-        document.getElementsByClassName("throwable")[0].addEventListener("triggerup", this.move);
+        // document.getElementsByClassName("throwable")[0].addEventListener("triggerup", this.move);
+        
+        document.getElementsByClassName("throwable")[0].addEventListener('hit', this.move);
+        document.getElementsByClassName("throwable")[0].addEventListener('gripdown', this.move);
+        document.getElementsByClassName("throwable")[0].addEventListener('gripup', this.move);
+        document.getElementsByClassName("throwable")[0].addEventListener('trackpaddown', this.move);
+        document.getElementsByClassName("throwable")[0].addEventListener('trackpadup', this.move);
+        document.getElementsByClassName("throwable")[0].addEventListener('triggerdown', this.move);
+        document.getElementsByClassName("throwable")[0].addEventListener('triggerup', this.move);
     }
 
     move = (event) => {

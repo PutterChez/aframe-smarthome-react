@@ -60,9 +60,9 @@ class Device extends PureComponent {
             this.setState({pickingColor: true});
     }
 
-    sliderClick = (e, data) => {
+    sliderClick = (e) => {
         // access to e.target here
-        console.log(e.target.getAttribute("data-percent"));
+        console.log(e.currentTarget);
     }
 
     render() {
