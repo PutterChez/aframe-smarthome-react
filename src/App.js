@@ -515,14 +515,15 @@ class App extends Component {
             <Entity 
               id="fan"
               gltf-model="#dysonModel"
-              position={{ x: 0.9, y: 0, z: -4.3 }}
+              position={{ x: 0.9, y: 0.06, z: -4.3 }}
+              scale={{x: 1.0, y: 1.2, z: 1}}
               rotation={{ x: 0, y: 0, z: 0 }}
               animation={{property: "rotation", to: "0 115 0", dir: "alternate", loop: "true", dur: "5000"}}
               />
             <a-gui-button
               id="fanButton"
               width="0.75" height="0.25" 
-              position="0.9 1.1 -4.4"
+              position="0.9 1.33 -4.4"
               // onClick="  "
               value="Toggle Fan"
               font-family="Arial"
