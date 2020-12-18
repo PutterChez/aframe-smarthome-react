@@ -8,6 +8,10 @@ class Device extends PureComponent {
             url: 'https://ff4827428103.ngrok.io/',
             lightOn: false,
             pickingColor: false,
+            finalColor: "#ffffff",
+            redColor: 0,
+            greenColor: 0,
+            blueColor: 0,
         };
         this.toggle = this.toggle.bind(this);
         this.colorPicker = this.colorPicker.bind(this);
@@ -153,7 +157,7 @@ class Device extends PureComponent {
                         width="2.5" height="0.4"
                         onClick={this.slider}
                         background-color="red"
-                        percent="0.3"
+                        percent="0"
                         margin="0 0 0.05 0"
                     >
                     </a-gui-slider>
@@ -162,7 +166,7 @@ class Device extends PureComponent {
                         width="2.5" height="0.4"
                         onClick={this.slider}
                         background-color="green"
-                        percent="0.3"
+                        percent="0"
                         margin="0 0 0.05 0"
                     >
                     </a-gui-slider>
@@ -171,7 +175,7 @@ class Device extends PureComponent {
                         width="2.5" height="0.4"
                         onClick={this.slider}
                         background-color="blue"
-                        percent="0.3"
+                        percent="0"
                         margin="0 0 0.05 0"
                     >
                     </a-gui-slider>
@@ -179,6 +183,7 @@ class Device extends PureComponent {
                     <a-gui-label
                         width="2.5" height="0.50"
                         value="Selected Color"
+                        background-color={this.state.finalColor}
                         margin="0 0 0.05 0"
                         font-size="150px"
                     ></a-gui-label>

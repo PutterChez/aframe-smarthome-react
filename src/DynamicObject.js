@@ -21,6 +21,7 @@ class DynamicObject extends PureComponent {
                 gltf-model="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/CHAHIN_NOTEBOOK.gltf"
                 position="-0.07672 1 -4.46525"
                 scale={this.state.scale}
+                event-set__1="_event: triggerup; scale: 1 1 1"
             >
             </Entity>
         )
