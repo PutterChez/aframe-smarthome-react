@@ -9,16 +9,12 @@ class Device extends PureComponent {
             lightOn: false,
             pickingColor: false,
             finalColor: "#ffffff",
-            redColor: "0.5",
-            greenColor: "0.5",
-            blueColor: "0.5",
+            redColor: 0,
+            greenColor: 0,
+            blueColor: 0,
         };
         this.toggle = this.toggle.bind(this);
         this.colorPicker = this.colorPicker.bind(this);
-
-        this.redRef = React.createRef();
-        this.greenRef = React.createRef();
-        this.blueRef = React.createRef();
     }
 
     async toggle() {
@@ -52,7 +48,6 @@ class Device extends PureComponent {
     colorPicker() {
         
         if(this.state.pickingColor){
-            console.log("R: " +  this.redRef.current + ", G: " + this.greenRef.current  + ", B: " + this.blueRef.current );
             this.setState({pickingColor: false});
         }
         
@@ -60,9 +55,32 @@ class Device extends PureComponent {
             this.setState({pickingColor: true});
     }
 
+    componentToHex(c) {
+        var hex = c.toString(16);
+        return hex.length == 1 ? "0" + hex : hex;
+    }
+
+    rgbToHex(r, g, b) {
+        console.log("R: " + r, ", G: " + g + ", B: " + b);
+        return "#" + this.componentToHex(r) + this.componentToHex(g) + this.componentToHex(b);
+    }
+
     sliderClick = (e) => {
-        // access to e.target here
-        console.log(e.currentTarget);
+        const sliderID = e.currentTarget.getAttribute('id');
+        const percent = e.currentTarget.getAttribute('gui-slider').percent;
+        const value = parseInt(percent * 255);
+
+        switch(sliderID){
+            case 'redSlider':
+                this.state.redColor = value;
+            case 'greenSlider':
+                this.state.greenColor = value;
+            case 'blueSlider':
+                this.state.blueColor = value;
+        }
+
+        this.setState( {finalColor: this.rgbToHex(this.state.redColor, this.state.blueColor, this.state.greenColor)} );
+        console.log(this.state.finalColor);
     }
 
     render() {
@@ -162,6 +180,7 @@ class Device extends PureComponent {
 
                     <a-gui-slider
                         width="2.5" height="0.4"
+                        id="redSlider"
                         onClick={this.sliderClick}
                         background-color="red"
                         percent="0.3"
@@ -171,6 +190,7 @@ class Device extends PureComponent {
                     
                     <a-gui-slider
                         width="2.5" height="0.4"
+                        id="greenSlider"
                         onClick={this.sliderClick}
                         background-color="green"
                         percent="0.5"
@@ -180,6 +200,7 @@ class Device extends PureComponent {
 
                     <a-gui-slider
                         width="2.5" height="0.4"
+                        id="blueSlider"
                         onClick={this.sliderClick}
                         background-color="blue"
                         percent="0.5"
