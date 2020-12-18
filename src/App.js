@@ -19,9 +19,9 @@ class App extends Component {
     super(props);
     this.state = {
       url: 'https://ff4827428103.ngrok.io/',
-      deviceList: []
-      // deviceList: [{name: 'lightbulb1', position: '2.04 0.936 -1.5', rotation: '0 90 0', tag: 'ict.HueLight01.onoff'},
-      // {name: 'lightbulb2', position: '2.04 0.936 -3.043', rotation: '0 90 0', tag: 'ict.HueLight02.onoff'}],
+      deviceList: [],
+      deviceList: [{name: 'lightbulb1', position: '2.04 0.936 -1.5', rotation: '0 90 0', tag: 'ict.HueLight01.onoff'},
+      {name: 'lightbulb2', position: '2.04 0.936 -3.043', rotation: '0 90 0', tag: 'ict.HueLight02.onoff'}],
     };
   }
 
@@ -574,7 +574,7 @@ class App extends Component {
           />
 
           <DynamicObject></DynamicObject>
-          
+
         </Entity>
       </Scene>
     );

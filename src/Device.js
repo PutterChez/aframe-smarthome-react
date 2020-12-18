@@ -7,8 +7,10 @@ class Device extends PureComponent {
         this.state = {
             url: 'https://ff4827428103.ngrok.io/',
             lightOn: false,
+            pickingColor: false,
         };
         this.toggle = this.toggle.bind(this);
+        this.colorPicker = this.colorPicker.bind(this);
     }
 
     async toggle() {
@@ -39,6 +41,15 @@ class Device extends PureComponent {
         }
     }
 
+    colorPicker() {
+        
+        if(this.state.pickingColor)    
+            this.setState({pickingColor: false});
+        
+        else
+            this.setState({pickingColor: true});
+    }
+
     slider() {
         console.log("slider test");
     }
@@ -66,6 +77,7 @@ class Device extends PureComponent {
                 </Entity>
                 
                 <a-gui-flex-container
+                    visible={!this.state.pickingColor}
                     flex-direction="column" 
                     justify-content="center" 
                     align-items="normal" 
@@ -105,27 +117,81 @@ class Device extends PureComponent {
                     >
                     </a-gui-slider>
 
+                    <a-gui-button
+                        id="changeMenuButton"
+                        width="2.5" height="0.75"
+                        onClick={this.colorPicker}
+                        value="Change Color"
+                        font-family="Arial"
+                        font-size="150px"
+                        margin="0 0 0.05 0">
+                    </a-gui-button>
+
+                </a-gui-flex-container>
+
+                <a-gui-flex-container
+                    visible={this.state.pickingColor}
+                    flex-direction="column" 
+                    justify-content="center" 
+                    align-items="normal" 
+                    component-padding="0.1" 
+                    opacity="0.7" 
+                    width="3.5" 
+                    height="4.5"
+                    rotation="0 -90 0"
+                    position="0 1 0"
+                    scale="0.3 0.3 0.3"
+                >
                     <a-gui-label
                         width="2.5" height="0.75"
-                        value="Color"
+                        value="RGB Color Slider"
                         margin="0 0 0.05 0"
                         font-size="150px"
                     ></a-gui-label>
 
-                    <a-gui-input id="test_input"
-                        width="2.5" height="0.75"
-                        onclick="testInputAction"
-                        value="Input Color"
-                        font-size="160px"
-                        font-color="#212121"
-                        border-color="#212121"
-                        border-hover-color="#424242"
-                        background-color="#FAFAFA"
-                        hover-color="#F5F5F5"
-                        active-color="#FFEB3B"
+                    <a-gui-slider
+                        width="2.5" height="0.4"
+                        onClick={this.slider}
+                        background-color="red"
+                        percent="0.3"
+                        margin="0 0 0.05 0"
                     >
-                    </a-gui-input>
+                    </a-gui-slider>
+                    
+                    <a-gui-slider
+                        width="2.5" height="0.4"
+                        onClick={this.slider}
+                        background-color="green"
+                        percent="0.3"
+                        margin="0 0 0.05 0"
+                    >
+                    </a-gui-slider>
 
+                    <a-gui-slider
+                        width="2.5" height="0.4"
+                        onClick={this.slider}
+                        background-color="blue"
+                        percent="0.3"
+                        margin="0 0 0.05 0"
+                    >
+                    </a-gui-slider>
+
+                    <a-gui-label
+                        width="2.5" height="0.50"
+                        value="Selected Color"
+                        margin="0 0 0.05 0"
+                        font-size="150px"
+                    ></a-gui-label>
+
+                    <a-gui-button
+                        id="changeMenuButton"
+                        width="2.5" height="0.75"
+                        onClick={this.colorPicker}
+                        value="Confirm Color"
+                        font-family="Arial"
+                        font-size="150px"
+                        margin="0 0 0.05 0">
+                    </a-gui-button>
                 </a-gui-flex-container>
             </Entity>
         )
