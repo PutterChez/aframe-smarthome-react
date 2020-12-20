@@ -83,7 +83,7 @@ class Device extends Component {
             <Entity id="device" position={this.props.position} >
                 <Entity
                     id="TV" 
-                    gltf-model="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome/TV_01.gltf" 
+                    // gltf-model="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome/TV_01.gltf" 
                     
                     scale={{ x: 0.06, y: 0.06 , z: 0.06}}
                     rotation={this.props.rotation}

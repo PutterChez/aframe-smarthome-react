@@ -149,7 +149,7 @@ class Device extends Component {
             <Entity id="device" position={this.props.position} >
                 <Entity
                     id="lightbulb" 
-                    gltf-model="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome/Lightbulb.gltf" 
+                    // gltf-model="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome/Lightbulb.gltf" 
                     
                     scale={{ x: 0.001, y: 0.001 , z: 0.001}}
                     rotation={this.props.rotation}
@@ -168,7 +168,7 @@ class Device extends Component {
                     </Entity>
                 </Entity>
                 
-                {/* <a-gui-flex-container
+                <a-gui-flex-container
                     id="deviceUI"
                     visible={!this.state.pickingColor}
                     flex-direction="column" 
@@ -289,7 +289,7 @@ class Device extends Component {
                         font-size="150px"
                         margin="0 0 0.05 0">
                     </a-gui-button>
-                </a-gui-flex-container> */}
+                </a-gui-flex-container>
             </Entity>
         )
     }
