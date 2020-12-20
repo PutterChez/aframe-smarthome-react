@@ -67,7 +67,7 @@ class App extends Component {
 
   render() {
     return (
-      <Scene stats physics="gravity: -1.6" environment="preset: default; lighting: none" style="position: absolute; height: 100%; width: 100%;">
+      <Scene stats physics="gravity: -1.6" environment="preset: default; lighting: none; ground: none" style="position: absolute; height: 100%; width: 100%;">
         <Entity
           id="cameraRig"
         >
@@ -552,7 +552,7 @@ class App extends Component {
           </Entity> */}
           
           {/* <Device></Device> */}
-          <Entity id="deviceList">
+          {/* <Entity id="deviceList">
             {
               this.state.deviceList.map((item) => {
                 return item.type === "lightbulb" ?  
@@ -563,7 +563,7 @@ class App extends Component {
               )
             }
 
-          </Entity>
+          </Entity> */}
 
           <Entity
             id="aircon"
