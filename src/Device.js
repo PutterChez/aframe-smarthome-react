@@ -27,7 +27,12 @@ class Device extends PureComponent {
         for (let tag of this.props.tags){
 
             if(tag.widget === "button"){
-                this.setState({lightTag: tag.tag, lightOn: tag.value})
+                if(tag.value == 0)
+                    this.setState({lightOn: false})
+                else if(tag.value == 1)
+                    this.setState({lightOn: true})
+
+                this.setState({lightTag: tag.tag})
             }
 
             else if(tag.widget === "rgb_slider")
@@ -140,6 +145,7 @@ class Device extends PureComponent {
     }
 
     render() {
+        console.log("Render: " + this.state.lightOn);
         return(
             <Entity id="device" position={this.props.position} >
                 <Entity
@@ -153,6 +159,7 @@ class Device extends PureComponent {
 
                     <Entity
                         id="lightbulbLight"
+            
                         visible={this.state.lightOn}
                         >
                         <a-sphere color={this.state.finalColor} radius="69.130" position="-0.176 141.959 0" emissive={this.state.finalColor}></a-sphere>

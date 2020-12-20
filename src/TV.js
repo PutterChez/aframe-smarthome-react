@@ -94,7 +94,7 @@ class Device extends PureComponent {
                 
                 <a-gui-flex-container
                     id="deviceUI"
-                    visible="false"
+                    visible="true"
                     flex-direction="column" 
                     justify-content="center" 
                     align-items="normal" 
