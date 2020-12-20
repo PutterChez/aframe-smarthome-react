@@ -552,7 +552,7 @@ class App extends Component {
           </Entity> */}
           
           {/* <Device></Device> */}
-          {/* <Entity id="deviceList">
+          <Entity id="deviceList">
             {
               this.state.deviceList.map((item) => {
                 return item.type === "lightbulb" ?  
@@ -563,7 +563,7 @@ class App extends Component {
               )
             }
 
-          </Entity> */}
+          </Entity>
 
           <Entity
             id="aircon"

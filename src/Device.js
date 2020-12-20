@@ -169,7 +169,7 @@ class Device extends PureComponent {
                     </Entity>
                 </Entity>
                 
-                <a-gui-flex-container
+                {/* <a-gui-flex-container
                     id="deviceUI"
                     visible={!this.state.pickingColor}
                     flex-direction="column" 
@@ -290,7 +290,7 @@ class Device extends PureComponent {
                         font-size="150px"
                         margin="0 0 0.05 0">
                     </a-gui-button>
-                </a-gui-flex-container>
+                </a-gui-flex-container> */}
             </Entity>
         )
     }
