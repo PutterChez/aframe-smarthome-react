@@ -67,7 +67,7 @@ class App extends Component {
 
   render() {
     return (
-      <Scene physics="gravity: -1.6" environment="preset: default; lighting: none" style="position: absolute; height: 100%; width: 100%;">
+      <Scene stats physics="gravity: -1.6" environment="preset: default; lighting: none" style="position: absolute; height: 100%; width: 100%;">
         <Entity
           id="cameraRig"
         >
@@ -530,7 +530,7 @@ class App extends Component {
           </Entity>
           
 
-          <Entity>
+          {/* <Entity>
             <Entity 
               id="fan"
               gltf-model="#dysonModel"
@@ -549,7 +549,7 @@ class App extends Component {
               font-size="30px"
               margin="0 0 0.05 0">
             </a-gui-button>
-          </Entity>
+          </Entity> */}
           
           {/* <Device></Device> */}
           <Entity id="deviceList">
