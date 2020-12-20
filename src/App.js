@@ -212,7 +212,7 @@ class App extends Component {
             shadow={{cast: true}}
           />
 
-          <Entity id="furnitureList">
+          <Entity geometry-merger="preserveOriginal: false" id="furnitureList">
             <Entity
               id="wallPartition1"
               gltf-model="#wallPartition"
