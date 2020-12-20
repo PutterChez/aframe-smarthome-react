@@ -28,9 +28,9 @@ class DynamicObject extends PureComponent {
 
     componentDidMount() {
         
-        // document.getElementsByClassName("throwable")[0].addEventListener('hit', this.move);
-        document.getElementsByClassName("throwable")[0].addEventListener('gripdown', this.move);
-        document.getElementsByClassName("throwable")[0].addEventListener('gripup', this.move);
+        document.getElementsByClassName("throwable")[0].addEventListener('hit', this.move);
+        // document.getElementsByClassName("throwable")[0].addEventListener('gripdown', this.move);
+        // document.getElementsByClassName("throwable")[0].addEventListener('gripup', this.move);
         // document.getElementsByClassName("throwable")[0].addEventListener('trackpaddown', this.move);
         // document.getElementsByClassName("throwable")[0].addEventListener('trackpadup', this.move);
         // document.getElementsByClassName("throwable")[0].addEventListener('triggerdown', this.move);

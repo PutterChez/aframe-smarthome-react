@@ -5,28 +5,47 @@ class Device extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {
-            url: 'https://523619f360bf.ngrok.io/',
+            url: 'https://1b08d3614b60.ngrok.io/',
             lightOn: false,
             pickingColor: false,
             finalColor: "#ffffff",
+            brightness: 0,
             redColor: 0,
             greenColor: 0,
             blueColor: 0,
+            lightTag: "",
+            brightTag: "",
+            colorTag: "",
+            
         };
         this.toggle = this.toggle.bind(this);
         this.colorPicker = this.colorPicker.bind(this);
     }
 
-    async toggle() {
-        console.log("Toggle TAG: " + this.props.tag[0]);
+    componentDidMount() {
 
+        for (let tag of this.props.tags){
+
+            if(tag.widget === "button"){
+                this.setState({lightTag: tag.tag, lightOn: tag.value})
+            }
+
+            else if(tag.widget === "rgb_slider")
+                this.setState({colorTag: tag.tag, finalColor: tag.value})
+
+            else if(tag.widget === "brightness_slider")
+                this.setState({brightTag: tag.tag, brightness: tag.value})
+        }
+    }
+
+    async toggle() {
         if(this.state.lightOn){
             console.log("turn off light");
 
             const requestOptions = {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ tag: this.props.tag[0].tag, value: 0 })
+                body: JSON.stringify({ tag: this.state.lightTag, value: 0 })
             };
             fetch(this.state.url + 'mock/sendTag/', requestOptions)
                 this.setState({lightOn: false});
@@ -34,31 +53,47 @@ class Device extends PureComponent {
 
         else{
             console.log("turn on light");
-            console.log(this.props.tag)
 
             const requestOptions = {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ tag: this.props.tag[0].tag, value: 1 })
+                body: JSON.stringify({ tag: this.state.lightTag, value: 1 })
             };
             fetch(this.state.url + 'mock/sendTag/', requestOptions)
                 this.setState({lightOn: true});
 
         }
-    }
+    }   
 
-    async changeColor() {
-        console.log("COLOR TAG: " + this.props.tag[1]);
-        console.log("changle color");
+    async changeBright() {
+        console.log("change bright: " +  this.state.brightness);
 
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ tag: this.props.tag[1].tag, value: this.state.finalColor })
+            body: JSON.stringify({ tag: this.state.brightTag, value: this.state.brightness })
         };
             fetch(this.state.url + 'mock/sendTag/', requestOptions)
-                this.setState({lightOn: false});
         
+    }
+
+    brightnessSlider = (e) => {
+        const percent = e.currentTarget.getAttribute('gui-slider').percent;
+        const value = parseInt(percent * 200);
+
+        this.setState({brightness: value})
+        this.changeBright()
+    }
+
+    async changeColor() {
+        console.log("change color");
+
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ tag: this.state.colorTag, value: this.state.finalColor })
+        };
+            fetch(this.state.url + 'mock/sendTag/', requestOptions)   
     }
 
     colorPicker() {
@@ -119,9 +154,9 @@ class Device extends PureComponent {
                         id="lightbulbLight"
                         visible={this.state.lightOn}
                         >
-                        <a-sphere color="blue" radius="69.130" position="-0.176 141.959 0" emissive="blue"></a-sphere>
+                        <a-sphere color={this.state.finalColor} radius="69.130" position="-0.176 141.959 0" emissive={this.state.finalColor}></a-sphere>
 
-                        <a-light type="point" color="blue" intensity="0.6" light="castShadow: true" decay="1.2" distance="5.0"></a-light>
+                        <a-light type="point" color={this.state.finalColor} intensity={this.state.brightness/100} light="castShadow: true" decay="1.2" distance="5.0"></a-light>
                         
                     </Entity>
                 </Entity>
@@ -161,7 +196,7 @@ class Device extends PureComponent {
 
                     <a-gui-slider
                         width="2.5" height="0.75"
-                        onClick={this.slider}
+                        onClick={this.brightnessSlider}
                         percent="0.3"
                         margin="0 0 0.05 0"
                     >

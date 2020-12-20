@@ -5,45 +5,84 @@ class Device extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {
-            url: 'https://523619f360bf.ngrok.io/',
+            url: 'https://1b08d3614b60.ngrok.io/',
             tvOn: false,
-            volume: 0,
+            channel: "",
+            volume: "",
+            channelTag: "",
+            volumeTag: "",
         };
-        this.toggle = this.toggle.bind(this);
+        this.channelUp = this.channelUp.bind(this);
+        this.channelDown = this.channelDown.bind(this);
+        this.volumeSlider = this.volumeSlider.bind(this);
     }
 
-    async toggle() {
-        if(this.state.lightOn){
-            console.log("turn off TV");
+    componentDidMount() {
+        for (let tag of this.props.tags){
 
-            const requestOptions = {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ tag: this.props.tag, value: 0 })
-            };
-            fetch(this.state.url + 'mock/sendTag/', requestOptions)
-                this.setState({tvOn: false});
+            if(tag.widget === "channel_button"){
+                
+                this.setState({channelTag: tag.tag})
+                this.setState({channel: tag.value})
+            }
+
+            else if(tag.widget === "volume_slider")
+                this.setState({volumeTag: tag.tag, volume: tag.value})
         }
+    }
 
-        else{
-            console.log("turn on TV");
+    async channelUp() {
+        const upChannel = (parseInt(this.state.channel) + 1) + '';
+        console.log(upChannel);
 
-            const requestOptions = {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ tag: this.props.tag, value: 1 })
-            };
-            fetch(this.state.url + 'mock/sendTag/', requestOptions)
-                this.setState({tvOn: true});
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ tag: this.state.channelTag, value: upChannel })
+        };
+        fetch(this.state.url + 'mock/sendTag/', requestOptions)
 
-        }
+        this.setState({channel: upChannel})
+    }   
+
+    async channelDown() {
+        console.log("channel down");
+        const downChannel = (parseInt(this.state.channel) - 1) + '';
+
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ tag: this.state.channelTag, value: downChannel })
+        };
+        fetch(this.state.url + 'mock/sendTag/', requestOptions)
+
+        this.setState({channel: downChannel})
+    }   
+
+    async changeVolume() {
+        console.log("change volume: " +  this.state.volume);
+
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ tag: this.state.volumeTag, value: this.state.volume })
+        };
+        fetch(this.state.url + 'mock/sendTag/', requestOptions)
+    }
+
+    volumeSlider = (e) => {
+        const percent = e.currentTarget.getAttribute('gui-slider').percent;
+        const value = parseInt(percent * 100);
+
+        this.setState({volume: value})
+        this.changeVolume()
     }
 
     render() {
         return(
             <Entity id="device" position={this.props.position} >
                 <Entity
-                    id="lightbulb" 
+                    id="TV" 
                     gltf-model="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome/TV_01.gltf" 
                     
                     scale={{ x: 0.06, y: 0.06 , z: 0.06}}
@@ -51,51 +90,74 @@ class Device extends PureComponent {
                     shadow={{cast: true}}>
                 </Entity>
                 
+                
                 <a-gui-flex-container
+                
                     flex-direction="column" 
                     justify-content="center" 
                     align-items="normal" 
                     component-padding="0.1" 
                     opacity="0.7" 
                     width="3.5" 
-                    height="4.5"
+                    height="2.5"
                     rotation={this.props.rotation}
-                    position="0 1.35 0"
-                    scale="0.3 0.3 0.3"
+                    position="0 1.1 0"
+                    scale="0.3 0.3 0.3">
+                    
+                    <a-gui-flex-container
+                        flex-direction="row" 
+                        justify-content="center" 
+                        align-items="normal" 
+                        component-padding="0" 
+                        opacity="0" 
+                        width="3.5" 
+                        height="1.5"
+                        >
+                        
+                        <a-gui-button
+                            id="upChannel"
+                            width="1" height="0.75"
+                            onClick={this.channelUp}
+                            value="+"
+                            font-family="Arial"
+                            font-size="150px"
+                            margin="0 0 0.05 0">
+                        </a-gui-button>
+                        
+                        <a-gui-label
+                            width="1" height="0.75"
+                            value={this.state.channel}
+                            margin="0 0 0.05 0"
+                            font-size="150px"
+                        >
+                        </a-gui-label>
+
+                        <a-gui-button
+                            id="downChannel"
+                            width="1" height="0.75"
+                            onClick={this.channelDown}
+                            value="-"
+                            font-family="Arial"
+                            font-size="150px"
+                            margin="0 0 0.05 0">
+                        </a-gui-button>
+                    </a-gui-flex-container>
+
+                    <a-gui-label
+                        width="2.5" height="0.3"
+                        value={this.state.volume}
+                        margin="0 0 0.05 0"
+                        font-size="150px"
                     >
-                    
+                    </a-gui-label>
 
-                    <a-gui-button
-                        id="toggleTVButton"
-                        width="2.5" height="0.75"
-                        onClick={this.toggle}
-                        value="Toggle TV"
-                        font-family="Arial"
-                        font-size="150px"
-                        margin="0 0 0.05 0">
-                    </a-gui-button>
-                    
-                    <a-gui-button
-                        id="upChannel"
-                        width="2.5" height="0.75"
-                        onClick={this.toggle}
-                        value="+"
-                        font-family="Arial"
-                        font-size="150px"
-                        margin="0 0 0.05 0">
-                    </a-gui-button>
-                    
-                    <a-gui-button
-                        id="downChannel"
-                        width="2.5" height="0.75"
-                        onClick={this.toggle}
-                        value="-"
-                        font-family="Arial"
-                        font-size="150px"
-                        margin="0 0 0.05 0">
-                    </a-gui-button>
-                    
-
+                    <a-gui-slider
+                        width="2.5" height="0.4"
+                        onClick={this.volumeSlider}
+                        percent="0.3"
+                        margin="0 0 0.05 0"
+                    >
+                    </a-gui-slider>
                 </a-gui-flex-container>
             </Entity>
         )

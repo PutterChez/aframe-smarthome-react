@@ -19,7 +19,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      url: 'https://523619f360bf.ngrok.io/',
+      url: 'https://1b08d3614b60.ngrok.io/',
       deviceList: [],
     //   deviceList: [{name: 'lightbulb1', position: '2.04 0.936 -1.5', rotation: '0 90 0', tag: 'ict.HueLight01.onoff', type: 'lightbulb'},
     //   {name: 'lightbulb2', position: '2.04 0.936 -3.043', rotation: '0 90 0', tag: 'ict.HueLight02.onoff', type: 'lightbulb'}, 
@@ -48,7 +48,6 @@ class App extends Component {
             // console.log("Name: " + id + "\nLocation: " + zodbData[id].location + "\nRotation: " + zodbData[id].rotation + "\nTag: " +  zodbData[id].tag[0].tags)
             
             zodbData.ICTLab.devices.map((devices) => {
-              console.log("TAG: " + devices.tags)
               this.addDevice(devices.name, devices.location, devices.rotation, devices.tags, devices.type);
             })
 
@@ -59,8 +58,8 @@ class App extends Component {
         });
   }
 
-  addDevice(newName, newPosition, newRotation, newTag, newType) {
-    var newDevice = {name: newName, position: newPosition, rotation: newRotation, tag: newTag, type: newType} 
+  addDevice(newName, newPosition, newRotation, newTags, newType) {
+    var newDevice = {name: newName, position: newPosition, rotation: newRotation, tags: newTags, type: newType} 
     this.setState(prevState => ({
       deviceList: [...prevState.deviceList, newDevice]
     }))
@@ -556,10 +555,10 @@ class App extends Component {
           <Entity id="deviceList">
             {
               this.state.deviceList.map((item) => {
-                return item.type == "lightbulb" ?  
-                  <Device key={item.name} position={item.position} rotation={item.rotation} tag={item.tag}/>
+                return item.type === "lightbulb" ?  
+                  <Device key={item.name} position={item.position} rotation={item.rotation} tags={item.tags}/>
                 :
-                  <TV key={item.name} position={item.position} rotation={item.rotation} tag={item.tag}/>
+                  <TV key={item.name} position={item.position} rotation={item.rotation} tags={item.tags}/>
                 } 
               )
             }
