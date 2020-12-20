@@ -148,8 +148,7 @@ class Device extends PureComponent {
                     
                     scale={{ x: 0.001, y: 0.001 , z: 0.001}}
                     rotation={this.props.rotation}
-                    shadow={{cast: true}}
-                    >
+                    shadow={{cast: true}}>
 
                     <Entity
                         id="lightbulbLight"
@@ -163,7 +162,6 @@ class Device extends PureComponent {
                 </Entity>
                 
                 <a-gui-flex-container
-                    id="deviceUI"
                     visible={!this.state.pickingColor}
                     flex-direction="column" 
                     justify-content="center" 
