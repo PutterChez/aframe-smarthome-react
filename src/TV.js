@@ -5,7 +5,7 @@ class Device extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            url: 'https://1b08d3614b60.ngrok.io/',
+            url: 'https://a8a3a3cce8df.ngrok.io/',
             tvOn: false,
             channel: "",
             volume: "",
@@ -83,7 +83,7 @@ class Device extends Component {
             <Entity id="device" position={this.props.position} >
                 <Entity
                     id="TV" 
-                    // gltf-model="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome/TV_01.gltf" 
+                    gltf-model="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome/TV_01.gltf" 
                     
                     scale={{ x: 0.06, y: 0.06 , z: 0.06}}
                     rotation={this.props.rotation}
@@ -92,7 +92,7 @@ class Device extends Component {
                 </Entity>
                 
                 
-                {/* <a-gui-flex-container
+                <a-gui-flex-container
                     id="deviceUI"
                     visible="true"
                     flex-direction="column" 
@@ -160,7 +160,7 @@ class Device extends Component {
                         margin="0 0 0.05 0"
                     >
                     </a-gui-slider>
-                </a-gui-flex-container> */}
+                </a-gui-flex-container>
             </Entity>
         )
     }

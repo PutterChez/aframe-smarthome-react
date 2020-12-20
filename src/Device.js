@@ -5,7 +5,7 @@ class Device extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            url: 'https://1b08d3614b60.ngrok.io/',
+            url: 'https://a8a3a3cce8df.ngrok.io/',
             lightOn: false,
             pickingColor: false,
             finalColor: "#ffffff",
@@ -156,7 +156,7 @@ class Device extends Component {
                     shadow={{cast: true}}
                     >
 
-                    {/* <Entity
+                    <Entity
                         id="lightbulbLight"
             
                         visible={this.state.lightOn}
@@ -165,10 +165,10 @@ class Device extends Component {
 
                         <a-light type="point" color={this.state.finalColor} intensity={this.state.brightness/100} light="castShadow: true" decay="1.2" distance="5.0"></a-light>
                         
-                    </Entity> */}
+                    </Entity>
                 </Entity>
                 
-                {/* <a-gui-flex-container
+                <a-gui-flex-container
                     id="deviceUI"
                     visible={!this.state.pickingColor}
                     flex-direction="column" 
@@ -191,8 +191,12 @@ class Device extends Component {
                         value="Toggle Light"
                         font-family="Arial"
                         font-size="150px"
-                        margin="0 0 0.05 0">
+                        margin="0 0 0.05 0"
+                        >
                     </a-gui-button>
+                    
+
+                    
 
                     <a-gui-label
                         width="2.5" height="0.75"
@@ -289,7 +293,7 @@ class Device extends Component {
                         font-size="150px"
                         margin="0 0 0.05 0">
                     </a-gui-button>
-                </a-gui-flex-container> */}
+                </a-gui-flex-container>
             </Entity>
         )
     }

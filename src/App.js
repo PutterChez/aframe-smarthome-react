@@ -19,7 +19,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      url: 'https://1b08d3614b60.ngrok.io/',
+      url: 'https://a8a3a3cce8df.ngrok.io/',
       deviceList: [],
     //   deviceList: [{name: 'lightbulb1', position: '2.04 0.936 -1.5', rotation: '0 90 0', tag: 'ict.HueLight01.onoff', type: 'lightbulb'},
     //   {name: 'lightbulb2', position: '2.04 0.936 -3.043', rotation: '0 90 0', tag: 'ict.HueLight02.onoff', type: 'lightbulb'}, 
@@ -181,13 +181,13 @@ class App extends Component {
           ></a-asset-item>
         </a-assets>
 
-        <a-light
+        {/* <a-light
           type="ambient"
           position="0.214 3.281 -2.02969"
           intensity="0.2"
           color="white"
           visible="true"
-        ></a-light>
+        ></a-light> */}
 
         <a-light
           type="point"
