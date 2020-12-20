@@ -1,7 +1,7 @@
-import React, { PureComponent } from "react";
+import React, { Component } from "react";
 import { Entity } from "aframe-react";
 
-class Device extends PureComponent {
+class Device extends Component {
     constructor(props) {
         super(props);
         this.state = {

@@ -1,7 +1,7 @@
-import React, { PureComponent } from "react";
+import React, { Component, PureComponent } from "react";
 import { Entity } from "aframe-react";
 
-class Device extends PureComponent {
+class Device extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -145,7 +145,6 @@ class Device extends PureComponent {
     }
 
     render() {
-        console.log("Render: " + this.state.lightOn);
         return(
             <Entity id="device" position={this.props.position} >
                 <Entity
