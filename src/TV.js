@@ -87,12 +87,14 @@ class Device extends PureComponent {
                     
                     scale={{ x: 0.06, y: 0.06 , z: 0.06}}
                     rotation={this.props.rotation}
-                    shadow={{cast: true}}>
+                    shadow={{cast: true}}
+                    event-set__mouseenter="_target: #deviceUI; visible: true">
                 </Entity>
                 
                 
                 <a-gui-flex-container
-                
+                    id="deviceUI"
+                    visible="false"
                     flex-direction="column" 
                     justify-content="center" 
                     align-items="normal" 
