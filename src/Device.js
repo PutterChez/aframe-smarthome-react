@@ -169,12 +169,12 @@ class Device extends Component {
                         >
                         <a-sphere color={this.state.finalColor} radius="69.130" position="-0.176 141.959 0" emissive={this.state.finalColor}></a-sphere>
 
-                        <a-light type="point" color={this.state.finalColor} intensity={this.state.brightness/100} light="castShadow: true" decay="1.2" distance="5.0"></a-light>
+                        {/* <a-light type="point" color={this.state.finalColor} intensity={this.state.brightness/100} light="castShadow: true" decay="1.2" distance="5.0"></a-light> */}
                         
                     </Entity>
                 </Entity>
                 
-                <Entity id="uiPage1">
+                <Entity id="uiPage1" >
                     <a-gui-flex-container
                         visible={!this.state.pickingColor}
                         flex-direction="column" 
