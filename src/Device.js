@@ -20,11 +20,10 @@ class Device extends Component {
         };
         this.toggle = this.toggle.bind(this);
         this.colorPicker = this.colorPicker.bind(this);
-        this.buttonRef = React.createRef();
+        this.brightnessPage = React.createRef();
     }
 
     componentDidMount() {
-        console.log("Button ref: " + this.buttonRef.current);
 
         for (let tag of this.props.tags){
 
@@ -147,6 +146,9 @@ class Device extends Component {
     }
 
     render() {
+        const lightTag = this.state.lightTag;
+        console.log("Tag:" + lightTag)
+        console.log("Color:" + this.state.pickingColor)
         return(
             <Entity id="device" position={this.props.position} >
                 <Entity
@@ -156,6 +158,8 @@ class Device extends Component {
                     scale={{ x: 0.001, y: 0.001 , z: 0.001}}
                     rotation={this.props.rotation}
                     shadow={{cast: true}}
+                    // event-set__1={{_event: "mouseenter", _target: "#uiPage1", visible: true}}
+                    // event-set__2={{_event: "mouseleave", _target: "#uiPage1", visible: true}}
                     >
 
                     <Entity
@@ -170,130 +174,133 @@ class Device extends Component {
                     </Entity>
                 </Entity>
                 
-                <a-gui-flex-container
-                    id="deviceUI"
-                    visible={!this.state.pickingColor}
-                    flex-direction="column" 
-                    justify-content="center" 
-                    align-items="normal" 
-                    component-padding="0.1" 
-                    opacity="0.7" 
-                    width="3.5" 
-                    height="4.5"
-                    rotation="0 -90 0"
-                    position="0 1 0"
-                    scale="0.3 0.3 0.3"
-                    >
-                    
-
-                    <a-gui-button
-                        id="toggleLightButton"
-                        ref={this.buttonRef}
-                        width="2.5" height="0.75"
-                        onClick={this.toggle}
-                        value="Toggle Light"
-                        font-family="Arial"
-                        font-size="150px"
-                        margin="0 0 0.05 0"
+                <Entity id="uiPage1">
+                    <a-gui-flex-container
+                        visible={!this.state.pickingColor}
+                        flex-direction="column" 
+                        justify-content="center" 
+                        align-items="normal" 
+                        component-padding="0.1" 
+                        opacity="0.7" 
+                        width="3.5" 
+                        height="4.5"
+                        rotation="0 -90 0"
+                        position="0 1 0"
+                        scale="0.3 0.3 0.3"
                         >
-                    </a-gui-button>
-                    
-                    <a-gui-label
-                        width="2.5" height="0.75"
-                        value="Brightness"
-                        margin="0 0 0.05 0"
-                        font-size="150px"
+                        
+
+                        <a-gui-button
+                            id="toggleLightButton"
+                            width="2.5" height="0.75"
+                            onClick={this.toggle}
+                            value="Toggle Light"
+                            font-family="Arial"
+                            font-size="150px"
+                            margin="0 0 0.05 0"
+                            >
+                        </a-gui-button>
+                        
+                        <a-gui-label
+                            width="2.5" height="0.75"
+                            value="Brightness"
+                            margin="0 0 0.05 0"
+                            font-size="150px"
+                        >
+                        </a-gui-label>
+
+                        <a-gui-slider
+                            width="2.5" height="0.75"
+                            onClick={this.brightnessSlider}
+                            percent="0.3"
+                            margin="0 0 0.05 0"
+                        >
+                        </a-gui-slider>
+
+                        <a-gui-button
+                            id="changeMenuButton"
+                            width="2.5" height="0.75"
+                            onClick={this.colorPicker}
+                            value="Change Color"
+                            font-family="Arial"
+                            font-size="150px"
+                            margin="0 0 0.05 0"
+                            >
+                        </a-gui-button>
+
+                    </a-gui-flex-container>
+
+                    <a-gui-flex-container
+                        id="uiPage2"
+                        visible={this.state.pickingColor}
+                        flex-direction="column" 
+                        justify-content="center" 
+                        align-items="normal" 
+                        component-padding="0.1" 
+                        opacity="0.7" 
+                        width="3.5" 
+                        height="4.5"
+                        rotation="0 -90 0"
+                        position="0 1 0"
+                        scale="0.3 0.3 0.3"
                     >
-                    </a-gui-label>
+                        <a-gui-label
+                            width="2.5" height="0.75"
+                            value="RGB Color Slider"
+                            margin="0 0 0.05 0"
+                            font-size="150px"
+                        ></a-gui-label>
 
-                    <a-gui-slider
-                        width="2.5" height="0.75"
-                        onClick={this.brightnessSlider}
-                        percent="0.3"
-                        margin="0 0 0.05 0"
-                    >
-                    </a-gui-slider>
+                        <a-gui-slider
+                            width="2.5" height="0.4"
+                            id="redSlider"
+                            onClick={this.sliderClick}
+                            background-color="red"
+                            percent="0.01"
+                            margin="0 0 0.05 0"
+                        >
+                        </a-gui-slider>
+                        
+                        <a-gui-slider
+                            width="2.5" height="0.4"
+                            id="greenSlider"
+                            onClick={this.sliderClick}
+                            background-color="green"
+                            percent="0.01"
+                            margin="0 0 0.05 0"
+                        >
+                        </a-gui-slider>
 
-                    <a-gui-button
-                        id="changeMenuButton"
-                        width="2.5" height="0.75"
-                        onClick={this.colorPicker}
-                        value="Change Color"
-                        font-family="Arial"
-                        font-size="150px"
-                        margin="0 0 0.05 0">
-                    </a-gui-button>
+                        <a-gui-slider
+                            width="2.5" height="0.4"
+                            id="blueSlider"
+                            onClick={this.sliderClick}
+                            background-color="blue"
+                            percent="0.01"
+                            margin="0 0 0.05 0"
+                        >
+                        </a-gui-slider>
 
-                </a-gui-flex-container>
+                        <a-gui-label
+                            width="2.5" height="0.50"
+                            value="Selected Color"
+                            background-color={this.state.finalColor}
+                            margin="0 0 0.05 0"
+                            font-size="150px"
+                        ></a-gui-label>
 
-                <a-gui-flex-container
-                    visible={this.state.pickingColor}
-                    flex-direction="column" 
-                    justify-content="center" 
-                    align-items="normal" 
-                    component-padding="0.1" 
-                    opacity="0.7" 
-                    width="3.5" 
-                    height="4.5"
-                    rotation="0 -90 0"
-                    position="0 1 0"
-                    scale="0.3 0.3 0.3"
-                >
-                    <a-gui-label
-                        width="2.5" height="0.75"
-                        value="RGB Color Slider"
-                        margin="0 0 0.05 0"
-                        font-size="150px"
-                    ></a-gui-label>
+                        <a-gui-button
+                            id="changeMenuButton"
+                            width="2.5" height="0.75"
+                            onClick={this.colorPicker}
+                            value="Confirm Color"
+                            font-family="Arial"
+                            font-size="150px"
+                            margin="0 0 0.05 0">
+                        </a-gui-button>
+                    </a-gui-flex-container>
+                </Entity>
 
-                    <a-gui-slider
-                        width="2.5" height="0.4"
-                        id="redSlider"
-                        onClick={this.sliderClick}
-                        background-color="red"
-                        percent="0.01"
-                        margin="0 0 0.05 0"
-                    >
-                    </a-gui-slider>
-                    
-                    <a-gui-slider
-                        width="2.5" height="0.4"
-                        id="greenSlider"
-                        onClick={this.sliderClick}
-                        background-color="green"
-                        percent="0.01"
-                        margin="0 0 0.05 0"
-                    >
-                    </a-gui-slider>
-
-                    <a-gui-slider
-                        width="2.5" height="0.4"
-                        id="blueSlider"
-                        onClick={this.sliderClick}
-                        background-color="blue"
-                        percent="0.01"
-                        margin="0 0 0.05 0"
-                    >
-                    </a-gui-slider>
-
-                    <a-gui-label
-                        width="2.5" height="0.50"
-                        value="Selected Color"
-                        background-color={this.state.finalColor}
-                        margin="0 0 0.05 0"
-                        font-size="150px"
-                    ></a-gui-label>
-
-                    <a-gui-button
-                        id="changeMenuButton"
-                        width="2.5" height="0.75"
-                        onClick={this.colorPicker}
-                        value="Confirm Color"
-                        font-family="Arial"
-                        font-size="150px"
-                        margin="0 0 0.05 0">
-                    </a-gui-button>
-                </a-gui-flex-container>
             </Entity>
         )
     }

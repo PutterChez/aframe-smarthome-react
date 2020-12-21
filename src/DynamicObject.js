@@ -27,8 +27,9 @@ class DynamicObject extends PureComponent {
     }
 
     componentDidMount() {
-        
-        document.getElementsByClassName("throwable")[0].addEventListener('hit', this.move);
+        // TODO: USE ON HIT TO CHECK FOR BOTH OBJECTS COLLISON + GRIPDOWN
+
+        // document.getElementsByClassName("throwable")[0].addEventListener('hit', this.move);
         // document.getElementsByClassName("throwable")[0].addEventListener('gripdown', this.move);
         // document.getElementsByClassName("throwable")[0].addEventListener('gripup', this.move);
         // document.getElementsByClassName("throwable")[0].addEventListener('trackpaddown', this.move);
