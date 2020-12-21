@@ -19,7 +19,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      url: 'https://a8a3a3cce8df.ngrok.io/',
+      url: 'https://caae7c447308.ngrok.io/',
       deviceList: [],
     //   deviceList: [{name: 'lightbulb1', position: '2.04 0.936 -1.5', rotation: '0 90 0', tag: 'ict.HueLight01.onoff', type: 'lightbulb'},
     //   {name: 'lightbulb2', position: '2.04 0.936 -3.043', rotation: '0 90 0', tag: 'ict.HueLight02.onoff', type: 'lightbulb'}, 

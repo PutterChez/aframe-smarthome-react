@@ -5,7 +5,7 @@ class Device extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            url: 'https://a8a3a3cce8df.ngrok.io/',
+            url: 'https://caae7c447308.ngrok.io/',
             tvOn: false,
             channel: "",
             volume: "",

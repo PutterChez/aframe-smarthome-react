@@ -1,11 +1,11 @@
-import React, { Component, PureComponent } from "react";
+import React, { Component } from "react";
 import { Entity } from "aframe-react";
 
 class Device extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            url: 'https://a8a3a3cce8df.ngrok.io/',
+            url: 'https://caae7c447308.ngrok.io/',
             lightOn: false,
             pickingColor: false,
             finalColor: "#ffffff",
@@ -20,9 +20,11 @@ class Device extends Component {
         };
         this.toggle = this.toggle.bind(this);
         this.colorPicker = this.colorPicker.bind(this);
+        this.buttonRef = React.createRef();
     }
 
     componentDidMount() {
+        console.log("Button ref: " + this.buttonRef.current);
 
         for (let tag of this.props.tags){
 
@@ -186,6 +188,7 @@ class Device extends Component {
 
                     <a-gui-button
                         id="toggleLightButton"
+                        ref={this.buttonRef}
                         width="2.5" height="0.75"
                         onClick={this.toggle}
                         value="Toggle Light"
@@ -195,9 +198,6 @@ class Device extends Component {
                         >
                     </a-gui-button>
                     
-
-                    
-
                     <a-gui-label
                         width="2.5" height="0.75"
                         value="Brightness"
