@@ -198,7 +198,7 @@ class App extends Component {
           light="castShadow: true"
         ></a-light>
 
-        <Entity id="labAll" position="0 0 3.75">
+        <Entity id="labAll" position="-0.8 0 2.353">
           <Entity
             id="lab"
             gltf-model="#labModel"
@@ -206,6 +206,7 @@ class App extends Component {
             visible="false"
           />
           <Entity
+            static-body={{}}
             id="labWall"
             gltf-model="#labWall"
             position={{ x: -4, y: 0.05, z: 0 }}
