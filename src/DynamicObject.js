@@ -5,7 +5,7 @@ class DynamicObject extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {
-            url: 'https://ff4827428103.ngrok.io/',
+            url: 'https://a28bc3f35b14.ngrok.io/',
             scale: "0.5 0.5 0.5",
         };
     }
