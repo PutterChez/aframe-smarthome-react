@@ -73,7 +73,6 @@ class App extends Component {
           id="cameraRig"
         >
           <Entity
-            id="head" 
             camera
             wasd-controls={{ enabled: "true" }}
             look-controls={{ enabled: "true" }}
@@ -84,7 +83,7 @@ class App extends Component {
           <Entity 
             id="rightHand" 
             
-            teleport-controls="cameraRig: #cameraRig; teleportOrigin: #head; button: trigger;"
+            teleport-controls="cameraRig: #cameraRig; button: trigger;"
 
             // static-body="shape: sphere; sphereRadius: 0.02;"
             // sphere-collider="objects: .throwable"
