@@ -71,7 +71,8 @@ class App extends Component {
         <Entity
           id="cameraRig"
         >
-          <Entity 
+          <Entity
+            id="head" 
             camera
             wasd-controls={{ enabled: "true" }}
             look-controls={{ enabled: "true" }}
@@ -90,6 +91,7 @@ class App extends Component {
 
           <Entity 
             id="leftHand" 
+            teleport-controls="cameraRig: #cameraRig; teleportOrigin: #head;"
             oculus-touch-controls="hand: left"
             controller-cursor={{}}
           ></Entity>
