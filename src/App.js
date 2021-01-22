@@ -84,7 +84,7 @@ class App extends Component {
           <Entity 
             id="rightHand" 
             
-            teleport-controls="cameraRig: #cameraRig; teleportOrigin: #head;"
+            teleport-controls="cameraRig: #cameraRig; teleportOrigin: #head; button: trigger;"
 
             // static-body="shape: sphere; sphereRadius: 0.02;"
             // sphere-collider="objects: .throwable"
