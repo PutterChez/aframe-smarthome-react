@@ -78,7 +78,9 @@ class App extends Component {
             camera={{active: "true"}}
             wasd-controls={{ enabled: "true" }}
             look-controls={{ enabled: "true" }}
-            position={{ x: 0, y: 1.65, z: 0 }}>
+            position={{ x: 0, y: 1.65, z: 0 }}
+            thumbstick-rotate={{}}
+            >
               <a-cursor></a-cursor>
           </Entity>
 
@@ -86,7 +88,6 @@ class App extends Component {
             id="rightHand" 
             oculus-touch-controls="hand: right"
             teleport-controls="cameraRig: #cameraRig; teleportOrigin: #head; button: trigger;"
-            thumbstick-rotate={{}}
 
             // static-body="shape: sphere; sphereRadius: 0.02;"
             // sphere-collider="objects: .throwable"
