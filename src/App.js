@@ -72,14 +72,14 @@ class App extends Component {
         <Entity
           id="cameraRig"
         >
-          <a-camera
+          <Entity
             id="head" 
-            camera={{}}
+            camera={{active: "true"}}
             wasd-controls={{ enabled: "true" }}
             look-controls={{ enabled: "true" }}
             position={{ x: 0, y: 1.65, z: 0 }}>
               <a-cursor></a-cursor>
-          </a-camera>
+          </Entity>
 
           <Entity 
             id="rightHand" 
