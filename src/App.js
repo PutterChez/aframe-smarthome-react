@@ -74,7 +74,7 @@ class App extends Component {
         >
           <a-camera
             id="head" 
-            camera
+            camera={{}}
             wasd-controls={{ enabled: "true" }}
             look-controls={{ enabled: "true" }}
             position={{ x: 0, y: 1.65, z: 0 }}>
@@ -83,13 +83,12 @@ class App extends Component {
 
           <Entity 
             id="rightHand" 
-            
+            oculus-touch-controls="hand: right"
             teleport-controls="cameraRig: #cameraRig; teleportOrigin: #head; button: trigger;"
 
             // static-body="shape: sphere; sphereRadius: 0.02;"
             // sphere-collider="objects: .throwable"
             // grab ={{}}
-            oculus-touch-controls="hand: right"
             >
           </Entity>
 
