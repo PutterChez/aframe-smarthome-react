@@ -88,7 +88,7 @@ class App extends Component {
             id="rightHand" 
             oculus-touch-controls="hand: right"
             teleport-controls="cameraRig: #cameraRig; teleportOrigin: #head; button: trigger;"
-            thumbstick-rotate={{}}
+            thumbstick-rotate
 
             // static-body="shape: sphere; sphereRadius: 0.02;"
             // sphere-collider="objects: .throwable"
@@ -589,7 +589,7 @@ class App extends Component {
             rotation={{ x: 0, y: 90, z: 0 }}
           />
 
-          <DynamicObject></DynamicObject>
+          {/* <DynamicObject></DynamicObject> */}
 
         </Entity>
       </Scene>
