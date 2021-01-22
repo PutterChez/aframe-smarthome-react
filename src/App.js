@@ -82,16 +82,18 @@ class App extends Component {
 
           <Entity 
             id="rightHand" 
-            static-body="shape: sphere; sphereRadius: 0.02;"
-            sphere-collider="objects: .throwable"
-            grab ={{}}
+            
+            teleport-controls="cameraRig: #cameraRig; teleportOrigin: #head;"
+            
+            // static-body="shape: sphere; sphereRadius: 0.02;"
+            // sphere-collider="objects: .throwable"
+            // grab ={{}}
             oculus-touch-controls="hand: right"
             >
           </Entity>
 
           <Entity 
             id="leftHand" 
-            teleport-controls="cameraRig: #cameraRig; teleportOrigin: #head;"
             oculus-touch-controls="hand: left"
             controller-cursor={{}}
           ></Entity>
