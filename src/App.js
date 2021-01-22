@@ -14,6 +14,7 @@ require("aframe-environment-component");
 require("aframe-controller-cursor-component");
 require('aframe-extras');
 require('aframe-event-set-component');
+require('aframe-teleport-controls');
 
 class App extends Component {
   constructor(props) {
@@ -84,7 +85,7 @@ class App extends Component {
             id="rightHand" 
             
             teleport-controls="cameraRig: #cameraRig; teleportOrigin: #head;"
-            
+
             // static-body="shape: sphere; sphereRadius: 0.02;"
             // sphere-collider="objects: .throwable"
             // grab ={{}}
