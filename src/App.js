@@ -81,7 +81,7 @@ class App extends Component {
             look-controls={{ enabled: "true" }}
             position={{ x: 0, y: 1.65, z: 0 }}
             >
-              <a-cursor></a-cursor>
+              {/* <a-cursor></a-cursor> */}
           </Entity>
 
           <Entity 
