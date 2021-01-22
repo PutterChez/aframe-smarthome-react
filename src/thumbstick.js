@@ -2,13 +2,12 @@ const AFRAME = window.AFRAME;
 
 AFRAME.registerComponent('thumbstick-rotate',{
     init: function () {
-        this.el.addEventListener('abuttondown', this.rotateRight);
-        this.el.addEventListener('bbuttondown', this.rotateLeft);
+        this.el.addEventListener('thumbstickmoved', this.rotate);
     },
-    rotateRight: function (evt) {
-        this.el.components['look-controls'].yawObject.rotation.y -= 1;
-    },
-    rotateLeft: function (evt) {
-        this.el.components['look-controls'].yawObject.rotation.y += 1;
-    }
+    rotate: function (evt) {
+        var camera = document.getElementById("cameraRig");
+
+        if (evt.detail.x < -0.95) { camera.setAttribute('rotation', '0 -90 0'); }
+        if (evt.detail.x > 0.95) { camera.setAttribute('rotation', '0 90 0'); }
+      }
   });
