@@ -2,7 +2,7 @@ const AFRAME = window.AFRAME;
 
 AFRAME.registerComponent('thumbstick-rotate',{
     init: function () {
-        this.el.addEventListener('thumbstickmoved', this.rotate);
+        this.el.addEventListener('thumbstickdown', this.rotate);
     },
     rotate: function (evt) {
         var camera = document.getElementById("cameraRig");
