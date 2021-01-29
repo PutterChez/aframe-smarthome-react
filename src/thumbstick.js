@@ -7,10 +7,13 @@ AFRAME.registerComponent('thumbstick-rotate',{
     rotate: function (evt) {
         var camera = document.getElementById("cameraRig");
         var head = document.getElementById("head");
-        var newRotation = '0 ' + camera.getAttribute("rotation") -90 + ' 0';
+        
+        var prevX = camera.getAttribute("rotation").x;
+        var prevZ = camera.getAttribute("rotation").z;
+        var newY = camera.getAttribute("rotation").y -90;
 
         // head.setAttribute('look-controls', {enabled: false})
-        camera.setAttribute('rotation', newRotation);
+        camera.setAttribute('rotation', {x: prevX, y: newY, z: prevZ });
         // head.setAttribute('look-controls', {enabled: true})
         // if (evt.detail.x < -0.95) { camera.setAttribute('rotation', '0 -90 0'); }
         // if (evt.detail.x > 0.95) { camera.setAttribute('rotation', '0 90 0'); }
