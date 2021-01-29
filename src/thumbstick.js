@@ -10,7 +10,7 @@ AFRAME.registerComponent('thumbstick-rotate',{
         
         var prevX = camera.getAttribute("rotation").x;
         var prevZ = camera.getAttribute("rotation").z;
-        var newY = camera.getAttribute("rotation").y -90;
+        var newY = camera.getAttribute("rotation").y -10;
 
         // head.setAttribute('look-controls', {enabled: false})
         camera.setAttribute('rotation', {x: prevX, y: newY, z: prevZ });
