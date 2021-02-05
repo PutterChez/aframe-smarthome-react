@@ -2,7 +2,6 @@ import { Entity, Scene } from "aframe-react";
 import React, { Component } from "react";
 
 require("aframe");
-require("ar.js-modular/aframe/build/aframe-ar");
 
 require("aframe-environment-component");
 require("aframe-look-at-component");
@@ -10,6 +9,16 @@ require("aframe-look-at-component");
 require("./rotation-reader");
 
 class ARApp extends Component {
+
+    componentDidMount () {
+        const script = document.createElement("script");
+    
+        script.src = "https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js";
+        script.async = true;
+    
+        document.body.appendChild(script);
+    }
+
     render() {
         return (
             <Scene vr-mode-ui="enabled: false" embedded arjs='sourceType: webcam; debugUIEnabled: false;'>
