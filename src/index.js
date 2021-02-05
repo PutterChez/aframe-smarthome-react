@@ -1,13 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
+import ARApp from './AR-App';
 import './index.css';
 
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    {/* <App /> */}
+    <ARApp></ARApp>
   </React.StrictMode>,
   document.getElementById('root')
 );

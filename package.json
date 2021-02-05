@@ -20,6 +20,7 @@
     "aframe-react": "^4.4.0",
     "aframe-react-assets": "^2.0.5",
     "aframe-teleport-controls": "^0.3.1",
+    "ar.js-modular": "^1.0.1",
     "cra-template": "1.0.3",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
