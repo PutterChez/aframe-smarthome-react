@@ -19,10 +19,15 @@ const ARApp = (props) => {
 
     return (
         <div>
-            {loaded ? <Scene arjs="sourceType: webcam; debugUIEnabled: false;">
-            <a-marker-camera preset="hiro">
+            {loaded ? <Scene arjs="sourceType: webcam; debugUIEnabled: false;" gesture-detector>
+            <a-marker-camera 
+                preset="hiro"
+                raycaster="objects: .clickable"
+                emitevents="true"
+                cursor="fuse: false; rayOrigin: mouse;"
+                id="markerA">
 
-                <Entity id="labAll" scale="0.5 0.5 0.5" rotation="0 -90 90">
+                <Entity id="labAll" scale="0.5 0.5 0.5" rotation="0 -90 90" class="clickable" gesture-handler>
                     <Entity
                         id="labWall"
                         gltf-model="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react@v1.0/assets/Lab.gltf"
