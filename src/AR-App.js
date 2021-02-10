@@ -13,7 +13,7 @@ class ARApp extends Component {
     componentDidMount () {
         const script = document.createElement("script");
     
-        script.src = "https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js";
+        script.src = "https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js";
         script.async = true;
     
         document.body.appendChild(script);
