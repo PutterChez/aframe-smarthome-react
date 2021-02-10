@@ -22,12 +22,14 @@ class ARApp extends Component {
     render() {
         return (
             <Scene vr-mode-ui="enabled: false" embedded arjs='sourceType: webcam; debugUIEnabled: false;'>
-                <Entity 
-                    text={{ value: "This content will always face you." }}
-                    look-at="[gps-camera]"
-                    scale="120 120 120"
-                ></Entity>
-                <Entity camera={{active: "true"}} gps-camera={{}} rotation-reader={{}}></Entity>
+                <a-marker preset="hiro">
+                    <Entity
+                    position="0 -1 0"
+                    scale="0.05 0.05 0.05"
+                    gltf-model="https://arjs-cors-proxy.herokuapp.com/https://raw.githack.com/AR-js-org/AR.js/master/aframe/examples/image-tracking/nft/trex/scene.gltf"
+                    ></Entity>
+                </a-marker>
+                <Entity camera={{active: "true"}}></Entity>
             </Scene>
         );
     }
