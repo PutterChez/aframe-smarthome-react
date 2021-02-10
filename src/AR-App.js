@@ -27,14 +27,15 @@ const ARApp = (props) => {
                 cursor="fuse: false; rayOrigin: mouse;"
                 id="markerA">
 
-                <Entity id="labAll" scale="0.5 0.5 0.5" rotation="0 -90 90" class="clickable" gesture-handler={{}}>
+                <Entity id="labAll" scale="0.5 0.5 0.5" class="clickable" gesture-handler={{}}>
                     <Entity
                         id="labWall"
                         gltf-model="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react@v1.0/assets/Lab.gltf"
                         position={{ x: -4, y: 0.05, z: 0 }}
+                        rotation={{ x: 0, y: -90, z:90 }}
                     />
 
-                    <Entity
+                    {/* <Entity
                         id="aircon"
                         gltf-model="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/devices/Air%20conditioner%201.gltf"
                         scale="0.0025 0.0025 0.0025"
@@ -47,7 +48,7 @@ const ARApp = (props) => {
                         scale="0.0025 0.0025 0.0025"
                         position={{ x: -3.77, y: 2.5, z: -3.3 }}
                         rotation={{ x: 0, y: 90, z: 0 }}
-                    />
+                    /> */}
                 </Entity>
 
             </a-marker-camera>
