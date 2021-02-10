@@ -1,5 +1,6 @@
 import { Entity, Scene } from "aframe-react";
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
+import loadAR from "./loadAR";
 
 require("aframe");
 
@@ -8,31 +9,28 @@ require("aframe-look-at-component");
 
 require("./rotation-reader");
 
-class ARApp extends Component {
+const ARApp = (props) => {
+    const [loaded, setLoaded] = useState(false);
+    useEffect(() => {
+      loadAR(() => {
+        setLoaded(true);
+      });
+    });
 
-    componentDidMount () {
-        const script = document.createElement("script");
-    
-        script.src = "https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js";
-        script.async = true;
-    
-        document.body.appendChild(script);
-    }
-
-    render() {
-        return (
-            <Scene vr-mode-ui="enabled: false" embedded arjs='sourceType: webcam; debugUIEnabled: false;'>
-                <a-marker preset="hiro">
-                    <Entity
-                    position="0 -1 0"
-                    scale="0.05 0.05 0.05"
-                    gltf-model="https://arjs-cors-proxy.herokuapp.com/https://raw.githack.com/AR-js-org/AR.js/master/aframe/examples/image-tracking/nft/trex/scene.gltf"
-                    ></Entity>
-                </a-marker>
-                <Entity camera={{active: "true"}}></Entity>
-            </Scene>
-        );
-    }
+    return (
+        <div>
+            {loaded ? <Scene arjs="sourceType: webcam; debugUIEnabled: false;">
+            <a-marker-camera preset="hiro">
+                <Entity
+                position="0 -1 0"
+                rotation="0 0 90"
+                scale="0.5 0.5 0.5"
+                gltf-model="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react@v1.0/assets/LabPlan.gltf"
+                ></Entity>
+            </a-marker-camera>
+        </Scene> : ''}
+        </div>
+    );
 }
 
 export default ARApp;

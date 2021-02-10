@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import ARApp from './AR-App';
+import ARLocation from './AR-Location';
+
 import './index.css';
 
 import * as serviceWorker from './serviceWorker';
@@ -10,6 +12,7 @@ ReactDOM.render(
   <React.StrictMode>
     {/* <App /> */}
     <ARApp></ARApp>
+    {/* <ARLocation></ARLocation> */}
   </React.StrictMode>,
   document.getElementById('root')
 );
