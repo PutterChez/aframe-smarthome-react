@@ -21,12 +21,30 @@ const ARApp = (props) => {
         <div>
             {loaded ? <Scene arjs="sourceType: webcam; debugUIEnabled: false;">
             <a-marker-camera preset="hiro">
-                <Entity
-                position="0 -1 0"
-                rotation="0 0 90"
-                scale="0.5 0.5 0.5"
-                gltf-model="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react@v1.0/assets/LabPlan.gltf"
-                ></Entity>
+
+                <Entity id="labAll" scale="0.5 0.5 0.5" rotation="0 -90 90">
+                    <Entity
+                        id="labWall"
+                        gltf-model="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react@v1.0/assets/Lab.gltf"
+                        position={{ x: -4, y: 0.05, z: 0 }}
+                    />
+
+                    <Entity
+                        id="aircon"
+                        gltf-model="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/devices/Air%20conditioner%201.gltf"
+                        scale="0.0025 0.0025 0.0025"
+                        position={{ x: -3.77, y: 2.5, z: -8.3 }}
+                        rotation={{ x: 0, y: 90, z: 0 }}
+                    />
+                    <Entity
+                        id="aircon"
+                        gltf-model="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/devices/Air%20conditioner%201.gltf"
+                        scale="0.0025 0.0025 0.0025"
+                        position={{ x: -3.77, y: 2.5, z: -3.3 }}
+                        rotation={{ x: 0, y: 90, z: 0 }}
+                    />
+                </Entity>
+
             </a-marker-camera>
         </Scene> : ''}
         </div>
