@@ -2,16 +2,18 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import ARApp from './AR-App';
-import ARLocation from './AR-Location';
+import ARLocation from './Sensor';
 
 import './index.css';
 
 import * as serviceWorker from './serviceWorker';
+import Sensor from './Sensor';
 
 ReactDOM.render(
   <React.StrictMode>
     {/* <App /> */}
-    <ARApp></ARApp>
+    <Sensor></Sensor>
+    {/* <ARApp></ARApp> */}
     {/* <ARLocation></ARLocation> */}
   </React.StrictMode>,
   document.getElementById('root')

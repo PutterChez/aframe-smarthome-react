@@ -32,7 +32,7 @@ const ARApp = (props) => {
                         id="labWall"
                         gltf-model="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react@v1.0/assets/Lab.gltf"
                         position={{ x: -4, y: 0.05, z: 0 }}
-                        rotation={{ x: 0, y: -90, z:90 }}
+                        // rotation={{ x: 0, y: -90, z:90 }}
                     />
 
                     {/* <Entity
