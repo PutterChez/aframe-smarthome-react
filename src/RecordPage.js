@@ -31,6 +31,16 @@ class RecordPage extends Component {
   onStop(recordedBlob) {
     console.log('recordedBlob is: ', recordedBlob);
     this.setState({audioLink: '' + recordedBlob.blobURL});
+
+    console.log('sending blob to server..');
+    var fd = new FormData();
+    var apiUrl = "127.0.0.1:8000/mock/audio/Test"
+    fd.append('audio', recordedBlob);
+  
+    fetch(apiUrl + '/api/createAudio', {
+      headers: { Accept: "application/json" },
+      method: "POST", body: fd
+    });
   }
 
   render() {
