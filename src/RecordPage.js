@@ -5,9 +5,11 @@ class RecordPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      record: false
+      record: false,
+      audioLink: ""
     }
 
+    this.onStop = this.onStop.bind(this);
   }
 
   startRecording = () => {
@@ -28,6 +30,7 @@ class RecordPage extends Component {
 
   onStop(recordedBlob) {
     console.log('recordedBlob is: ', recordedBlob);
+    this.setState({audioLink: '' + recordedBlob.blobURL});
   }
 
   render() {
@@ -43,6 +46,7 @@ class RecordPage extends Component {
           mimeType="audio/mp3" />
         <button onClick={this.startRecording} type="button">Start</button>
         <button onClick={this.stopRecording} type="button">Stop</button>
+        <a href={this.state.audioLink}> Click for audio</a>
       </div>
     );
   }
