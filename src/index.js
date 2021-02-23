@@ -8,11 +8,13 @@ import './index.css';
 
 import * as serviceWorker from './serviceWorker';
 import Sensor from './Sensor';
+import RecordPage from './RecordPage';
 
 ReactDOM.render(
   <React.StrictMode>
     {/* <App /> */}
-    <Sensor></Sensor>
+    {/* <Sensor></Sensor> */}
+    <RecordPage></RecordPage>
     {/* <ARApp></ARApp> */}
     {/* <ARLocation></ARLocation> */}
   </React.StrictMode>,
