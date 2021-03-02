@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import ARApp from './AR-App';
 import ARLocation from './Sensor';
+import CesiumVR from './CesiumVR';
 
 import './index.css';
 
@@ -13,10 +14,11 @@ import RecordPage from './RecordPage';
 ReactDOM.render(
   <React.StrictMode>
     {/* <App /> */}
-    {/* <Sensor></Sensor> */}
-    <RecordPage></RecordPage>
+    <Sensor></Sensor>
+    {/* <RecordPage></RecordPage> */}
     {/* <ARApp></ARApp> */}
     {/* <ARLocation></ARLocation> */}
+    {/* <CesiumVR></CesiumVR> */}
   </React.StrictMode>,
   document.getElementById('root')
 );
