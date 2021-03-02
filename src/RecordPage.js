@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { ReactMic } from 'react-mic';
 
 const axios = require('axios');
+const toWav = require('audiobuffer-to-wav');
 
 class RecordPage extends Component {
   constructor(props) {
@@ -38,20 +39,40 @@ class RecordPage extends Component {
   
     var apiUrl = "https://bd7fc827ac09.ngrok.io"
     
-    var fd = new FormData();
-    fd.append('fname', 'test.wav');
-    fd.append('data', recordedBlob.blob);
+    const reader = new window.FileReader();
+    reader.readAsDataURL(recordedBlob.blob);
+    reader.onloadend = () => {
+      let base64 = reader.result + '';
+      base64 = base64.split(',')[1];
+      const ab = new ArrayBuffer(base64.length);
+      const buff = new Buffer.from(base64, 'base64');
+      const view = new Uint8Array(ab);
+      for (let i = 0; i < buff.length; ++i) {
+        view[i] = buff[i];
+      }
+      const context = new AudioContext();
+      context.decodeAudioData(ab, (buffer) => {
+      const wavFile = toWav(buffer);
+      const blob = new window.Blob([ new DataView(wavFile) ], {
+        type: 'audio/wav'
+      });
 
-    axios({
-      method: 'post',
-      url: apiUrl + '/mock/audio/',
-      data: fd,
-      processData: false,
-      contentType: false
-    }).then(function(data) {
-      console.log(data);
-    });
+      var fd = new FormData();
+      fd.append('file', blob);
 
+      axios({
+        method: 'post',
+        url: apiUrl + '/mock/audio/',
+        data: fd,
+        processData: false,
+        contentType: false
+      }).then(function(data) {
+        console.log(data);
+      });
+
+    })}
+
+    
     this.setState({audioLink: '' + recordedBlob.blobURL});
   }
 
