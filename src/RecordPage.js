@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { ReactMic } from 'react-mic';
 
-var toWav = require('audiobuffer-to-wav');
+const axios = require('axios');
 
 class RecordPage extends Component {
   constructor(props) {
@@ -35,15 +35,21 @@ class RecordPage extends Component {
 
     console.log('sending blob to server..');
 
-    var wavefilefromblob = new File([recordedBlob.blob], 'filename.wav');
-
-    var fd = new FormData();
-    var apiUrl = "https://992d1569c397.ngrok.io"
-    fd.append('file', wavefilefromblob);
   
-    fetch(apiUrl + '/mock/audio/', {
-      headers: { Accept: "application/json" },
-      method: "POST", body: fd
+    var apiUrl = "https://bd7fc827ac09.ngrok.io"
+    
+    var fd = new FormData();
+    fd.append('fname', 'test.wav');
+    fd.append('data', recordedBlob.blob);
+
+    axios({
+      method: 'post',
+      url: apiUrl + '/mock/audio/',
+      data: fd,
+      processData: false,
+      contentType: false
+    }).then(function(data) {
+      console.log(data);
     });
 
     this.setState({audioLink: '' + recordedBlob.blobURL});
