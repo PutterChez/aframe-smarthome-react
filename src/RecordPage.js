@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { ReactMic } from 'react-mic';
 
+var toWav = require('audiobuffer-to-wav');
+
 class RecordPage extends Component {
   constructor(props) {
     super(props);
@@ -30,17 +32,21 @@ class RecordPage extends Component {
 
   onStop(recordedBlob) {
     console.log('recordedBlob is: ', recordedBlob);
-    this.setState({audioLink: '' + recordedBlob.blobURL});
 
     console.log('sending blob to server..');
+
+    var wavefilefromblob = new File([recordedBlob.blob], 'filename.wav');
+
     var fd = new FormData();
-    var apiUrl = "127.0.0.1:8000/mock/audio/Test"
-    fd.append('audio', recordedBlob);
+    var apiUrl = "https://992d1569c397.ngrok.io"
+    fd.append('file', wavefilefromblob);
   
-    fetch(apiUrl + '/api/createAudio', {
+    fetch(apiUrl + '/mock/audio/', {
       headers: { Accept: "application/json" },
       method: "POST", body: fd
     });
+
+    this.setState({audioLink: '' + recordedBlob.blobURL});
   }
 
   render() {
@@ -53,7 +59,7 @@ class RecordPage extends Component {
           onData={this.onData}
           strokeColor="#000000"
           backgroundColor="#FF4081" 
-          mimeType="audio/mp3" />
+          mimeType="audio/wav" />
         <button onClick={this.startRecording} type="button">Start</button>
         <button onClick={this.stopRecording} type="button">Stop</button>
         <a href={this.state.audioLink}> Click for audio</a>
