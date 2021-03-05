@@ -14,11 +14,11 @@ import RecordPage from './RecordPage';
 ReactDOM.render(
   <React.StrictMode>
     {/* <App /> */}
-    {/* <Sensor></Sensor> */}
+    <Sensor></Sensor>
     {/* <RecordPage></RecordPage> */}
     {/* <ARApp></ARApp> */}
     {/* <ARLocation></ARLocation> */}
-    <CesiumVR></CesiumVR>
+    {/* <CesiumVR></CesiumVR> */}
   </React.StrictMode>,
   document.getElementById('root')
 );

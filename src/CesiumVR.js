@@ -4,9 +4,6 @@ import { Canvas } from 'react-three-fiber';
 import Box from './Box';
 
 class CesiumVR extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   render () {
       return (

@@ -9,7 +9,8 @@ class RecordPage extends Component {
     super(props);
     this.state = {
       record: false,
-      audioLink: ""
+      audioLink: "",
+      speech: "",
     }
 
     this.onStop = this.onStop.bind(this);
@@ -37,7 +38,7 @@ class RecordPage extends Component {
     console.log('sending blob to server..');
 
   
-    var apiUrl = "https://bd7fc827ac09.ngrok.io"
+    var apiUrl = "https://754c670b0f27.ngrok.io"
     
     const reader = new window.FileReader();
     reader.readAsDataURL(recordedBlob.blob);
@@ -68,6 +69,7 @@ class RecordPage extends Component {
         contentType: false
       }).then(function(data) {
         console.log(data);
+        this.setState({speech: '' + data.data});
       });
 
     })}
@@ -90,6 +92,7 @@ class RecordPage extends Component {
         <button onClick={this.startRecording} type="button">Start</button>
         <button onClick={this.stopRecording} type="button">Stop</button>
         <a href={this.state.audioLink}> Click for audio</a>
+        <h1> Speech recognition: {this.state.speech}</h1>
       </div>
     );
   }

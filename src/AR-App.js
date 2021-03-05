@@ -1,5 +1,5 @@
 import { Entity, Scene } from "aframe-react";
-import React, { useEffect, useState } from "react";
+import React, { Component } from "react";
 import loadAR from "./loadAR";
 
 require("aframe");
@@ -9,52 +9,62 @@ require("aframe-look-at-component");
 
 require("./rotation-reader");
 
-const ARApp = (props) => {
-    const [loaded, setLoaded] = useState(false);
-    useEffect(() => {
-      loadAR(() => {
-        setLoaded(true);
-      });
-    });
+class ARApp extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            loaded: false,
+        };
+    }
 
-    return (
-        <div>
-            {loaded ? <Scene arjs="sourceType: webcam; debugUIEnabled: false;" gesture-detector={{}}>
-            <a-marker-camera 
-                preset="hiro"
-                raycaster="objects: .clickable"
-                emitevents="true"
-                cursor="fuse: false; rayOrigin: mouse;"
-                id="markerA">
+    componentDidMount() {
+        // loadAR(() => {
+        //     this.setState({loaded: true});
+        // });
+    }
 
-                <Entity id="labAll" scale="0.5 0.5 0.5" class="clickable" gesture-handler={{}}>
-                    <Entity
-                        id="labWall"
-                        gltf-model="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react@v1.0/assets/Lab.gltf"
-                        position={{ x: -4, y: 0.05, z: 0 }}
-                        // rotation={{ x: 0, y: -90, z:90 }}
-                    />
+    render() {
+        return (
+            <div>
+                <h1>{this.props.x}</h1>
+                <h1>{this.props.y}</h1>
+                <h1>{this.props.z}</h1>
+                <h1>{this.props.w}</h1>
+                {/* {this.state.loaded ? <Scene arjs="sourceType: webcam; debugUIEnabled: false;" gesture-detector={{}}>
+                <a-marker-camera 
+                    preset="hiro"
+                    raycaster="objects: .clickable"
+                    emitevents="true"
+                    cursor="fuse: false; rayOrigin: mouse;"
+                    id="markerA">
 
-                    {/* <Entity
-                        id="aircon"
-                        gltf-model="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/devices/Air%20conditioner%201.gltf"
-                        scale="0.0025 0.0025 0.0025"
-                        position={{ x: -3.77, y: 2.5, z: -8.3 }}
-                        rotation={{ x: 0, y: 90, z: 0 }}
-                    />
-                    <Entity
-                        id="aircon"
-                        gltf-model="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/devices/Air%20conditioner%201.gltf"
-                        scale="0.0025 0.0025 0.0025"
-                        position={{ x: -3.77, y: 2.5, z: -3.3 }}
-                        rotation={{ x: 0, y: 90, z: 0 }}
-                    /> */}
-                </Entity>
+                    <Entity id="labAll" scale="0.5 0.5 0.5" class="clickable" gesture-handler={{}}>
+                        <Entity
+                            id="labWall"
+                            gltf-model="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react@v1.0/assets/Lab.gltf"
+                            position={{ x: -4, y: 0.05, z: 0 }}
+                            rotation-reader={this.props.rotation[0], this.props.rotation[1], this.props.rotation[2], this.props.rotation[3]}
+                        />
+                    </Entity>
+                    
+                    <Entity 
+                        rotation-reader={this.props.rotation[0], this.props.rotation[1], this.props.rotation[2], this.props.rotation[3]}
+                    >
+                        <a-box></a-box>
+                    </Entity>
 
-            </a-marker-camera>
-        </Scene> : ''}
-        </div>
-    );
+                </a-marker-camera>
+                </Scene> : ''} */}
+
+                <Scene>
+                    <Entity camera={{ active: true }} look-controls={{ enabled: false }}></Entity>
+                    <a-box color="red" position="0 0 -5" rotation="0 0 0" rotation-reader={this.props.x, this.props.y, this.props.z, this.props.w}>
+                        {/* <a-text color="black"> {this.props.x} </a-text> */}
+                    </a-box>
+                </Scene>
+            </div>
+        );
+    }
 }
 
 export default ARApp;
