@@ -12,27 +12,32 @@ AFRAME.registerComponent('rotation-reader', {
       y: {type: 'number', default: 0},
       z: {type: 'number', default: 0},
       w: {type: 'number', default: 0},
+      enabled: {type: 'boolean', default: true},
     },
 
     init: function () {
-      console.log(this.data.yourData);
+      console.log(this.data.enabled);
     },
 
     tick: function (time, timedelta) {
-      var data = this.data;
+      if(this.data.enabled){
+        var data = this.data;
 
-      console.log("x:" + data.x); 
-      console.log("y:" + data.y); 
-      console.log("z:" + data.z); 
-      console.log("w:" + data.w); 
-      var quaternion = [data.z, data.y, data.x, data.w];
-      
-      var euler = qte(quaternion);
+        // console.log("x:" + data.x); 
+        // console.log("y:" + data.y); 
+        // console.log("z:" + data.z); 
+        // console.log("w:" + data.w); 
+        
+        // Rearrange ZYX for portrait mode
+        var quaternion = [data.x, data.y, data.z, data.w];
+        
+        var euler = qte(quaternion);
 
-      console.log(euler);
-      
-      var euler = new THREE.Euler().fromArray(euler);
-      this.el.object3D.setRotationFromEuler(euler);
+        // console.log(euler);
+
+        var euler = new THREE.Euler().fromArray(euler);
+        this.el.object3D.setRotationFromEuler(euler);
+      }
 
       // var euler = new THREE.Euler().setFromQuaternion(quaternion, 'ZYX');
       // var vector = new THREE.Vector3(1, 0, 0);

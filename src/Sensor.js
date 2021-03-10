@@ -41,8 +41,6 @@ class Sensor extends Component {
     render() {
         return (
             <div>
-                
-                {/* <h1>{this.state.rotation}</h1> */}
                 <ARApp x={this.state.x} y={this.state.y} z={this.state.z} w={this.state.w}></ARApp>
             </div>
         );
