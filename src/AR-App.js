@@ -23,6 +23,18 @@ class ARApp extends Component {
         // });
     }
 
+    componentDidUpdate() {
+        console.log("update");
+        var room = document.getElementById('room')
+        
+        room.setAttribute('rotation-reader', {
+            x: this.props.x,
+            y: this.props.y,
+            z: this.props.z,
+            w: this.props.w
+        });
+    }
+
     render() {
         return (
             <div>
@@ -58,8 +70,7 @@ class ARApp extends Component {
 
                 <Scene>
                     <Entity camera={{ active: true }} look-controls={{ enabled: false }}></Entity>
-                    <a-box color="red" position="0 0 -5" rotation="0 0 0" rotation-reader={this.props.x, this.props.y, this.props.z, this.props.w}>
-                        {/* <a-text color="black"> {this.props.x} </a-text> */}
+                    <a-box id="room" color="red" position="0 0 -5" rotation="0 0 0" rotation-reader="">
                     </a-box>
                 </Scene>
             </div>
