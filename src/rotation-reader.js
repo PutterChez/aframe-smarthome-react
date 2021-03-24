@@ -35,8 +35,8 @@ AFRAME.registerComponent('rotation-reader', {
         var callibratedEuler = [-euler[0], euler[2], -euler[1] ];
         // var callibratedEuler = [euler[0], euler[2], euler[1] -3.14159 ];
 
-        var euler = new THREE.Euler().fromArray(callibratedEuler);
-        this.el.object3D.setRotationFromEuler(euler);
+        var finalEuler = new THREE.Euler().fromArray(callibratedEuler);
+        this.el.object3D.setRotationFromEuler(finalEuler);
       }
 
       // var euler = new THREE.Euler().setFromQuaternion(quaternion, 'ZYX');

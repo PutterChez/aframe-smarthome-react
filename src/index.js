@@ -17,9 +17,7 @@ ReactDOM.render(
     {/* <App /> */}
     <Sensor></Sensor>
     {/* <RecordPage></RecordPage> */}
-    {/* <CesiumVR></CesiumVR> */}
     {/* <GeoSpatial></GeoSpatial> */}
-    {/* <LabClean></LabClean> */}
   </React.StrictMode>,
   document.getElementById('root')
 );

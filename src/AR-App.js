@@ -15,6 +15,7 @@ class ARApp extends Component {
         this.state = {
             loaded: false,
             callibrated: false,
+            preview: true,
         };
     }
 
@@ -29,33 +30,42 @@ class ARApp extends Component {
             var button = document.getElementById('callibrate');
             button.addEventListener("click", (e)=> {
                 console.log('calibrating');
-                labModel.setAttribute('rotation-reader', {'enabled' : 'true'});
+                labModel.setAttribute('rotation-reader', {'enabled' : true});
                 this.setState({callibrated: true});
               })
-
-            var scaleButton = document.getElementById('scale');
-            scaleButton.addEventListener("click", (e)=> {
-                labModel.setAttribute('scale', '' + (scale.x + 0.5) + ' ' + (scale.y + 0.5) + ' ' + (scale.z + 0.5) );
-                labModel.setAttribute('position', '' + (position.x) + ' ' + (position.y + 0.5) + ' ' + (position.z) );
+            
+            var showARButton = document.getElementById('showAR');
+            showARButton.addEventListener("click", (e)=> {
+                this.setState({preview: false});
             })
 
-            var scaleButton = document.getElementById('moveX');
-            scaleButton.addEventListener("click", (e)=> {
+            var scaleXButton = document.getElementById('scale');
+            scaleXButton.addEventListener("click", (e)=> {
+                labModel.setAttribute('scale', '' + (scale.x + 0.25) + ' ' + (scale.y + 0.25) + ' ' + (scale.z + 0.25) );
+            })
+
+            var scaleXDownButton = document.getElementById('scaleDown');
+            scaleXDownButton.addEventListener("click", (e)=> {
+                labModel.setAttribute('scale', '' + (scale.x - 0.25) + ' ' + (scale.y - 0.25) + ' ' + (scale.z - 0.25) );
+            })
+
+            var moveXButton = document.getElementById('moveX');
+            moveXButton.addEventListener("click", (e)=> {
                 labModel.setAttribute('position', '' + (position.x + 0.5) + ' ' + (position.y) + ' ' + (position.z) );
             })
 
-            var scaleButton = document.getElementById('moveXBack');
-            scaleButton.addEventListener("click", (e)=> {
+            var moveXBackButton = document.getElementById('moveXBack');
+            moveXBackButton.addEventListener("click", (e)=> {
                 labModel.setAttribute('position', '' + (position.x - 0.5) + ' ' + (position.y) + ' ' + (position.z) );
             })
 
-            var scaleButton = document.getElementById('moveZ');
-            scaleButton.addEventListener("click", (e)=> {
+            var moveZButton = document.getElementById('moveZ');
+            moveZButton.addEventListener("click", (e)=> {
                 labModel.setAttribute('position', '' + (position.x) + ' ' + (position.y) + ' ' + (position.z + 0.5) );
             })
 
-            var scaleButton = document.getElementById('moveZBack');
-            scaleButton.addEventListener("click", (e)=> {
+            var moveZBackButton = document.getElementById('moveZBack');
+            moveZBackButton.addEventListener("click", (e)=> {
                 labModel.setAttribute('position', '' + (position.x) + ' ' + (position.y) + ' ' + (position.z - 0.5) );
             })
             
@@ -81,14 +91,20 @@ class ARApp extends Component {
         return (
             <div>
                 {this.state.loaded ? <div>
-                    <div style={{position: 'fixed', top: '10px', width:'100%', textAlign: 'center', zIndex: 1}}>
-                        {/* <button id='moveX' style={{width: '80%'}}> Move X Front </button>
+                    <div style={{display: 'none', position: 'fixed', top: '10px', width:'100%', textAlign: 'center', zIndex: 1}}>
+                        <button id='moveX' style={{width: '80%'}}> Move X Front </button>
                         <button id='moveXBack' style={{width: '80%'}}> Move X Back </button>
                         <button id='moveZ' style={{width: '80%'}}> Move Z Front </button>
                         <button id='moveZBack' style={{width: '80%'}}> Move Z Back </button>
-                        <button id='scale' style={{width: '80%'}}> Scale </button> */}
-                        <button id='callibrate' style={{width: '80%'}}> Callibrate </button>
+                        <button id='scale' style={{width: '80%'}}> Scale </button>
+                        <button id='scaleDown' style={{width: '80%'}}> Scale Down </button>
                     </div>
+
+                    <div style={{position: 'fixed', top: '10px', width:'100%', textAlign: 'center', zIndex: 1}}>
+                        <button id='callibrate' style={{width: '80%'}}> Callibrate </button>
+                        <button id='showAR' style={{width: '80%'}}> Show AR </button>
+                    </div>
+
                     {/* gesture-detector={{}} to Scene for gesture */}
                     <Scene arjs="sourceType: webcam; debugUIEnabled: false;" >
                     <a-marker-camera 
@@ -103,10 +119,36 @@ class ARApp extends Component {
                             <Entity id="rotationWrapper" position="0 0 0" rotation-reader="enabled: false">
                                 <Entity
                                     id="labWall"
-                                    gltf-model="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react@v1.0/assets/Lab.gltf"
-                                    position="-2 -1.2 0"
+                                    position="-2 -1.2 3"
                                     scale='1 1 1'
-                                />
+                                >
+                                    <Entity
+                                        visible={this.state.preview}
+                                        id="previewModel"
+                                        gltf-model="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react@v1.0/assets/Lab.gltf"
+                                        position="0 0 0"
+                                        scale='1 1 1'
+                                    />
+
+                                    <Entity id="arUI" visible={!this.state.preview}>
+                                        <Entity
+                                            id="aircon"
+                                            gltf-model="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/devices/Air%20conditioner%201.gltf"
+                                            scale="0.0025 0.0025 0.0025"
+                                            position={{ x: 0.234, y: 2.5, z: -8.3 }}
+                                            rotation={{ x: 0, y: 90, z: 0 }}
+                                            />
+                                        <Entity
+                                            id="aircon"
+                                            gltf-model="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/devices/Air%20conditioner%201.gltf"
+                                            scale="0.0025 0.0025 0.0025"
+                                            position={{ x: 0.234, y: 2.5, z: -3.3 }}
+                                            rotation={{ x: 0, y: 90, z: 0 }}
+                                        />
+                                    </Entity>
+
+                                </Entity>
+                                {/* <a-entity geometry="primitive: box" material="color: red; opacity: 0.3"></a-entity> */}
                             </Entity>
                         </Entity>
                     </a-marker-camera>
