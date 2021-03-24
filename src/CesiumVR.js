@@ -3,6 +3,8 @@ import { Canvas } from 'react-three-fiber';
 
 import Box from './Box';
 
+require('dotenv').config()
+
 class CesiumVR extends Component {
 
   render () {

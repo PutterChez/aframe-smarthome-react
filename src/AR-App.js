@@ -21,39 +21,54 @@ class ARApp extends Component {
     componentDidMount() {
         loadAR(() => {
             this.setState({loaded: true});
-            var button = document.getElementById('callibrateButton');
+            
+            var labModel = document.getElementById('rotationWrapper');
+            var scale = labModel.getAttribute('scale');
+            var position = labModel.getAttribute('position');
+
+            var button = document.getElementById('callibrate');
             button.addEventListener("click", (e)=> {
                 console.log('calibrating');
-                var marker = document.getElementById('markerA');
-                // marker.addEventListener("markerFound", (e)=>{
-                //     document.getElementById('markerA').setAttribute();
-                // }
-
+                labModel.setAttribute('rotation-reader', {'enabled' : 'true'});
                 this.setState({callibrated: true});
-
-                document.getElementById('rotationWrapper').setAttribute('rotation-reader','true');
-                document.getElementById('labWall').setAttribute('rotation-reader','true');
-                
-                document.getElementById('rotationWrapper').setAttribute('position', '0 0 15');
               })
 
-            var scaleButton = document.getElementById('scaleButton');
+            var scaleButton = document.getElementById('scale');
             scaleButton.addEventListener("click", (e)=> {
-                var labModel = document.getElementById('rotationWrapper');
-    
-                // var scale = labModel.getAttribute('scale');
-                // console.log(scale);
-                // document.getElementById('rotationWrapper').setAttribute('scale', '' + (scale.x + 5) + ' ' + (scale.y + 5) + ' ' + (scale.z + 5) );
+                labModel.setAttribute('scale', '' + (scale.x + 0.5) + ' ' + (scale.y + 0.5) + ' ' + (scale.z + 0.5) );
+                labModel.setAttribute('position', '' + (position.x) + ' ' + (position.y + 0.5) + ' ' + (position.z) );
             })
+
+            var scaleButton = document.getElementById('moveX');
+            scaleButton.addEventListener("click", (e)=> {
+                labModel.setAttribute('position', '' + (position.x + 0.5) + ' ' + (position.y) + ' ' + (position.z) );
+            })
+
+            var scaleButton = document.getElementById('moveXBack');
+            scaleButton.addEventListener("click", (e)=> {
+                labModel.setAttribute('position', '' + (position.x - 0.5) + ' ' + (position.y) + ' ' + (position.z) );
+            })
+
+            var scaleButton = document.getElementById('moveZ');
+            scaleButton.addEventListener("click", (e)=> {
+                labModel.setAttribute('position', '' + (position.x) + ' ' + (position.y) + ' ' + (position.z + 0.5) );
+            })
+
+            var scaleButton = document.getElementById('moveZBack');
+            scaleButton.addEventListener("click", (e)=> {
+                labModel.setAttribute('position', '' + (position.x) + ' ' + (position.y) + ' ' + (position.z - 0.5) );
+            })
+            
         });
     }
 
     componentDidUpdate() {
-        if(this.state.loaded && this.state.callibrated){
+        if(this.state.loaded){
             var room = document.getElementById('rotationWrapper')
             
-            console.log("update", this.props);
-            room.setAttribute('rotation-reader', {      
+            // console.log("update", this.props);
+            room.setAttribute('rotation-reader', {   
+                enabled: this.state.callibrated,   
                 x: this.props.x,
                 y: this.props.y,
                 z: this.props.z,
@@ -67,8 +82,12 @@ class ARApp extends Component {
             <div>
                 {this.state.loaded ? <div>
                     <div style={{position: 'fixed', top: '10px', width:'100%', textAlign: 'center', zIndex: 1}}>
-                        <button id='callibrateButton' style={{width: '80%'}}> Callibrate </button>
-                        <button id='scaleButton' style={{width: '80%'}}> Scale </button>
+                        {/* <button id='moveX' style={{width: '80%'}}> Move X Front </button>
+                        <button id='moveXBack' style={{width: '80%'}}> Move X Back </button>
+                        <button id='moveZ' style={{width: '80%'}}> Move Z Front </button>
+                        <button id='moveZBack' style={{width: '80%'}}> Move Z Back </button>
+                        <button id='scale' style={{width: '80%'}}> Scale </button> */}
+                        <button id='callibrate' style={{width: '80%'}}> Callibrate </button>
                     </div>
                     {/* gesture-detector={{}} to Scene for gesture */}
                     <Scene arjs="sourceType: webcam; debugUIEnabled: false;" >
@@ -80,12 +99,13 @@ class ARApp extends Component {
                         id="markerA">
 
                         {/* gesture-handler={{}} to Entity for gesture */}
-                        <Entity id="labAll" position="0 -2.5 0" class="clickable" rotation="-90 0 -90" >
-                            <Entity id="rotationWrapper" rotation="0 0 90">
+                        <Entity id="labAll" position="0 0 0" rotation="0 0 0" class="clickable">
+                            <Entity id="rotationWrapper" position="0 0 0" rotation-reader="enabled: false">
                                 <Entity
                                     id="labWall"
                                     gltf-model="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react@v1.0/assets/Lab.gltf"
-                                    position="-4 -2.5 -4"
+                                    position="-2 -1.2 0"
+                                    scale='1 1 1'
                                 />
                             </Entity>
                         </Entity>

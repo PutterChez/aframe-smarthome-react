@@ -1,24 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
-import ARApp from './AR-App';
-import ARLocation from './Sensor';
-import CesiumVR from './CesiumVR';
 
 import './index.css';
-
 import * as serviceWorker from './serviceWorker';
+
+import App from './App';
+import ARApp from './AR-App';
+import CesiumVR from './CesiumVR';
 import Sensor from './Sensor';
 import RecordPage from './RecordPage';
+import GeoSpatial from './Geospatial';
+import LabClean from './LabClean';
 
 ReactDOM.render(
   <React.StrictMode>
     {/* <App /> */}
     <Sensor></Sensor>
     {/* <RecordPage></RecordPage> */}
-    {/* <ARApp></ARApp> */}
-    {/* <ARLocation></ARLocation> */}
     {/* <CesiumVR></CesiumVR> */}
+    {/* <GeoSpatial></GeoSpatial> */}
+    {/* <LabClean></LabClean> */}
   </React.StrictMode>,
   document.getElementById('root')
 );

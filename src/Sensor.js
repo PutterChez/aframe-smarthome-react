@@ -25,7 +25,7 @@ class Sensor extends Component {
         if ( 'Gyroscope' in window ) {
             let sensor = new RelativeOrientationSensor({frequency: 60});
             sensor.addEventListener('reading', (e)=> {
-                console.log('val: ' + sensor.quaternion);
+                // console.log('val: ' + sensor.quaternion);
 
                 this.setState({
                     x: sensor.quaternion[0].toFixed(3),

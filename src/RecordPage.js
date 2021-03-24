@@ -38,7 +38,7 @@ class RecordPage extends Component {
     console.log('sending blob to server..');
 
   
-    var apiUrl = "https://754c670b0f27.ngrok.io"
+    var apiUrl = "https://93af33d9d3fa.ngrok.io"
     
     const reader = new window.FileReader();
     reader.readAsDataURL(recordedBlob.blob);
@@ -60,7 +60,8 @@ class RecordPage extends Component {
 
       var fd = new FormData();
       fd.append('file', blob);
-
+      
+      var self = this;
       axios({
         method: 'post',
         url: apiUrl + '/mock/audio/',
@@ -69,7 +70,7 @@ class RecordPage extends Component {
         contentType: false
       }).then(function(data) {
         console.log(data);
-        this.setState({speech: '' + data.data});
+        self.setState({speech: '' + data.data});
       });
 
     })}
