@@ -6,6 +6,7 @@ require("aframe");
 
 require("aframe-environment-component");
 require("aframe-look-at-component");
+require("aframe-event-set-component");
 
 require("./rotation-reader");
 
@@ -107,51 +108,97 @@ class ARApp extends Component {
 
                     {/* gesture-detector={{}} to Scene for gesture */}
                     <Scene arjs="sourceType: webcam; debugUIEnabled: false;" >
-                    <a-marker-camera 
-                        preset="hiro"
-                        raycaster="objects: .clickable"
-                        emitevents="true"
-                        cursor="fuse: false; rayOrigin: mouse;"
-                        id="markerA">
 
-                        {/* gesture-handler={{}} to Entity for gesture */}
-                        <Entity id="labAll" position="0 0 0" rotation="0 0 0" class="clickable">
-                            <Entity id="rotationWrapper" position="0 0 0" rotation-reader="enabled: false">
-                                <Entity
-                                    id="labWall"
-                                    position="-2 -1.2 3"
-                                    scale='1 1 1'
-                                >
-                                    <Entity
-                                        visible={this.state.preview}
-                                        id="previewModel"
-                                        gltf-model="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react@v1.0/assets/Lab.gltf"
-                                        position="0 0 0"
-                                        scale='1 1 1'
-                                    />
-
-                                    <Entity id="arUI" visible={!this.state.preview}>
+                        <Entity 
+                            camera raycaster="objects: .clickable; showLine: true; far: 20"
+                            emitevents="true"
+                            cursor="fuse: false; rayOrigin: mouse;">
+                        </Entity>
+                        
+                        <Entity id="rotationWrapper" position="0 0 0" rotation-reader="enabled: false">
+                            <Entity
+                                id="labAll"
+                                position="-4 -1.6 3"
+                                scale='2 2 2'
+                            >
+                                <Entity id="arUI" visible={this.state.callibrated}>
+                                    <Entity id="device" position="0.234 2.5 -3.3">
                                         <Entity
                                             id="aircon"
                                             gltf-model="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/devices/Air%20conditioner%201.gltf"
                                             scale="0.0025 0.0025 0.0025"
-                                            position={{ x: 0.234, y: 2.5, z: -8.3 }}
-                                            rotation={{ x: 0, y: 90, z: 0 }}
-                                            />
-                                        <Entity
-                                            id="aircon"
-                                            gltf-model="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/devices/Air%20conditioner%201.gltf"
-                                            scale="0.0025 0.0025 0.0025"
-                                            position={{ x: 0.234, y: 2.5, z: -3.3 }}
-                                            rotation={{ x: 0, y: 90, z: 0 }}
+                                            rotation="0 90 0"
+                                            class="clickable"
+                                            event-set__1="_event: mouseenter; _target:#deviceUI; visible: true"
                                         />
+                                        
+                                        <a-gui-flex-container
+                                            id="deviceUI"
+                                            visible="false"
+                                            flex-direction="column" 
+                                            justify-content="center" 
+                                            align-items="normal" 
+                                            component-padding="0.1" 
+                                            opacity="0.7" 
+                                            width="3.5" 
+                                            height="2"
+                                            position="0.65 0 0"
+                                            scale="0.3 0.3 0.3"
+                                            rotation-reader=""
+                                            look-at="0 0 0"
+                                            >
+                                            
+                                            <a-gui-flex-container
+                                                flex-direction="row" 
+                                                justify-content="center" 
+                                                align-items="normal" 
+                                                component-padding="0" 
+                                                opacity="0" 
+                                                width="3.5" 
+                                                height="1.5"
+                                                position="0 0 0.04"
+                                                >
+                                                
+                                                <a-gui-button
+                                                    id="upChannel"
+                                                    width="1" height="0.75"
+                                                    value="+"
+                                                    font-family="Arial"
+                                                    font-size="150px"
+                                                    margin="0 0 0.05 0">
+                                                </a-gui-button>
+                                                
+                                                <a-gui-label
+                                                    width="1" height="0.75"
+                                                    margin="0 0 0.05 0"
+                                                    value="26 C"
+                                                    font-size="150px"
+                                                >
+                                                </a-gui-label>
+
+                                                <a-gui-button
+                                                    id="downChannel"
+                                                    width="1" height="0.75"
+                                                    value="-"
+                                                    font-family="Arial"
+                                                    font-size="150px"
+                                                    margin="0 0 0.05 0">
+                                                </a-gui-button>
+                                            </a-gui-flex-container>
+                                        </a-gui-flex-container>
                                     </Entity>
 
+                                    <Entity
+                                        id="aircon2"
+                                        gltf-model="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/devices/Air%20conditioner%201.gltf"
+                                        scale="0.0025 0.0025 0.0025"
+                                        position="0.234 2.5 -8.3"
+                                        rotation="0 90 0"
+                                    />
                                 </Entity>
-                                {/* <a-entity geometry="primitive: box" material="color: red; opacity: 0.3"></a-entity> */}
                             </Entity>
                         </Entity>
-                    </a-marker-camera>
+
                     </Scene> 
                 </div> : ''}
             </div>
