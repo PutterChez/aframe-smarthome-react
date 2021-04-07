@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { ReactMic } from 'react-mic';
+import App from './App';
 
 const axios = require('axios');
 const toWav = require('audiobuffer-to-wav');
@@ -29,7 +30,7 @@ class RecordPage extends Component {
   }
 
   onData(recordedBlob) {
-    console.log('This function does not return an object, but is called at a time interval of 10ms');
+    // console.log('This function does not return an object, but is called at a time interval of 10ms');
   }
 
   onStop(recordedBlob) {
@@ -38,7 +39,7 @@ class RecordPage extends Component {
     console.log('sending blob to server..');
 
   
-    var apiUrl = "https://93af33d9d3fa.ngrok.io"
+    var apiUrl = "https://9b5e9d9b1688.ngrok.io"
     
     const reader = new window.FileReader();
     reader.readAsDataURL(recordedBlob.blob);
@@ -94,6 +95,7 @@ class RecordPage extends Component {
         <button onClick={this.stopRecording} type="button">Stop</button>
         <a href={this.state.audioLink}> Click for audio</a>
         <h1> Speech recognition: {this.state.speech}</h1>
+        <App recordStart={this.startRecording} recordStop={this.stopRecording}></App>
       </div>
     );
   }

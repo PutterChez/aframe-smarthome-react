@@ -15,8 +15,8 @@ import LabClean from './LabClean';
 ReactDOM.render(
   <React.StrictMode>
     {/* <App /> */}
-    <Sensor></Sensor>
-    {/* <RecordPage></RecordPage> */}
+    {/* <Sensor></Sensor> */}
+    <RecordPage></RecordPage>
     {/* <GeoSpatial></GeoSpatial> */}
   </React.StrictMode>,
   document.getElementById('root')

@@ -16,13 +16,15 @@ require('aframe-extras');
 require('aframe-event-set-component');
 require('aframe-teleport-controls');
 require('./thumbstick');
+require('./speechControl');
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      url: 'https://a28bc3f35b14.ngrok.io/',
+      url: 'https://9b5e9d9b1688.ngrok.io/',
       deviceList: [],
+      retrieveObjects: false
     //   deviceList: [{name: 'lightbulb1', position: '2.04 0.936 -1.5', rotation: '0 90 0', tag: 'ict.HueLight01.onoff', type: 'lightbulb'},
     //   {name: 'lightbulb2', position: '2.04 0.936 -3.043', rotation: '0 90 0', tag: 'ict.HueLight02.onoff', type: 'lightbulb'}, 
     //   {name: 'tv1', position: '3.466 0.85 -1.25', rotation: '0 -140 0', tag: 'ict.HueLight02.onoff', type: 'tv'}
@@ -31,33 +33,37 @@ class App extends Component {
   }
 
   async componentDidMount() {
+    if(this.state.retrieveObjects){
+      // GET request using fetch with error handling
+      fetch(this.state.url + 'mock/get/')
+          .then(async response => {
+              const data = await response.json();
 
-    // GET request using fetch with error handling
-    fetch(this.state.url + 'mock/get/')
-        .then(async response => {
-            const data = await response.json();
+              // check for error response
+              if (!response.ok) {
+                  // get error message from body or default to response statusText
+                  const error = (data && data.message) || response.statusText;
+                  return Promise.reject(error);
+              }
 
-            // check for error response
-            if (!response.ok) {
-                // get error message from body or default to response statusText
-                const error = (data && data.message) || response.statusText;
-                return Promise.reject(error);
-            }
+              const zodbData = JSON.parse(data)
+              console.log(zodbData);
 
-            const zodbData = JSON.parse(data)
-            console.log(zodbData);
+              // console.log("Name: " + id + "\nLocation: " + zodbData[id].location + "\nRotation: " + zodbData[id].rotation + "\nTag: " +  zodbData[id].tag[0].tags)
+              
+              zodbData.ICTLab.devices.map((devices) => {
+                this.addDevice(devices.name, devices.location, devices.rotation, devices.tags, devices.type);
+              })
 
-            // console.log("Name: " + id + "\nLocation: " + zodbData[id].location + "\nRotation: " + zodbData[id].rotation + "\nTag: " +  zodbData[id].tag[0].tags)
-            
-            zodbData.ICTLab.devices.map((devices) => {
-              this.addDevice(devices.name, devices.location, devices.rotation, devices.tags, devices.type);
-            })
+              // this.addDevice(id, zodbData[id].location, zodbData[id].rotation, zodbData[id].tag[0].tags);
+          })
+          .catch(error => {
+              console.error('There was an error!', error);
+          });
+    }
 
-            // this.addDevice(id, zodbData[id].location, zodbData[id].rotation, zodbData[id].tag[0].tags);
-        })
-        .catch(error => {
-            console.error('There was an error!', error);
-        });
+    
+    window.recordPage = this;
   }
 
   addDevice(newName, newPosition, newRotation, newTags, newType) {
@@ -65,6 +71,14 @@ class App extends Component {
     this.setState(prevState => ({
       deviceList: [...prevState.deviceList, newDevice]
     }))
+  }
+
+  recordStart() {
+    this.props.recordStart();
+  }
+
+  recordStop() {
+    this.props.recordStop();
   }
 
   render() {
@@ -81,7 +95,8 @@ class App extends Component {
             look-controls={{ enabled: "true" }}
             position={{ x: 0, y: 1.65, z: 0 }}
             >
-              {/* <a-cursor></a-cursor> */}
+              {/* Enable for PC testing */}
+              <a-cursor></a-cursor>
           </Entity>
 
           <Entity 
@@ -100,6 +115,7 @@ class App extends Component {
             id="leftHand" 
             oculus-touch-controls="hand: left"
             controller-cursor={{}}
+            speech-control
           ></Entity>
 
         </Entity>
@@ -538,6 +554,27 @@ class App extends Component {
             />
           </Entity>
           
+          <a-gui-button
+              id="recordStartButton"
+              width="0.75" height="0.25" 
+              position="0.9 1.65 -4.4"
+              onClick={this.recordStart}
+              value="Speech Start"
+              font-family="Arial"
+              font-size="30px"
+              margin="0 0 0.05 0">
+          </a-gui-button>
+
+          <a-gui-button
+              id="recordStopButton"
+              width="0.75" height="0.25" 
+              position="0.9 1.33 -4.4"
+              onClick={this.recordStop}
+              value="Speech Stop"
+              font-family="Arial"
+              font-size="30px"
+              margin="0 0 0.05 0">
+          </a-gui-button>
 
           {/* <Entity>
             <Entity 
