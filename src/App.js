@@ -24,7 +24,7 @@ class App extends Component {
     this.state = {
       url: 'https://9b5e9d9b1688.ngrok.io/',
       deviceList: [],
-      retrieveObjects: false
+      retrieveObjects: true
     //   deviceList: [{name: 'lightbulb1', position: '2.04 0.936 -1.5', rotation: '0 90 0', tag: 'ict.HueLight01.onoff', type: 'lightbulb'},
     //   {name: 'lightbulb2', position: '2.04 0.936 -3.043', rotation: '0 90 0', tag: 'ict.HueLight02.onoff', type: 'lightbulb'}, 
     //   {name: 'tv1', position: '3.466 0.85 -1.25', rotation: '0 -140 0', tag: 'ict.HueLight02.onoff', type: 'tv'}

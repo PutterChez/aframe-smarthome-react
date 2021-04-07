@@ -17,6 +17,7 @@ class ARApp extends Component {
             loaded: false,
             callibrated: false,
             preview: true,
+            callibratedPos: "0 0 0",
         };
     }
 
@@ -31,7 +32,13 @@ class ARApp extends Component {
             var button = document.getElementById('callibrate');
             button.addEventListener("click", (e)=> {
                 console.log('calibrating');
-                labModel.setAttribute('rotation-reader', {'enabled' : true});
+                labModel.setAttribute('rotation-reader', {'enabled' : false});
+
+                var positionModel = labModel.getAttribute('position');
+
+                console.log('position: ' + positionModel.x + ',' + positionModel.y + ',' + positionModel.z);
+                
+                this.setState({callibratedPos: "positionModel.x " + "positionModel.y " + "positionModel.z"})
                 this.setState({callibrated: true});
               })
             
@@ -110,15 +117,26 @@ class ARApp extends Component {
                     <Scene arjs="sourceType: webcam; debugUIEnabled: false;" >
 
                         <Entity 
+                            id="rayCamera"
                             camera raycaster="objects: .clickable; showLine: true; far: 20"
                             emitevents="true"
                             cursor="fuse: false; rayOrigin: mouse;">
                         </Entity>
+
+                        <a-marker preset="hiro">
+                            <Entity
+                                visible={!this.state.callibrated}
+                                id="previewModel"
+                                gltf-model="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react@v1.0/assets/Lab.gltf"
+                                position="0 0 0"
+                                scale='2 2 2'
+                            />
+                        </a-marker>
                         
                         <Entity id="rotationWrapper" position="0 0 0" rotation-reader="enabled: false">
                             <Entity
                                 id="labAll"
-                                position="-4 -1.6 3"
+                                position={this.state.callibratedPos}
                                 scale='2 2 2'
                             >
                                 <Entity id="arUI" visible={this.state.callibrated}>
@@ -144,8 +162,7 @@ class ARApp extends Component {
                                             height="2"
                                             position="0.65 0 0"
                                             scale="0.3 0.3 0.3"
-                                            rotation-reader=""
-                                            look-at="0 0 0"
+                                            look-at="#rayCamera"
                                             >
                                             
                                             <a-gui-flex-container
