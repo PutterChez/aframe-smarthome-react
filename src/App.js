@@ -201,12 +201,12 @@ class App extends Component {
 
           <a-asset-item
             id="book"
-            src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react@v1.0/assets/CHAHIN_NOTEBOOK.gltf"
+            src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/CHAHIN_NOTEBOOK.gltf"
           ></a-asset-item>
 
           <a-asset-item
             id="assistant"
-            src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react@v1.0/assets/1332 Robot.gltf"
+            src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/1332 Robot.gltf"
           ></a-asset-item>
         </a-assets>
 
@@ -619,9 +619,10 @@ class App extends Component {
           <Entity
             id="assistant"
             gltf-model="#assistant"
-            scale="1 1 1"
-            position={{ x: -3.77, y: 2.5, z: -8.3 }}
-            rotation={{ x: 0, y: 90, z: 0 }}
+            scale="0.01 0.01 0.01"
+            position="0.08 0.95 -4"
+            rotation={{ x: 0, y: -55, z: 0 }}
+            animation={{property: "position", to: "0.08 1.5 -4", dir: "alternate", loop: "true", dur: "2000"}}
           />
 
           <Entity
