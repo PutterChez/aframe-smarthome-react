@@ -84,42 +84,6 @@ class App extends Component {
   render() {
     return (
       <Scene physics="gravity: -1.6" environment="preset: default; lighting: none; ground: none" style="position: absolute; height: 100%; width: 100%;">
-        <Entity
-          id="cameraRig"
-          rotation={{ x: 0, y: 0, z: 0}}
-        >
-          <Entity
-            id="head" 
-            camera={{active: "true"}}
-            wasd-controls={{ enabled: "true" }}
-            look-controls={{ enabled: "true" }}
-            position={{ x: 0, y: 1.65, z: 0 }}
-            >
-              {/* Enable for PC testing */}
-              <a-cursor></a-cursor>
-          </Entity>
-
-          <Entity 
-            id="rightHand" 
-            oculus-touch-controls="hand: right"
-            teleport-controls="cameraRig: #cameraRig; teleportOrigin: #head; button: trigger;"
-            thumbstick-rotate
-
-            // static-body="shape: sphere; sphereRadius: 0.02;"
-            // sphere-collider="objects: .throwable"
-            // grab ={{}}
-            >
-          </Entity>
-
-          <Entity 
-            id="leftHand" 
-            oculus-touch-controls="hand: left"
-            controller-cursor={{}}
-            speech-control
-          ></Entity>
-
-        </Entity>
-
         <a-assets>
           <a-asset-item
             id="tv"
@@ -208,7 +172,49 @@ class App extends Component {
             id="assistant"
             src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/1332 Robot.gltf"
           ></a-asset-item>
+
+          <a-asset-item
+            id="head"
+            src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/head/model.gltf"
+          ></a-asset-item>
         </a-assets>
+
+        <Entity
+          id="cameraRig"
+          rotation={{ x: 0, y: 0, z: 0}}
+        >
+          <Entity
+            id="head" 
+            camera={{active: "true"}}
+            wasd-controls={{ enabled: "true" }}
+            look-controls={{ enabled: "true" }}
+            position={{ x: 0, y: 1.65, z: 0 }}
+            >
+              <Entity gltf-model="#head" position="-0.33 -2.8 -1.6" rotation="0 180 0" scale="2 2 2" visible="false"></Entity>
+              {/* Enable for PC testing */}
+              <a-cursor></a-cursor>
+          </Entity>
+
+          <Entity 
+            id="rightHand" 
+            oculus-touch-controls="hand: right"
+            teleport-controls="cameraRig: #cameraRig; teleportOrigin: #head; button: trigger;"
+            thumbstick-rotate
+
+            // static-body="shape: sphere; sphereRadius: 0.02;"
+            // sphere-collider="objects: .throwable"
+            // grab ={{}}
+            >
+          </Entity>
+
+          <Entity 
+            id="leftHand" 
+            oculus-touch-controls="hand: left"
+            controller-cursor={{}}
+            speech-control
+          ></Entity>
+
+        </Entity>
 
         {/* <a-light
           type="ambient"
@@ -623,7 +629,20 @@ class App extends Component {
             position="0.08 0.95 -4"
             rotation={{ x: 0, y: -55, z: 0 }}
             animation={{property: "position", to: "0.08 1.5 -4", dir: "alternate", loop: "true", dur: "2000"}}
+            event-set__mouseenter="visible: true; _target: #queryButton;"
+            event-set__mouseleave="visible: false; _target: #queryButton;"
           />
+
+          <a-gui-button
+            id="queryButton"
+            width="0.75" height="0.25" 
+            position="-0.2 1.8 -3.4"
+            value="Query Result"
+            font-family="Arial"
+            font-size="30px"
+            margin="0 0 0.05 0"
+            visible="false">
+          </a-gui-button>
 
           <Entity
             id="aircon"
