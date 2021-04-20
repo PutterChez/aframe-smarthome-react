@@ -14,10 +14,10 @@ import LabClean from './LabClean';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    {/* <App /> */}
     {/* <Sensor></Sensor> */}
     {/* <RecordPage></RecordPage> */}
-    {/* <GeoSpatial></GeoSpatial> */}
+    <GeoSpatial></GeoSpatial>
   </React.StrictMode>,
   document.getElementById('root')
 );
