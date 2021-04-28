@@ -177,6 +177,16 @@ class App extends Component {
             id="head"
             src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/head/model.gltf"
           ></a-asset-item>
+
+          <a-asset-item
+            id="leftHand"
+            src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/left_hand/model.gltf"
+          ></a-asset-item>
+
+          <a-asset-item
+            id="rightHand"
+            src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/right_hand/model.gltf"
+          ></a-asset-item>
         </a-assets>
 
         <Entity
@@ -190,8 +200,9 @@ class App extends Component {
             look-controls={{ enabled: "true" }}
             position={{ x: 0, y: 1.65, z: 0 }}
             >
-              <Entity gltf-model="#head" position="-0.33 -2.8 -1.6" rotation="0 180 0" scale="2 2 2" visible="false"></Entity>
+              <Entity gltf-model="#head" scale="2 2 2" visible="true"></Entity>
               {/* Enable for PC testing */}
+              {/* <Entity gltf-model="#head" position="-0.33 -2.8 -1.6" rotation="0 180 0" scale="2 2 2" visible="false"></Entity> */}
               <a-cursor></a-cursor>
           </Entity>
 
@@ -199,6 +210,7 @@ class App extends Component {
             id="rightHand" 
             oculus-touch-controls="hand: right"
             teleport-controls="cameraRig: #cameraRig; teleportOrigin: #head; button: trigger;"
+            gltf-model="#rightHand"
             thumbstick-rotate
 
             // static-body="shape: sphere; sphereRadius: 0.02;"
@@ -211,6 +223,7 @@ class App extends Component {
             id="leftHand" 
             oculus-touch-controls="hand: left"
             controller-cursor={{}}
+            gltf-model="#leftHand"
             speech-control
           ></Entity>
 

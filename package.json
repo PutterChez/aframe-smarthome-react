@@ -7,7 +7,6 @@
     "node": "12.16.0"
   },
   "dependencies": {
-    "@craco/craco": "^6.1.1",
     "aframe": "^1.0.4",
     "aframe-animation-component": "^5.1.2",
     "aframe-aterrain-component": "^1.2.0",
@@ -28,7 +27,6 @@
     "axios": "^0.21.1",
     "cesium": "^1.79.1",
     "cra-template": "1.0.3",
-    "craco-cesium": "^1.2.0",
     "dotenv": "^8.2.0",
     "motion-sensors-polyfill": "^0.3.1",
     "quaternion-to-euler": "^0.5.0",
@@ -42,9 +40,9 @@
     "web2vr": "^1.0.1"
   },
   "scripts": {
-    "start": "craco start",
-    "build": "craco build",
-    "test": "craco test",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
