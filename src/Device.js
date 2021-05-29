@@ -44,6 +44,11 @@ class Device extends Component {
         }
     }
 
+    async updateDevice(tag) {
+        if(tag == "ict.HueLight01.onoff")
+            this.toggle();
+    }
+
     async toggle() {
         if(this.state.lightOn){
             console.log("turn off light");

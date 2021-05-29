@@ -12,9 +12,12 @@ import RecordPage from './RecordPage';
 import GeoSpatial from './Geospatial';
 import LabClean from './LabClean';
 
+import AppTest from './WebSockettest';
+
 ReactDOM.render(
   <React.StrictMode>
     <App />
+    {/* <AppTest></AppTest> */}
     {/* <Sensor></Sensor> */}
     {/* <RecordPage></RecordPage> */}
     {/* <GeoSpatial></GeoSpatial> */}

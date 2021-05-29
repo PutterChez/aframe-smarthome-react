@@ -22,18 +22,35 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      url: 'https://9b5e9d9b1688.ngrok.io/',
+      url: 'http://e42f17cfdc86.ngrok.io/',
       deviceList: [],
+      readyState: false,
       retrieveObjects: true
     //   deviceList: [{name: 'lightbulb1', position: '2.04 0.936 -1.5', rotation: '0 90 0', tag: 'ict.HueLight01.onoff', type: 'lightbulb'},
     //   {name: 'lightbulb2', position: '2.04 0.936 -3.043', rotation: '0 90 0', tag: 'ict.HueLight02.onoff', type: 'lightbulb'}, 
     //   {name: 'tv1', position: '3.466 0.85 -1.25', rotation: '0 -140 0', tag: 'ict.HueLight02.onoff', type: 'tv'}
     // ],
     };
+
+    this.ws = React.createRef();
   }
 
   async componentDidMount() {
     if(this.state.retrieveObjects){
+      this.ws.current = new WebSocket(
+        "ws://e42f17cfdc86.ngrok.io/ws/chat/Test1/",
+      );
+  
+      this.ws.current.onopen = () => {
+        console.log("ws opened");
+        this.setState({readyState: true});
+      };
+      this.ws.current.onclose = () => {
+        console.log("ws closed");
+        this.ws.current.close();
+        this.setState({readyState: false});
+      };
+      
       // GET request using fetch with error handling
       fetch(this.state.url + 'mock/get/')
           .then(async response => {
@@ -61,9 +78,29 @@ class App extends Component {
               console.error('There was an error!', error);
           });
     }
-
-    
     window.recordPage = this;
+  }
+
+  async componentDidUpdate() {
+    this.ws.current.onmessage = (e) => {
+      const data = JSON.parse(e.data);
+      const message = JSON.parse(data["message"]);
+      
+      console.log(data);
+      console.log(message);
+      
+      const tag = message.tag;
+      const value = message.value;
+    
+      console.log(tag, value);
+    }
+  }
+
+  playAudio() {
+    console.log('playing audio')
+    var msg = new SpeechSynthesisUtterance();
+    msg.text = "This is an example of text to speech assistant";
+    window.speechSynthesis.speak(msg);
   }
 
   addDevice(newName, newPosition, newRotation, newTags, newType) {
@@ -643,7 +680,6 @@ class App extends Component {
             rotation={{ x: 0, y: -55, z: 0 }}
             animation={{property: "position", to: "0.08 1.5 -4", dir: "alternate", loop: "true", dur: "2000"}}
             event-set__mouseenter="visible: true; _target: #queryButton;"
-            event-set__mouseleave="visible: false; _target: #queryButton;"
           />
 
           <a-gui-button
@@ -651,10 +687,12 @@ class App extends Component {
             width="0.75" height="0.25" 
             position="-0.2 1.8 -3.4"
             value="Query Result"
+            onClick={this.playAudio}
             font-family="Arial"
             font-size="30px"
             margin="0 0 0.05 0"
-            visible="false">
+            visible="false"
+            look-at="#cameraRig">
           </a-gui-button>
 
           <Entity
