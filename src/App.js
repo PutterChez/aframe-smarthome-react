@@ -38,7 +38,7 @@ class App extends Component {
   async componentDidMount() {
     if(this.state.retrieveObjects){
       this.ws.current = new WebSocket(
-        "ws://e42f17cfdc86.ngrok.io/ws/chat/Test1/",
+        "ws://5a3276bdf2cf.ngrok.io/ws/chat/Test1/",
       );
   
       this.ws.current.onopen = () => {
@@ -93,6 +93,9 @@ class App extends Component {
       const value = message.value;
     
       console.log(tag, value);
+      // this.ws.current.send(JSON.stringify({
+      //   message: 'reply'
+      // }))
     }
   }
 
@@ -223,6 +226,11 @@ class App extends Component {
           <a-asset-item
             id="rightHand"
             src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/right_hand/model.gltf"
+          ></a-asset-item>
+
+          <a-asset-item
+            id="iconFont"
+            src="assets/fa-solid-900.ttf"
           ></a-asset-item>
         </a-assets>
 
@@ -679,21 +687,58 @@ class App extends Component {
             position="0.08 0.95 -4"
             rotation={{ x: 0, y: -55, z: 0 }}
             animation={{property: "position", to: "0.08 1.5 -4", dir: "alternate", loop: "true", dur: "2000"}}
-            event-set__mouseenter="visible: true; _target: #queryButton;"
+            event-set__mouseenter="visible: true; _target: #querylistUI;"
           />
 
-          <a-gui-button
-            id="queryButton"
-            width="0.75" height="0.25" 
-            position="-0.2 1.8 -3.4"
-            value="Query Result"
-            onClick={this.playAudio}
-            font-family="Arial"
-            font-size="30px"
-            margin="0 0 0.05 0"
-            visible="false"
-            look-at="#cameraRig">
-          </a-gui-button>
+          <a-gui-flex-container
+              id="querylistUI"
+              visible="false"
+              flex-direction="column" 
+              justify-content="center" 
+              align-items="normal" 
+              component-padding="0" 
+              opacity="0.5" 
+              width="3.5" 
+              height="3.5"
+              position="-0.5 1.8 -3.4"
+              scale="0.3 0.3 0.3"
+              look-at="#cameraRig">
+
+              <a-gui-button
+                id="queryButton"
+                width="3" height="0.75"
+                position="-0.2 1.8 -3.4"
+                value="Query Result"
+                onClick={this.playAudio}
+                font-family="Arial"
+                font-size="150px"
+                margin="0 0 0.05 0">
+              </a-gui-button>
+              
+              <a-gui-icon-label-button
+                  width="3" height="0.75"
+                  value="Light Bulb 1"
+                  margin="0 0 0.05 0"
+                  icon="f2b9"
+                  icon-font="#iconFont"
+                  font-size="150px"
+              >
+              </a-gui-icon-label-button>
+              <a-gui-label
+                  width="3" height="0.75"
+                  value="Light Bulb 2"
+                  margin="0 0 0.05 0"
+                  font-size="150px"
+              >
+              </a-gui-label>
+              <a-gui-label
+                  width="3" height="0.75"
+                  value="Smart TV"
+                  margin="0 0 0.05 0"
+                  font-size="150px"
+              >
+              </a-gui-label>
+          </a-gui-flex-container>
 
           <Entity
             id="aircon"
