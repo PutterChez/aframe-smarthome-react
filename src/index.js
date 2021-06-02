@@ -16,11 +16,11 @@ import AppTest from './WebSockettest';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    {/* <App /> */}
     {/* <AppTest></AppTest> */}
     {/* <Sensor></Sensor> */}
     {/* <RecordPage></RecordPage> */}
-    {/* <GeoSpatial></GeoSpatial> */}
+    <GeoSpatial></GeoSpatial>
   </React.StrictMode>,
   document.getElementById('root')
 );

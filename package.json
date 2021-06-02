@@ -25,6 +25,7 @@
     "ar.js-modular": "^1.0.1",
     "audiobuffer-to-wav": "^1.0.0",
     "axios": "^0.21.1",
+    "cesium": "^1.82.1",
     "cra-template": "1.0.3",
     "dotenv": "^8.2.0",
     "motion-sensors-polyfill": "^0.3.1",

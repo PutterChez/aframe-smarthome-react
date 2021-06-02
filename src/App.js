@@ -230,7 +230,7 @@ class App extends Component {
 
           <a-asset-item
             id="iconFont"
-            src="assets/fa-solid-900.ttf"
+            src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/fa-solid-900.ttf"
           ></a-asset-item>
         </a-assets>
 
@@ -711,33 +711,70 @@ class App extends Component {
                 value="Query Result"
                 onClick={this.playAudio}
                 font-family="Arial"
-                font-size="150px"
+                font-size="100px"
                 margin="0 0 0.05 0">
               </a-gui-button>
               
-              <a-gui-icon-label-button
-                  width="3" height="0.75"
-                  value="Light Bulb 1"
-                  margin="0 0 0.05 0"
-                  icon="f2b9"
-                  icon-font="#iconFont"
-                  font-size="150px"
-              >
-              </a-gui-icon-label-button>
-              <a-gui-label
-                  width="3" height="0.75"
-                  value="Light Bulb 2"
-                  margin="0 0 0.05 0"
-                  font-size="150px"
-              >
-              </a-gui-label>
-              <a-gui-label
-                  width="3" height="0.75"
-                  value="Smart TV"
-                  margin="0 0 0.05 0"
-                  font-size="150px"
-              >
-              </a-gui-label>
+              <a-gui-flex-container
+                flex-direction="row" 
+                justify-content="center" 
+                align-items="normal" 
+                component-padding="0">
+                <a-gui-label
+                    width="2" height="0.75"
+                    value="Light Bulb 1"
+                    margin="0 0 0.05 0"
+                    font-size="100px"
+                >
+                </a-gui-label>
+                <a-gui-button
+                    width="1" height="0.75"
+                    value="Status: On"
+                    margin="0 0 0.05 0"
+                    font-size="80px"
+                >
+                </a-gui-button>
+              </a-gui-flex-container>
+              <a-gui-flex-container
+                flex-direction="row" 
+                justify-content="center" 
+                align-items="normal" 
+                component-padding="0">
+                <a-gui-label
+                    width="2" height="0.75"
+                    value="Light Bulb 2"
+                    margin="0 0 0.05 0"
+                    font-size="100px"
+                >
+                </a-gui-label>
+                <a-gui-button
+                    width="1" height="0.75"
+                    value="Status: Off"
+                    margin="0 0 0.05 0"
+                    font-size="80px"
+                >
+                </a-gui-button>
+              </a-gui-flex-container>
+              <a-gui-flex-container
+                flex-direction="row" 
+                justify-content="center" 
+                align-items="normal" 
+                component-padding="0">
+                <a-gui-label
+                    width="2" height="0.75"
+                    value="Smart TV"
+                    margin="0 0 0.05 0"
+                    font-size="100px"
+                >
+                </a-gui-label>
+                <a-gui-button
+                    width="1" height="0.75"
+                    value="Status: On"
+                    margin="0 0 0.05 0"
+                    font-size="80px"
+                >
+                </a-gui-button>
+              </a-gui-flex-container>
           </a-gui-flex-container>
 
           <Entity
