@@ -23,6 +23,7 @@ class ARApp extends Component {
 
     componentDidMount() {
         loadAR(() => {
+            console.log('AR scripts loaded')
             this.setState({loaded: true});
             
             var labModel = document.getElementById('rotationWrapper');

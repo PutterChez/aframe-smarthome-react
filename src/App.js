@@ -22,7 +22,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      url: 'http://e42f17cfdc86.ngrok.io/',
+      url: 'http://efdc91bd4fcd.ngrok.io/',
       deviceList: [],
       readyState: false,
       retrieveObjects: true
@@ -33,6 +33,8 @@ class App extends Component {
     };
 
     this.ws = React.createRef();
+    this.recordStart = this.recordStart.bind(this);
+    this.recordStop = this.recordStop.bind(this);
   }
 
   async componentDidMount() {
