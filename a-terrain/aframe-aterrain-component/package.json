@@ -1,0 +1,130 @@
+{
+  "_from": "aframe-aterrain-component@^1.2.0",
+  "_id": "aframe-aterrain-component@1.2.0",
+  "_inBundle": false,
+  "_integrity": "sha512-FkiTo6eX+TLuzvpVtGGCkdHT5YbtWXsXHDJzNx9s5ksggYquVS6Oo3bu5ol/E7oX0G2OUWbKTazuye8X5h/4Hw==",
+  "_location": "/aframe-aterrain-component",
+  "_phantomChildren": {
+    "@types/acorn": "4.0.5",
+    "acorn-dynamic-import": "3.0.0",
+    "date-time": "2.1.0",
+    "is-reference": "1.2.1",
+    "locate-character": "2.0.5",
+    "pretty-ms": "3.2.0",
+    "require-relative": "0.8.7",
+    "rollup-pluginutils": "2.8.2",
+    "signal-exit": "3.0.3",
+    "sourcemap-codec": "1.4.8"
+  },
+  "_requested": {
+    "type": "range",
+    "registry": true,
+    "raw": "aframe-aterrain-component@^1.2.0",
+    "name": "aframe-aterrain-component",
+    "escapedName": "aframe-aterrain-component",
+    "rawSpec": "^1.2.0",
+    "saveSpec": null,
+    "fetchSpec": "^1.2.0"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/aframe-aterrain-component/-/aframe-aterrain-component-1.2.0.tgz",
+  "_shasum": "fb0008c8c1c8a2f3233a584ecb2160d80d2433c2",
+  "_spec": "aframe-aterrain-component@^1.2.0",
+  "_where": "D:\\Putter\\KMITL\\Year 4\\Thesis Project\\aframe-smarthome-react",
+  "author": {
+    "name": "anselm@hook.org"
+  },
+  "bugs": {
+    "url": "https://github.com/anselm/aterrain/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "cesium": "^1.46.1",
+    "rollup": "^0.57.1",
+    "three": "^0.91.0",
+    "uglify-js": "^3.4.0"
+  },
+  "deprecated": false,
+  "description": "A 3d geographic map component for AFrame that uses Cesium data.",
+  "devDependencies": {
+    "aframe": "^0.8.2",
+    "browserify": "^13.0.0",
+    "budo": "^11.2.2",
+    "chai": "^3.4.1",
+    "chai-shallow-deep-equal": "^1.3.0",
+    "ghpages": "^0.0.8",
+    "karma": "^2.0.2",
+    "karma-browserify": "^5.2.0",
+    "karma-chai-shallow-deep-equal": "0.0.4",
+    "karma-chrome-launcher": "2.0.0",
+    "karma-env-preprocessor": "^0.1.1",
+    "karma-firefox-launcher": "^0.1.7",
+    "karma-mocha": "^0.2.1",
+    "karma-mocha-reporter": "^1.1.3",
+    "karma-sinon-chai": "^1.1.0",
+    "mocha": "^5.2.0",
+    "randomcolor": "^0.4.4",
+    "semistandard": "^12.0.1",
+    "shelljs": "^0.7.0",
+    "shx": "^0.1.1",
+    "sinon": "^1.17.5",
+    "sinon-chai": "^2.8.0",
+    "snazzy": "^4.0.0",
+    "uglify-es": "github:mishoo/UglifyJS2#harmony",
+    "uglifyjs-webpack-plugin": "^1.2.5",
+    "webpack": "^4.10.2",
+    "webpack-cli": "^2.1.5"
+  },
+  "homepage": "https://github.com/anselm/aterrain#readme",
+  "keywords": [
+    "aframe",
+    "aframe-component",
+    "aframe-vr",
+    "vr",
+    "mozvr",
+    "webvr",
+    "aterrain",
+    "geography",
+    "cartography",
+    "cesium",
+    "globe",
+    "map"
+  ],
+  "license": "MIT",
+  "name": "aframe-aterrain-component",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anselm/aterrain.git"
+  },
+  "scripts": {
+    "build": "npm run bundle && npm run compress",
+    "bundle": "npx webpack",
+    "compress": "uglifyjs dist/aframe-aterrain-component.js > dist/aframe-aterrain-component.min.js",
+    "dist": "npm run bundle && npm run compress",
+    "ghpages": "ghpages",
+    "lint": "semistandard -v | snazzy",
+    "prepare": "npm run bundle && npm run compress",
+    "start": "npm run dev",
+    "test": "karma start ./tests/karma.conf.js",
+    "test:chrome": "karma start ./tests/karma.conf.js --browsers Chrome",
+    "test:firefox": "karma start ./tests/karma.conf.js --browsers Firefox",
+    "unused_dev": "budo src/all.js:dist/aframe-aterrain-component.min.js --port 7000 --live --open",
+    "unused_error_with_multi": "npx webpack --mode development src/all.js dist/aframe-aterrain-component.js",
+    "unused_rollup": "rollup src/all.js --output.format umd --name 'aframe-aterrain-component' --output.file dist/aframe-aterrain-component.js"
+  },
+  "semistandard": {
+    "globals": [
+      "AFRAME",
+      "THREE"
+    ],
+    "ignore": [
+      "dist/**"
+    ]
+  },
+  "unused_main": "dist/aframe-terrain-component.js",
+  "unused_unpkg": "dist/aframe-aterrain-component.min.js",
+  "version": "1.2.0"
+}
