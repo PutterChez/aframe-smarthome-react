@@ -343,6 +343,7 @@ class TileServer  {
   setProvider(url) {
     if(this.terrainProvider) return;
     // this.terrainProvider = new Cesium.CesiumTerrainProvider({ ellipsoid:new Cesium.Ellipsoid(1,1,1), requestVertexNormals:true, url:url });
+    Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlNWYxNWRlYS05NTBmLTRhNWQtYWRhYS01NzQ4MWZhODYyZWMiLCJpZCI6MzgxNDUsImlhdCI6MTYwNjAxOTQ1N30.iuaqraFdmY_illOvWbpKDQ1B26yNz9P32Umxoz20nJg';
     this.terrainProvider = Cesium.createWorldTerrain();
   }
 
