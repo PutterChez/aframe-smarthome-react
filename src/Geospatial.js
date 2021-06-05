@@ -15,7 +15,7 @@ class GeoSpatial extends Component {
   }
   
   componentDidMount() {
-    appendScript('https://anselm.github.io/aterrain/Build/CesiumUnminified/Cesium.js');
+    appendScript('https://putterchez.github.io/aframe-smarthome-react/a-terrain/aframe-aterrain-component/Build/CesiumUnminified/Cesium.js');
     appendScript('https://putterchez.github.io/aframe-smarthome-react/a-terrain/aframe-aterrain-component/dist/aframe-aterrain-component.js', () => {
       console.log('add terrain');
       this.setState({loaded: true});

@@ -28,7 +28,7 @@ AFRAME.registerComponent('a-location', {
     mode: { type: 'string', default: 'absolute'}
   },
   init: function() {
-
+    Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlNWYxNWRlYS05NTBmLTRhNWQtYWRhYS01NzQ4MWZhODYyZWMiLCJpZCI6MzgxNDUsImlhdCI6MTYwNjAxOTQ1N30.iuaqraFdmY_illOvWbpKDQ1B26yNz9P32Umxoz20nJg';
     // hack - support latitude and longitude as a back patch to work around naming changes
     if(!this.data.lat) this.data.lat = this.data.latitude;
     if(!this.data.lon) this.data.lon = this.data.longitude;
