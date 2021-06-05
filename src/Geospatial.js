@@ -51,7 +51,7 @@ class GeoSpatial extends Component {
               <a-assets>
                 <img id="sky" src="https://anselm.github.io/aterrain/examples/assets/PIA12348_hires.jpg"/>
               </a-assets>
-
+                
                 {/* <a-entity id="world" position="0 0 0" visible="true" a-terrain="radius:1000; observer:camera">
                   <a-entity a-location="lat:37.79832222; lon:-122.3972797; mode:relative; elevation:0;">
                       <a-entity position="-20 1.5 -10" rotation="-90 180 0">
@@ -60,7 +60,7 @@ class GeoSpatial extends Component {
                   </a-entity>
                 </a-entity> */}
 
-              <a-entity a-terrain="fovpad:1;
+              {/* <a-entity a-terrain="fovpad:1;
                             latitude:37.7983222;
                             longitude:-122.3972797;
                             elevation:1;
@@ -71,7 +71,7 @@ class GeoSpatial extends Component {
                             <a-gltf-model scale="5 5 5" src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react@v1.0/assets/Lab.gltf"></a-gltf-model>
                     </a-entity>
                 </a-entity>
-              </a-entity>
+              </a-entity> */}
 
                 <a-entity id="cameraRig">
                   <a-entity
