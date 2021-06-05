@@ -5,6 +5,8 @@ import React, { Component } from "react";
 
 import {appendScript} from './appendScript';
 require('aframe');
+require('aframe-aterrain-component/Build/Cesium/Cesium')
+require('aframe-aterrain-component/dist/aframe-aterrain-component')
 
 class GeoSpatial extends Component {
   constructor(props){
@@ -15,12 +17,12 @@ class GeoSpatial extends Component {
   }
   
   componentDidMount() {
-    appendScript('https://anselm.github.io/aterrain/Build/CesiumUnminified/Cesium.js');
-    appendScript('https://anselm.github.io/aterrain/dist/aframe-aterrain-component.js', () => {
-      console.log('add terrain');
-      this.setState({loaded: true});
-      // document.getElementById("world").setAttribute("a-terrain", "radius:1000; observer:camera");
-    })
+    
+    // appendScript('https://anselm.github.io/aterrain/Build/CesiumUnminified/Cesium.js', () => {
+    //   console.log('add terrain');
+    //   this.setState({loaded: true});
+    //   // document.getElementById("world").setAttribute("a-terrain", "radius:1000; observer:camera");
+    // })
   }
 
 
