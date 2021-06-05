@@ -16,7 +16,6 @@ class Device extends Component {
             lightTag: "",
             brightTag: "",
             colorTag: "",
-            
         };
         this.toggle = this.toggle.bind(this);
         this.colorPicker = this.colorPicker.bind(this);
@@ -44,9 +43,11 @@ class Device extends Component {
         }
     }
 
-    async updateDevice(tag) {
+    async updateDevice(tag, value) {
         if(tag == "ict.HueLight01.onoff")
             this.toggle();
+        else if(tag == "ict.HueLight01.color")
+            this.setState({finalColor: value});
     }
 
     async toggle() {
@@ -88,12 +89,16 @@ class Device extends Component {
         
     }
 
+    setBrightness(value) {
+        this.setState({brightness: value})
+    }
+
     brightnessSlider = (e) => {
         const percent = e.currentTarget.getAttribute('gui-slider').percent;
         const value = parseInt(percent * 200);
 
         this.setState({brightness: value})
-        this.changeBright()
+        this.changeBright();
     }
 
     async changeColor() {
@@ -155,7 +160,7 @@ class Device extends Component {
         console.log("Tag:" + lightTag)
         console.log("Color:" + this.state.pickingColor)
         return(
-            <Entity id="device" position={this.props.position} >
+            <Entity id={this.props.id} position={this.props.position} >
                 <Entity
                     id="lightbulb" 
                     gltf-model="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome/Lightbulb.gltf" 
@@ -305,7 +310,57 @@ class Device extends Component {
                         </a-gui-button>
                     </a-gui-flex-container>
                 </Entity>
+                
+                <Entity id="uiInfo" >
+                    <a-gui-flex-container
+                        visible="true"
+                        flex-direction="column" 
+                        justify-content="center" 
+                        align-items="normal" 
+                        component-padding="0.1" 
+                        opacity="0.7" 
+                        width="3.5" 
+                        height="4.5"
+                        rotation="0 -40 0"
+                        position="-0.56 1 -1"
+                        scale="0.3 0.3 0.3"
+                        >
+                        
+                        <a-gui-label
+                            width="2.5" height="0.75"
+                            value={"Device name: " + this.props.id}
+                            margin="0 0 0.05 0"
+                            font-size="120px"
+                        >
+                        </a-gui-label>
 
+                        <a-gui-label
+                            width="2.5" height="0.75"
+                            value={"Light Status: " + (this.state.lightOn ? 'On' : 'Off')}
+                            margin="0 0 0.05 0"
+                            font-size="120px"
+                        >
+                        </a-gui-label>
+
+                        <a-gui-label
+                            width="2.5" height="0.75"
+                            value={"Brightness Status: " + this.state.brightness}
+                            margin="0 0 0.05 0"
+                            font-size="120px"
+                        >
+                        </a-gui-label>
+
+                        <a-gui-label
+                            width="2.5" height="0.75"
+                            value={"Current Color: "}
+                            margin="0 0 0.05 0"
+                            font-size="120px"
+                            background-color={this.state.finalColor}
+                        >
+                        </a-gui-label>
+                    </a-gui-flex-container>
+                </Entity>
+                
             </Entity>
         )
     }

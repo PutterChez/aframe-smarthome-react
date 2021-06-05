@@ -80,7 +80,7 @@ class Device extends Component {
 
     render() {
         return(
-            <Entity id="device" position={this.props.position} >
+            <Entity id={this.props.id} position={this.props.position} >
                 <Entity
                     id="TV" 
                     gltf-model="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome/TV_01.gltf" 
@@ -161,6 +161,55 @@ class Device extends Component {
                     >
                     </a-gui-slider>
                 </a-gui-flex-container>
+
+                <Entity id="uiInfo" >
+                    <a-gui-flex-container
+                        visible="true"
+                        flex-direction="column" 
+                        justify-content="center" 
+                        align-items="normal" 
+                        component-padding="0.1" 
+                        opacity="0.7" 
+                        width="3.5" 
+                        height="4.5"
+                        rotation="0 -90 0"
+                        position="0.5 1.1 -0.8"
+                        scale="0.3 0.3 0.3"
+                        >
+                        
+                        <a-gui-label
+                            width="2.5" height="0.75"
+                            value={"Device name: " + this.props.id}
+                            margin="0 0 0.05 0"
+                            font-size="120px"
+                        >
+                        </a-gui-label>
+
+                        <a-gui-label
+                            width="2.5" height="0.75"
+                            value={"TV Status: " + (this.state.tvOn ? 'On' : 'Off')}
+                            margin="0 0 0.05 0"
+                            font-size="120px"
+                        >
+                        </a-gui-label>
+
+                        <a-gui-label
+                            width="2.5" height="0.75"
+                            value={"Channel Status: " + this.state.channel}
+                            margin="0 0 0.05 0"
+                            font-size="120px"
+                        >
+                        </a-gui-label>
+
+                        <a-gui-label
+                            width="2.5" height="0.75"
+                            value={"Volume Status: " + this.state.volume}
+                            margin="0 0 0.05 0"
+                            font-size="120px"
+                        >
+                        </a-gui-label>
+                    </a-gui-flex-container>
+                </Entity>
             </Entity>
         )
     }

@@ -22,7 +22,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      url: 'http://efdc91bd4fcd.ngrok.io/',
+      url: 'http://9d8bc81d9cd1.ngrok.io/',
       deviceList: [],
       readyState: false,
       retrieveObjects: true
@@ -40,7 +40,7 @@ class App extends Component {
   async componentDidMount() {
     if(this.state.retrieveObjects){
       this.ws.current = new WebSocket(
-        "ws://5a3276bdf2cf.ngrok.io/ws/chat/Test1/",
+        "ws://9d8bc81d9cd1.ngrok.io/ws/chat/Test1/",
       );
   
       this.ws.current.onopen = () => {
@@ -95,9 +95,18 @@ class App extends Component {
       const value = message.value;
     
       console.log(tag, value);
-      // this.ws.current.send(JSON.stringify({
-      //   message: 'reply'
-      // }))
+
+      
+      // var lightbulbTest = this.state.deviceList.find(device => device.name === "Light01")
+      // console.log('get element test', lightbulbTest)
+
+      // const lightBulbComponent = ReactDOM.render(<Page ref={(pageComponent) => {window.pageComponent = pageComponent}}/>, document.getElementById("app"));
+
+      // lightbulbTest.setState({finalColor: value})
+
+      // var lightbulbTest = document.getElementById('Light01')
+      // console.log('get element test', lightbulbTest)
+      // lightbulbTest.updateDevice('');
     }
   }
 
@@ -673,9 +682,9 @@ class App extends Component {
             {
               this.state.deviceList.map((item) => {
                 return item.type === "lightbulb" ?  
-                  <Device key={item.name} position={item.position} rotation={item.rotation} tags={item.tags}/>
+                  <Device key={item.name} id={item.name} position={item.position} rotation={item.rotation} tags={item.tags}/>
                 :
-                  <TV key={item.name} position={item.position} rotation={item.rotation} tags={item.tags}/>
+                  <TV key={item.name} id={item.name} position={item.position} rotation={item.rotation} tags={item.tags}/>
                 } 
               )
             }
