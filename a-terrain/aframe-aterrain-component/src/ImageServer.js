@@ -99,7 +99,7 @@ class ImageServer {
       this.imageProvider = new BingImageProvider();
     } else if(this.data.source == 1) {
        // cesium for sf area - Something seems to be not working with this provider although it's the one I'd prefer to use right now - mar 1 2018
-       this.data.CesiumionAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlYmI0ZmY0My1hOTg5LTQzNWEtYWRjNy1kYzYzNTM5ZjYyZDciLCJpZCI6NjksImFzc2V0cyI6WzM3MDQsMzcwMywzNjk5LDM2OTNdLCJpYXQiOjE1MTY4MzA4ODZ9.kM-JnlG-00e7S_9fqS_QpXYTg7y5-cIEcZEgxKwRt5E';
+       this.data.CesiumionAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJlNWYxNWRlYS05NTBmLTRhNWQtYWRhYS01NzQ4MWZhODYyZWMiLCJpZCI6MzgxNDUsImlhdCI6MTYwNjAxOTQ1N30.iuaqraFdmY_illOvWbpKDQ1B26yNz9P32Umxoz20nJg';
        this.data.url = 'https://beta.cesium.com/api/assets/3693?access_token=' + this.data.CesiumionAccessToken;
        this.imageProvider = new Cesium.createTileMapServiceImageryProvider(this.data);
     } else if(this.data.source == 2) {
