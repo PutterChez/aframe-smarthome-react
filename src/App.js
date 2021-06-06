@@ -22,7 +22,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      url: 'http://9d8bc81d9cd1.ngrok.io/',
+      url: 'http://c6147b72f199.ngrok.io/',
       deviceList: [],
       readyState: false,
       retrieveObjects: true
@@ -40,7 +40,7 @@ class App extends Component {
   async componentDidMount() {
     if(this.state.retrieveObjects){
       this.ws.current = new WebSocket(
-        "ws://9d8bc81d9cd1.ngrok.io/ws/chat/Test1/",
+        "ws://c6147b72f199.ngrok.io/ws/chat/Test1/",
       );
   
       this.ws.current.onopen = () => {
