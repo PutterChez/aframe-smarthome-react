@@ -39,7 +39,7 @@ class RecordPage extends Component {
     console.log('sending blob to server..');
 
   
-    var apiUrl = "http://efdc91bd4fcd.ngrok.io"
+    var apiUrl = "http://c6147b72f199.ngrok.io"
     
     const reader = new window.FileReader();
     reader.readAsDataURL(recordedBlob.blob);
