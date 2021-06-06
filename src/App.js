@@ -17,6 +17,7 @@ require('aframe-event-set-component');
 require('aframe-teleport-controls');
 require('./thumbstick');
 require('./speechControl');
+require('./callAssistant');
 
 class App extends Component {
   constructor(props) {
@@ -220,12 +221,12 @@ class App extends Component {
           ></a-asset-item>
 
           <a-asset-item
-            id="assistant"
+            id="assistantModel"
             src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/1332 Robot.gltf"
           ></a-asset-item>
 
           <a-asset-item
-            id="head"
+            id="headModel"
             src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/head/model.gltf"
           ></a-asset-item>
 
@@ -256,7 +257,7 @@ class App extends Component {
             look-controls={{ enabled: "true" }}
             position={{ x: 0, y: 1.65, z: 0 }}
             >
-              <Entity gltf-model="#head" scale="2 2 2" visible="true"></Entity>
+              <Entity gltf-model="#headModel" scale="2 2 2" visible="true"></Entity>
               {/* Enable for PC testing */}
               {/* <Entity gltf-model="#head" position="-0.33 -2.8 -1.6" rotation="0 180 0" scale="2 2 2" visible="false"></Entity> */}
               <a-cursor></a-cursor>
@@ -268,6 +269,7 @@ class App extends Component {
             teleport-controls="cameraRig: #cameraRig; teleportOrigin: #head; button: trigger;"
             gltf-model="#rightHand"
             thumbstick-rotate
+            call-assistant
 
             // static-body="shape: sphere; sphereRadius: 0.02;"
             // sphere-collider="objects: .throwable"
@@ -693,12 +695,14 @@ class App extends Component {
           
           <Entity
             id="assistant"
-            gltf-model="#assistant"
+            gltf-model="#assistantModel"
+            visible="false"
             scale="0.01 0.01 0.01"
-            position="0.08 0.95 -4"
+            // position="0.08 0.95 -4"
+            position="0 -5 0"
             rotation={{ x: 0, y: -55, z: 0 }}
             animation={{property: "position", to: "0.08 1.5 -4", dir: "alternate", loop: "true", dur: "2000"}}
-            event-set__mouseenter="visible: true; _target: #querylistUI;"
+            // event-set__mouseenter="visible: true; _target: #querylistUI;"
           />
 
           <a-gui-flex-container

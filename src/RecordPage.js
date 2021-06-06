@@ -91,10 +91,10 @@ class RecordPage extends Component {
           strokeColor="#000000"
           backgroundColor="#FF4081" 
           mimeType="audio/wav" />
-        <button onClick={this.startRecording} type="button">Start</button>
+        {/* <button onClick={this.startRecording} type="button">Start</button>
         <button onClick={this.stopRecording} type="button">Stop</button>
         <a href={this.state.audioLink}> Click for audio</a>
-        <h1> Speech recognition: {this.state.speech}</h1>
+        <h1> Speech recognition: {this.state.speech}</h1> */}
         <App recordStart={this.startRecording} recordStop={this.stopRecording}></App>
       </div>
     );
