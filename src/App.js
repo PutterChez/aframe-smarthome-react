@@ -22,7 +22,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      url: 'http://c6147b72f199.ngrok.io/',
+      url: 'https://52e506a6df1b.ngrok.io/',
       deviceList: [],
       readyState: false,
       retrieveObjects: true
@@ -40,7 +40,7 @@ class App extends Component {
   async componentDidMount() {
     if(this.state.retrieveObjects){
       this.ws.current = new WebSocket(
-        "ws://c6147b72f199.ngrok.io/ws/chat/Test1/",
+        "wss://52e506a6df1b.ngrok.io/ws/chat/Test1/",
       );
   
       this.ws.current.onopen = () => {
@@ -134,7 +134,7 @@ class App extends Component {
 
   render() {
     return (
-      <Scene physics="gravity: -1.6" environment="preset: default; lighting: none; ground: none" style="position: absolute; height: 100%; width: 100%;">
+      <Scene physics="gravity: -1.6" environment="preset: default; lighting: none; ground: none" style="position: relative; height: 100%; width: 100%;">
         <a-assets>
           <a-asset-item
             id="tv"
