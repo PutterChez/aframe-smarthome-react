@@ -23,13 +23,14 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      url: 'https://52e506a6df1b.ngrok.io/',
+      url: 'https://76904cbbc45d.ngrok.io/',
       deviceList: [],
       readyState: false,
-      retrieveObjects: true
-    //   deviceList: [{name: 'lightbulb1', position: '2.04 0.936 -1.5', rotation: '0 90 0', tag: 'ict.HueLight01.onoff', type: 'lightbulb'},
-    //   {name: 'lightbulb2', position: '2.04 0.936 -3.043', rotation: '0 90 0', tag: 'ict.HueLight02.onoff', type: 'lightbulb'}, 
-    //   {name: 'tv1', position: '3.466 0.85 -1.25', rotation: '0 -140 0', tag: 'ict.HueLight02.onoff', type: 'tv'}
+      retrieveObjects: true,
+    //   deviceList: [
+    //     {name: 'lightbulb1', position: '2.04 0.936 -1.5', rotation: '0 90 0', tags: [{tag:'ict.HueLight01.onoff', widget:'button'}, {tag:'ict.HueLight01.bright', widget:'brightness_slider'}, {tag:'ict.HueLight01.hue', widget:'rgb_slider'}], type: 'lightbulb'},
+    //   {name: 'lightbulb2', position: '2.04 0.936 -3.043', rotation: '0 90 0', tags: [{tag:'ict.HueLight02.onoff', widget:'button'}, {tag:'ict.HueLight02.bright', widget:'brightness_slider'}, {tag:'ict.HueLight02.hue', widget:'rgb_slider'}], type: 'lightbulb'}, 
+    //   {name: 'tv1', position: '3.466 0.85 -1.25', rotation: '0 -140 0', tags:  [{tag:'ict.tv.channel', widget:'channel_button', value: '20'}], type: 'tv'}
     // ],
     };
 
@@ -41,7 +42,7 @@ class App extends Component {
   async componentDidMount() {
     if(this.state.retrieveObjects){
       this.ws.current = new WebSocket(
-        "wss://52e506a6df1b.ngrok.io/ws/chat/Test1/",
+        "wss://76904cbbc45d.ngrok.io/ws/chat/Test1/",
       );
   
       this.ws.current.onopen = () => {
@@ -139,71 +140,71 @@ class App extends Component {
         <a-assets>
           <a-asset-item
             id="tv"
-            src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/devices/TV_01.gltf"
+            src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react@v2.0/assets/devices/TV_01.gltf"
           ></a-asset-item>
           <a-asset-item
             id="airconModel"
-            src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/devices/Air%20conditioner%201.gltf"
+            src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react@v2.0/assets/devices/Air%20conditioner%201.gltf"
           ></a-asset-item>
           <a-asset-item
             id="dysonModel"
-            src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/devices/scene.gltf"
+            src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react@v2.0/assets/devices/scene.gltf"
           ></a-asset-item>
           <a-asset-item 
             id="lightbulbModel" 
-            src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/devices/Lightbulb.gltf"
+            src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react@v2.0/assets/devices/Lightbulb.gltf"
           ></a-asset-item>
 
           <a-asset-item
             id="wallPartition"
-            src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/wallPartition.gltf"
+            src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react@v2.0/assets/wallPartition.gltf"
           ></a-asset-item>
           <a-asset-item
             id="deskDrawerModel"
-            src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/deskDrawer.gltf"
+            src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react@v2.0/assets/deskDrawer.gltf"
           ></a-asset-item>
           <a-asset-item
             id="deskModel"
-            src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/desk.gltf"
+            src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react@v2.0/assets/desk.gltf"
           ></a-asset-item>
           <a-asset-item
             id="deskLectureModel"
-            src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/deskLecture.gltf"
+            src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react@v2.0/assets/deskLecture.gltf"
           ></a-asset-item>
           
           <a-asset-item
             id="cabinetModel"
-            src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/cabinet_double.gltf"
+            src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react@v2.0/assets/cabinet_double.gltf"
           ></a-asset-item>
           <a-asset-item
             id="shelfModel"
-            src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/shelf.gltf"
+            src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react@v2.0/assets/shelf.gltf"
           ></a-asset-item>
           <a-asset-item
             id="shelfDoubleModel"
-            src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/shelfDouble.gltf"
+            src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react@v2.0/assets/shelfDouble.gltf"
           ></a-asset-item>
 
           <a-asset-item
             id="shelfLowerModel"
-            src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/shelfLower.gltf"
+            src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react@v2.0/assets/shelfLower.gltf"
           ></a-asset-item>
           <a-asset-item
             id="shelfGlassModel"
-            src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/shelfGlass.gltf"
+            src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react@v2.0/assets/shelfGlass.gltf"
           ></a-asset-item>
 
           <a-asset-item
             id="lockerModel"
-            src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/locker.gltf"
+            src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react@v2.0/assets/locker.gltf"
           ></a-asset-item>
           <a-asset-item
             id="tableModel"
-            src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/table.gltf"
+            src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react@v2.0/assets/table.gltf"
           ></a-asset-item>
           <a-asset-item
             id="tableCurvedModel"
-            src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/tableCurved.gltf"
+            src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react@v2.0/assets/tableCurved.gltf"
           ></a-asset-item>
 
           <a-asset-item
@@ -217,32 +218,27 @@ class App extends Component {
 
           <a-asset-item
             id="book"
-            src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/CHAHIN_NOTEBOOK.gltf"
+            src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react@v2.0/assets/CHAHIN_NOTEBOOK.gltf"
           ></a-asset-item>
 
           <a-asset-item
             id="assistantModel"
-            src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/1332 Robot.gltf"
+            src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react@v2.0/assets/1332 Robot.gltf"
           ></a-asset-item>
 
           <a-asset-item
             id="headModel"
-            src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/head/model.gltf"
+            src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react@v2.0/assets/head/model.gltf"
           ></a-asset-item>
 
           <a-asset-item
             id="leftHand"
-            src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/left_hand/model.gltf"
+            src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react@v2.0/assets/left_hand/model.gltf"
           ></a-asset-item>
 
           <a-asset-item
             id="rightHand"
-            src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/right_hand/model.gltf"
-          ></a-asset-item>
-
-          <a-asset-item
-            id="iconFont"
-            src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/fa-solid-900.ttf"
+            src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react@v2.0/assets/right_hand/model.gltf"
           ></a-asset-item>
         </a-assets>
 
