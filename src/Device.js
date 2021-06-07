@@ -7,7 +7,7 @@ class Device extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            url: 'https://a28bc3f35b14.ngrok.io/',
+            url: 'https://76904cbbc45d.ngrok.io/',
             lightOn: false,
             pickingColor: false,
             finalColor: "#ffffff",
@@ -49,11 +49,14 @@ class Device extends Component {
         }
     }
 
-    async updateDevice(tag, value) {
-        if(tag == "ict.HueLight01.onoff")
+    updateDevice(tag, value) {
+        if(tag === "ict.HueLight01.onoff"){
             this.toggle();
-        else if(tag == "ict.HueLight01.color")
+        }
+        else if(tag === "ict.HueLight01.Color"){
             this.setState({finalColor: value});
+            console.log('color changed from update')
+        }
     }
 
     async toggle() {

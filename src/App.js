@@ -25,6 +25,7 @@ class App extends Component {
     this.state = {
       url: 'https://76904cbbc45d.ngrok.io/',
       deviceList: [],
+      deviceRef: [],
       readyState: false,
       retrieveObjects: true,
     //   deviceList: [
@@ -33,7 +34,6 @@ class App extends Component {
     //   {name: 'tv1', position: '3.466 0.85 -1.25', rotation: '0 -140 0', tags:  [{tag:'ict.tv.channel', widget:'channel_button', value: '20'}], type: 'tv'}
     // ],
     };
-
     this.ws = React.createRef();
     this.recordStart = this.recordStart.bind(this);
     this.recordStop = this.recordStop.bind(this);
@@ -75,6 +75,7 @@ class App extends Component {
               zodbData.ICTLab.devices.map((devices) => {
                 this.addDevice(devices.name, devices.location, devices.rotation, devices.tags, devices.type);
               })
+              
 
               // this.addDevice(id, zodbData[id].location, zodbData[id].rotation, zodbData[id].tag[0].tags);
           })
@@ -98,17 +99,12 @@ class App extends Component {
     
       console.log(tag, value);
 
+
+      console.log('get devicelist test before', this.state.deviceRef  )
+
+      this.state.deviceRef[0].current.updateDevice(tag, value);
       
-      // var lightbulbTest = this.state.deviceList.find(device => device.name === "Light01")
-      // console.log('get element test', lightbulbTest)
-
-      // const lightBulbComponent = ReactDOM.render(<Page ref={(pageComponent) => {window.pageComponent = pageComponent}}/>, document.getElementById("app"));
-
-      // lightbulbTest.setState({finalColor: value})
-
-      // var lightbulbTest = document.getElementById('Light01')
-      // console.log('get element test', lightbulbTest)
-      // lightbulbTest.updateDevice('');
+      console.log('get devicelist test after', this.state.deviceList)
     }
   }
 
@@ -120,10 +116,21 @@ class App extends Component {
   }
 
   addDevice(newName, newPosition, newRotation, newTags, newType) {
-    var newDevice = {name: newName, position: newPosition, rotation: newRotation, tags: newTags, type: newType} 
+    var newRef = React.createRef();
     this.setState(prevState => ({
-      deviceList: [...prevState.deviceList, newDevice]
+      deviceRef: [...prevState.deviceRef, newRef]
     }))
+
+    if(newType === "lightbulb"){
+      this.setState(prevState => ({
+        deviceList: [...prevState.deviceList, <Device ref={newRef} key={newName} id={newName} position={newPosition} rotation={newRotation} tags={newTags}/>]
+      }))
+    }
+    else{
+      this.setState(prevState => ({
+        deviceList: [...prevState.deviceList, <TV ref={newRef} key={newName} id={newName} position={newPosition} rotation={newRotation} tags={newTags}/>]
+      }))
+    }
   }
 
   recordStart() {
@@ -676,13 +683,10 @@ class App extends Component {
           </Entity> */}
           
           {/* <Device></Device> */}
-          <Entity id="deviceList">
+          <Entity id="deviceListRender">
             {
               this.state.deviceList.map((item) => {
-                return item.type === "lightbulb" ?  
-                  <Device key={item.name} id={item.name} position={item.position} rotation={item.rotation} tags={item.tags}/>
-                :
-                  <TV key={item.name} id={item.name} position={item.position} rotation={item.rotation} tags={item.tags}/>
+                return item
                 } 
               )
             }
