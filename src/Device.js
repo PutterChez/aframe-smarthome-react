@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Entity } from "aframe-react";
 
 require('./on-hover');
+require('super-hands');
 
 class Device extends Component {
     constructor(props) {
@@ -24,6 +25,7 @@ class Device extends Component {
         this.colorPicker = this.colorPicker.bind(this);
         this.closeMenu = this.closeMenu.bind(this);
         this.openMenu = this.openMenu.bind(this);
+        this.moveObject = this.moveObject.bind(this);
     }
 
     componentDidMount() {
@@ -37,26 +39,27 @@ class Device extends Component {
                 else if(tag.value == 1)
                     this.setState({lightOn: true})
 
-                this.setState({lightTag: tag.tag})
+                this.setState({lightTag: tag.tags})
             }
 
             else if(tag.widget === "rgb_slider"){
-                this.setState({colorTag: tag.tag, finalColor: tag.value})
+                this.setState({colorTag: tag.tags, finalColor: tag.value})
             }
 
             else if(tag.widget === "brightness_slider"){
-                this.setState({brightTag: tag.tag, brightness: tag.value})
+                this.setState({brightTag: tag.tags, brightness: tag.value})
             }
         }
     }
 
     updateDevice(tag, value) {
+        console.log(tag + " === " + this.state.colorTag);
         if(tag === this.state.lightTag){
             this.toggle();
         }
         else if(tag === this.state.colorTag){
             this.setState({finalColor: value});
-            console.log(this.state.finalColor);
+            console.log("FINAL COLOR: " + this.state.finalColor);
             this.changeColor();
         }
         else if(tag === this.state.brightTag){
@@ -127,6 +130,17 @@ class Device extends Component {
             fetch(this.props.url + 'mock/sendTag/', requestOptions)   
     }
 
+    async moveObject() {
+
+        const requestOptions = {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ room: "ICTLab", floor: 7, building: "ECCBuilding", name: "Light01", location: {x: 3.6, y:0.936, z:-4} })
+        };
+            console.log(requestOptions);
+            fetch(this.props.url + 'mock/update/', requestOptions)   
+    }
+
     colorPicker() {
         
         if(this.state.pickingColor){
@@ -184,7 +198,7 @@ class Device extends Component {
         // console.log("Color:" + this.state.pickingColor)
 
         return(
-            <Entity id={this.props.id} position={this.props.position} >
+            <Entity id={this.props.id} position={this.props.position}>
                 <Entity
                     id={this.props.id + "-model"} 
                     gltf-model="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome/Lightbulb.gltf" 
@@ -236,6 +250,25 @@ class Device extends Component {
                             panel-color="#2effd5"
                             panel-rounded="0.3"
                             >
+
+                        <a-gui-button
+                            id="toggleLightButton"
+                            width="2.5" height="0.75"
+                            onClick={this.moveObject}
+                            value="Move Object"
+
+                            font-family="Arial"
+                            font-size="150px"
+                            margin="0 0 0.15 0"
+                            opacity="0.4" 
+
+                            font-color="#2effd5"
+                            active-color="#4f8278"
+                            hover-color="#81dbca"
+                            border-color="#2effd5"
+                            background-color="#2a8d7a"
+                            >
+                        </a-gui-button>
 
                             {this.state.lightTag != "" ?
                                 <a-gui-icon-button

@@ -17,6 +17,7 @@ require("aframe-controller-cursor-component");
 require('aframe-extras');
 require('aframe-event-set-component');
 require('aframe-teleport-controls');
+require('super-hands');
 require('./thumbstick');
 require('./speechControl');
 require('./callAssistant');
@@ -108,7 +109,6 @@ class App extends Component {
       for (let device of this.state.deviceRef){
         for (let controlTag of device.current.props.tags){
           if(controlTag.tags === tag){
-            console.log("updating device");
             device.current.updateDevice(tag, value);
           }
         }
@@ -283,6 +283,9 @@ class App extends Component {
             gltf-model="#rightHand"
             thumbstick-rotate
             call-assistant
+            
+            sphere-collider="objects: a-box;"
+            super-hands={{}}
 
             // static-body="shape: sphere; sphereRadius: 0.02;"
             // sphere-collider="objects: .throwable"
@@ -296,6 +299,9 @@ class App extends Component {
             controller-cursor={{}}
             gltf-model="#leftHand"
             speech-control
+            
+            sphere-collider="objects: a-box;"
+            super-hands={{}}
           ></Entity>
 
         </Entity>
@@ -319,17 +325,12 @@ class App extends Component {
 
         <Entity id="labAll" position="-0.8 0 2.353">
           <Entity
-            id="lab"
-            gltf-model="#labModel"
-            position={{ x: -4, y: 0.06, z: 0 }}
-            visible="false"
-          />
-          <Entity
             static-body={{}}
             id="labWall"
             gltf-model="#labWall"
             position={{ x: -4, y: 0.05, z: 0 }}
             shadow={{cast: true}}
+            visible="false"
           />
 
           <Entity geometry-merger="preserveOriginal: false" id="furnitureList">
@@ -649,6 +650,8 @@ class App extends Component {
             />
           </Entity>
           
+          <a-box grabbable="" scale="0.5 0.5 0.5" position="3.6 0.9 -3"></a-box>
+
           <a-gui-button
               id="recordStartButton"
               width="0.75" height="0.25" 
@@ -733,7 +736,7 @@ class App extends Component {
               scale="0.3 0.3 0.3"
               panel-color="#2effd5"
               panel-rounded="0.3"
-              look-at="#cameraRig">
+              look-at="#head">
 
               <a-gui-button
                 id="queryButton"
@@ -751,7 +754,6 @@ class App extends Component {
                 background-color="#2a8d7a">
               </a-gui-button>
               
-              {/* <DeviceInfo name="Lightbulb1"></DeviceInfo> */}
               {
                 this.state.deviceList.map((item) => {
                   return <DeviceInfo name={item.props.id}></DeviceInfo>

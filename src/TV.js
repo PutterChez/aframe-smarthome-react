@@ -26,12 +26,12 @@ class Device extends Component {
 
             if(tag.widget === "channel_button"){
                 
-                this.setState({channelTag: tag.tag})
+                this.setState({channelTag: tag.tags})
                 this.setState({channel: tag.value})
             }
 
             else if(tag.widget === "volume_slider")
-                this.setState({volumeTag: tag.tag, volume: tag.value})
+                this.setState({volumeTag: tag.tags, volume: tag.value})
         }
     }
 

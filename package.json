@@ -35,6 +35,7 @@
     "react-mic": "^12.4.6",
     "react-scripts": "4.0.3",
     "react-three-fiber": "^5.3.19",
+    "super-hands": "^3.0.2",
     "three": "^0.125.2"
   },
   "scripts": {
