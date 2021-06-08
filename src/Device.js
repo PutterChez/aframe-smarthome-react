@@ -7,7 +7,7 @@ class Device extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            url: 'https://76904cbbc45d.ngrok.io/',
+            name: '',
             lightOn: false,
             pickingColor: false,
             finalColor: "#ffffff",
@@ -27,6 +27,7 @@ class Device extends Component {
     }
 
     componentDidMount() {
+        this.setState({name: this.props.id});
 
         for (let tag of this.props.tags){
 
@@ -50,12 +51,17 @@ class Device extends Component {
     }
 
     updateDevice(tag, value) {
-        if(tag === "ict.HueLight01.onoff"){
+        if(tag === this.state.lightTag){
             this.toggle();
         }
-        else if(tag === "ict.HueLight01.Color"){
+        else if(tag === this.state.colorTag){
             this.setState({finalColor: value});
-            console.log('color changed from update')
+            console.log(this.state.finalColor);
+            this.changeColor();
+        }
+        else if(tag === this.state.brightTag){
+            this.setState({brightness: value});
+            this.changeBright();
         }
     }
 
@@ -66,9 +72,9 @@ class Device extends Component {
             const requestOptions = {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ tag: this.state.lightTag, value: 0 })
+                body: JSON.stringify({ tag: this.state.lightTag, value: 0.0 })
             };
-            fetch(this.state.url + 'mock/sendTag/', requestOptions)
+            fetch(this.props.url + 'mock/sendTag/', requestOptions)
                 this.setState({lightOn: false});
         }
 
@@ -78,9 +84,9 @@ class Device extends Component {
             const requestOptions = {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ tag: this.state.lightTag, value: 1 })
+                body: JSON.stringify({ tag: this.state.lightTag, value: 1.0 })
             };
-            fetch(this.state.url + 'mock/sendTag/', requestOptions)
+            fetch(this.props.url + 'mock/sendTag/', requestOptions)
                 this.setState({lightOn: true});
 
         }
@@ -94,7 +100,7 @@ class Device extends Component {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ tag: this.state.brightTag, value: this.state.brightness })
         };
-            fetch(this.state.url + 'mock/sendTag/', requestOptions)
+            fetch(this.props.url + 'mock/sendTag/', requestOptions)
         
     }
 
@@ -118,7 +124,7 @@ class Device extends Component {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ tag: this.state.colorTag, value: this.state.finalColor })
         };
-            fetch(this.state.url + 'mock/sendTag/', requestOptions)   
+            fetch(this.props.url + 'mock/sendTag/', requestOptions)   
     }
 
     colorPicker() {
@@ -171,7 +177,7 @@ class Device extends Component {
     openMenu() {
         this.setState({menuOpen: true})
     }
-    
+
     render() {
         const lightTag = this.state.lightTag;
         // console.log("Tag:" + lightTag)

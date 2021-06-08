@@ -8,6 +8,8 @@ import TV from "./TV";
 
 import "aframe-physics-system/dist/aframe-physics-system"
 import DynamicObject from "./DynamicObject";
+import DeviceInfo from "./DeviceInfo";
+import {appendScript} from './appendScript';
 
 require("aframe-gui");
 require("aframe-environment-component");
@@ -19,15 +21,16 @@ require('./thumbstick');
 require('./speechControl');
 require('./callAssistant');
 
+
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      url: 'https://76904cbbc45d.ngrok.io/',
       deviceList: [],
       deviceRef: [],
       readyState: false,
       retrieveObjects: true,
+      // deviceList: [<Device key="Lightbulb1" id="Lightbulb1" position='2.04 0.936 -3.043' rotation='0 90 0' tags={[{tag:'ict.HueLight01.onoff', widget:'button'}, {tag:'ict.HueLight01.bright', widget:'brightness_slider'}, {tag:'ict.HueLight01.hue', widget:'rgb_slider'}]} type='lightbulb'></Device>],
     //   deviceList: [
     //     {name: 'lightbulb1', position: '2.04 0.936 -1.5', rotation: '0 90 0', tags: [{tag:'ict.HueLight01.onoff', widget:'button'}, {tag:'ict.HueLight01.bright', widget:'brightness_slider'}, {tag:'ict.HueLight01.hue', widget:'rgb_slider'}], type: 'lightbulb'},
     //   {name: 'lightbulb2', position: '2.04 0.936 -3.043', rotation: '0 90 0', tags: [{tag:'ict.HueLight02.onoff', widget:'button'}, {tag:'ict.HueLight02.bright', widget:'brightness_slider'}, {tag:'ict.HueLight02.hue', widget:'rgb_slider'}], type: 'lightbulb'}, 
@@ -42,7 +45,7 @@ class App extends Component {
   async componentDidMount() {
     if(this.state.retrieveObjects){
       this.ws.current = new WebSocket(
-        "wss://76904cbbc45d.ngrok.io/ws/chat/Test1/",
+        "wss://23b24c2ee33b.ngrok.io/ws/chat/Test1/",
       );
   
       this.ws.current.onopen = () => {
@@ -56,7 +59,7 @@ class App extends Component {
       };
       
       // GET request using fetch with error handling
-      fetch(this.state.url + 'mock/get/')
+      fetch(this.props.url + 'mock/get/')
           .then(async response => {
               const data = await response.json();
 
@@ -102,17 +105,24 @@ class App extends Component {
 
       console.log('get devicelist test before', this.state.deviceRef  )
 
-      this.state.deviceRef[0].current.updateDevice(tag, value);
+      for (let device of this.state.deviceRef){
+        for (let controlTag of device.current.props.tags){
+          if(controlTag.tags === tag){
+            console.log("updating device");
+            device.current.updateDevice(tag, value);
+          }
+        }
+      }
+
+      // this.state.deviceRef[0].current.updateDevice(tag, value);
       
-      console.log('get devicelist test after', this.state.deviceList)
     }
   }
 
   playAudio() {
     console.log('playing audio')
-    var msg = new SpeechSynthesisUtterance();
-    msg.text = "This is an example of text to speech assistant";
-    window.speechSynthesis.speak(msg);
+    // var player = new talkify.TtsPlayer(); //or new talkify.Html5Player()
+    // player.playText('Hello world');
   }
 
   addDevice(newName, newPosition, newRotation, newTags, newType) {
@@ -123,12 +133,12 @@ class App extends Component {
 
     if(newType === "lightbulb"){
       this.setState(prevState => ({
-        deviceList: [...prevState.deviceList, <Device ref={newRef} key={newName} id={newName} position={newPosition} rotation={newRotation} tags={newTags}/>]
+        deviceList: [...prevState.deviceList, <Device key={newName} url={this.props.url} ref={newRef}  id={newName} position={newPosition} rotation={newRotation} tags={newTags}/>]
       }))
     }
     else{
       this.setState(prevState => ({
-        deviceList: [...prevState.deviceList, <TV ref={newRef} key={newName} id={newName} position={newPosition} rotation={newRotation} tags={newTags}/>]
+        deviceList: [...prevState.deviceList, <TV key={newName} url={this.props.url} ref={newRef} id={newName} position={newPosition} rotation={newRotation} tags={newTags}/>]
       }))
     }
   }
@@ -696,13 +706,17 @@ class App extends Component {
           <Entity
             id="assistant"
             gltf-model="#assistantModel"
-            visible="false"
+            visible="true"
             scale="0.01 0.01 0.01"
-            // position="0.08 0.95 -4"
-            position="0 -5 0"
             rotation={{ x: 0, y: -55, z: 0 }}
-            animation={{property: "position", to: "0.08 1.5 -4", dir: "alternate", loop: "true", dur: "2000"}}
-            // event-set__mouseenter="visible: true; _target: #querylistUI;"
+
+            // Real pos
+            // position="0 -5 0"
+            
+            // Testing pos
+            position="0.08 0.95 -4"
+            // animation={{property: "position", to: "0.08 1.5 -4", dir: "alternate", loop: "true", dur: "2000"}}
+            event-set__mouseenter="visible: true; _target: #querylistUI;"
           />
 
           <a-gui-flex-container
@@ -712,11 +726,13 @@ class App extends Component {
               justify-content="center" 
               align-items="normal" 
               component-padding="0" 
-              opacity="0.5" 
+              opacity="0.4" 
               width="3.5" 
-              height="3.5"
+              height="4.5"
               position="-0.5 1.8 -3.4"
               scale="0.3 0.3 0.3"
+              panel-color="#2effd5"
+              panel-rounded="0.3"
               look-at="#cameraRig">
 
               <a-gui-button
@@ -727,69 +743,20 @@ class App extends Component {
                 onClick={this.playAudio}
                 font-family="Arial"
                 font-size="100px"
-                margin="0 0 0.05 0">
+                margin="0 0 0.05 0"
+                font-color="#2effd5"
+                active-color="#4f8278"
+                hover-color="#81dbca"
+                border-color="#2effd5"
+                background-color="#2a8d7a">
               </a-gui-button>
               
-              <a-gui-flex-container
-                flex-direction="row" 
-                justify-content="center" 
-                align-items="normal" 
-                component-padding="0">
-                <a-gui-label
-                    width="2" height="0.75"
-                    value="Light Bulb 1"
-                    margin="0 0 0.05 0"
-                    font-size="100px"
-                >
-                </a-gui-label>
-                <a-gui-button
-                    width="1" height="0.75"
-                    value="Status: On"
-                    margin="0 0 0.05 0"
-                    font-size="80px"
-                >
-                </a-gui-button>
-              </a-gui-flex-container>
-              <a-gui-flex-container
-                flex-direction="row" 
-                justify-content="center" 
-                align-items="normal" 
-                component-padding="0">
-                <a-gui-label
-                    width="2" height="0.75"
-                    value="Light Bulb 2"
-                    margin="0 0 0.05 0"
-                    font-size="100px"
-                >
-                </a-gui-label>
-                <a-gui-button
-                    width="1" height="0.75"
-                    value="Status: Off"
-                    margin="0 0 0.05 0"
-                    font-size="80px"
-                >
-                </a-gui-button>
-              </a-gui-flex-container>
-              <a-gui-flex-container
-                flex-direction="row" 
-                justify-content="center" 
-                align-items="normal" 
-                component-padding="0">
-                <a-gui-label
-                    width="2" height="0.75"
-                    value="Smart TV"
-                    margin="0 0 0.05 0"
-                    font-size="100px"
-                >
-                </a-gui-label>
-                <a-gui-button
-                    width="1" height="0.75"
-                    value="Status: On"
-                    margin="0 0 0.05 0"
-                    font-size="80px"
-                >
-                </a-gui-button>
-              </a-gui-flex-container>
+              {/* <DeviceInfo name="Lightbulb1"></DeviceInfo> */}
+              {
+                this.state.deviceList.map((item) => {
+                  return <DeviceInfo name={item.props.id}></DeviceInfo>
+                }) 
+              }
           </a-gui-flex-container>
 
           <Entity

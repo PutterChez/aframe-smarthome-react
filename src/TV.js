@@ -7,7 +7,6 @@ class Device extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            url: 'https://76904cbbc45d.ngrok.io/',
             tvOn: false,
             channel: "",
             volume: "",
@@ -36,6 +35,26 @@ class Device extends Component {
         }
     }
 
+    updateDevice(tag, value) {
+        if(tag === this.state.channelTag){
+            this.setState({channel: value});
+            this.changeChannel(value);
+        }
+        else if(tag === this.state.volumeTag){
+            this.setState({volume: value});
+            this.changeVolume();
+        }
+    }
+
+    async changeChannel() {
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ tag: this.state.channelTag, value: this.state.channel })
+        };
+        fetch(this.props.url + 'mock/sendTag/', requestOptions)
+    }
+
     async channelUp() {
         const upChannel = (parseInt(this.state.channel) + 1) + '';
         console.log(upChannel);
@@ -45,7 +64,7 @@ class Device extends Component {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ tag: this.state.channelTag, value: upChannel })
         };
-        fetch(this.state.url + 'mock/sendTag/', requestOptions)
+        fetch(this.props.url + 'mock/sendTag/', requestOptions)
 
         this.setState({channel: upChannel})
     }   
@@ -59,7 +78,7 @@ class Device extends Component {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ tag: this.state.channelTag, value: downChannel })
         };
-        fetch(this.state.url + 'mock/sendTag/', requestOptions)
+        fetch(this.props.url + 'mock/sendTag/', requestOptions)
 
         this.setState({channel: downChannel})
     }   
@@ -72,7 +91,7 @@ class Device extends Component {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ tag: this.state.volumeTag, value: this.state.volume })
         };
-        fetch(this.state.url + 'mock/sendTag/', requestOptions)
+        fetch(this.props.url + 'mock/sendTag/', requestOptions)
     }
 
     volumeSlider = (e) => {
