@@ -28,25 +28,6 @@ class GeoSpatial extends Component {
 
   render() {
     return (
-            // <Scene camera-transform-controls cursor="rayOrigin: mouse">
-
-            //   <a-entity id="target"></a-entity>
-
-            //   <a-entity id="terrainModel">
-            //   </a-entity>
-
-            //   <a-entity id="cameraRig" position="0 0 0" >
-            //     <a-entity id="camera" camera="near:1;far:100000" wasd-controls="fly:true" look-controls></a-entity>
-            //     <a-entity id="lefthand" camera-transform-controls-hand="hand:left" vive-controls="hand: left" oculus-touch-controls="hand: left" windows-motion-controls="hand: left"></a-entity>
-            //     <a-entity id="righthand" camera-transform-controls-hand="hand:right" vive-controls="hand: right" oculus-touch-controls="hand: right" windows-motion-controls="hand: right"></a-entity>
-            //   </a-entity>
-
-
-            //   <a-light type="directional" color="#ffffff" intensity="1" position="-1 1 1"></a-light>
-            //   <a-light type="ambient" color="#444444"></a-light>
-            //   <a-light type="point" intensity="1" position="2 4 4"></a-light>
-
-            //   </Scene>
             <div>
                 {this.state.loaded ? <div>
               <Scene id="scene" cursor="rayOrigin: mouse">
@@ -54,59 +35,39 @@ class GeoSpatial extends Component {
                 <img id="sky" src="https://anselm.github.io/aterrain/examples/assets/PIA12348_hires.jpg"/>
               </a-assets>
                 
-                {/* <a-entity id="world" position="0 0 0" visible="true" a-terrain="radius:1000; observer:camera">
-                  <a-entity a-location="lat:37.79832222; lon:-122.3972797; mode:relative; elevation:0;">
-                      <a-entity position="-20 1.5 -10" rotation="-90 180 0">
-                              <a-gltf-model scale="5 5 5" src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react@v1.0/assets/Lab.gltf"></a-gltf-model>
-                      </a-entity>
-                  </a-entity>
-                </a-entity>
-                
-                <a-entity id="cameraRig">
-                  <a-entity
-                      id="camera"
-                      camera="fov: 45; near:0.01; far:10000"
-                      wasd-controls="fly:true" look-controls
-                      position="0 1 5000"
-                      orbit-controls="
-                          autoRotate: false;
-                          target: #world;
-                          enableDamping: true;
-                          dampingFactor: 0.125;
-                          rotateSpeed:0.10;
-                          minDistance:1000;
-                          maxDistance:5000;
-                          minPolarAngle:0.1;
-                          maxPolarAngle:3.04159265359;
-                          enableProportionalVelocity:true;
+              <a-entity id="target"></a-entity>
+
+              <a-entity a-terrain="fovpad:1;
+                     latitude:37.7983222;
+                     longitude:-122.3972797;
+                     elevation:100;
+                     lod:14;
                       ">
-                  </a-entity>
+              </a-entity>
+
+              <a-entity id="cameraRig" position="0 0 0" >
+                <a-entity id="camera" camera="near:1;far:100000" wasd-controls="fly:true" look-controls></a-entity>
+                <a-entity id="lefthand" camera-transform-controls-hand="hand:left" vive-controls="hand: left" oculus-touch-controls="hand: left" windows-motion-controls="hand: left"></a-entity>
+                <a-entity id="righthand" camera-transform-controls-hand="hand:right" vive-controls="hand: right" oculus-touch-controls="hand: right" windows-motion-controls="hand: right"></a-entity>
+              </a-entity>
+
+
+              <a-light type="directional" color="#ffffff" intensity="1" position="-1 1 1"></a-light>
+              <a-light type="ambient" color="#444444"></a-light>
+              <a-light type="point" intensity="1" position="2 4 4"></a-light>
+
+            {/* <a-entity id="world" position="0 0 0" rotation="0 180 0" visible="true" a-terrain="radius:1000; observer:camera">
+              <a-entity a-location="lat:45; lon:-122; radius:1010;">
+                <a-entity rotation="-90 0 0">
+                  <a-gltf-model scale="10 10 10" rotation="0 180 0" src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react@v1.0/assets/Lab.gltf"></a-gltf-model>
                 </a-entity>
+              </a-entity>
 
-                <a-entity a-terrain="fovpad:1;
-                            latitude:37.7983222;
-                            longitude:-122.3972797;
-                            elevation:1;
-                            lod:15;
-                            radius:1000;
-                            observer:camera;
-                          ">
-                  <a-entity a-location="lat:37.79832222; lon:-122.3972797; mode:relative; elevation:0;">
-                      <a-entity position="-20 1.5 -10" rotation="-90 180 0">
-                              <a-gltf-model scale="5 5 5" src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react@v1.0/assets/Lab.gltf"></a-gltf-model>
-                      </a-entity>
-                  </a-entity>
-                </a-entity> */}
-
-            <a-entity id="world" position="0 0 0" rotation="0 180 0" visible="true" a-terrain="radius:1000; observer:camera">
-            <a-entity a-location="lat:45; lon:-122; radius:1010;">
-            <a-entity rotation="-90 0 0">
-            <a-gltf-model scale="10 10 10" rotation="0 180 0" src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react@v1.0/assets/Lab.gltf">
-            <a-animation attribute="rotation" dur="1000" from="0 0 0" to="0 360 0" easing="linear" repeat="indefinite">
-            </a-animation>
-            </a-gltf-model>
-            </a-entity>
-            </a-entity>
+              <a-entity a-location="lat:13; lon:100; radius:1010;">
+                <a-entity rotation="-90 0 0">
+                  <a-gltf-model scale="10 10 10" rotation="0 180 0" src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react@v1.0/assets/Lab.gltf"></a-gltf-model>
+                </a-entity>
+              </a-entity>
             </a-entity>
 
             <a-entity id="cameraRig">
@@ -120,13 +81,13 @@ class GeoSpatial extends Component {
               </a-entity>
               <a-entity id="lefthand" camera-transform-controls-hand="hand:left" vive-controls="hand: left" oculus-touch-controls="hand: left" windows-motion-controls="hand: left"></a-entity>
               <a-entity id="righthand" camera-transform-controls-hand="hand:right" vive-controls="hand: right" oculus-touch-controls="hand: right" windows-motion-controls="hand: right"></a-entity>
-            </a-entity>
+            </a-entity> */}
 
-                <a-entity id="environment" environment="playArea:100; xground: none; preset: starry; fog: 0"></a-entity>
+                {/* <a-entity id="environment" environment="playArea:100; xground: none; preset: starry; fog: 0"></a-entity>
 
                 <a-entity light="type: directional; color: #EED; intensity: 3" position="-1 1 1"></a-entity>
 
-                <a-sky src="#sky" radius="4000" color="#6EBAA7" ></a-sky>
+                <a-sky src="#sky" radius="4000" color="#6EBAA7" ></a-sky> */}
               
             </Scene>
             </div> : ''}

@@ -12,7 +12,7 @@ class RecordPage extends Component {
       record: false,
       audioLink: "",
       speech: "",
-      apiUrl: "https://23b24c2ee33b.ngrok.io/",
+      apiUrl: "https://140a48e12222.ngrok.io/",
     }
 
     this.onStop = this.onStop.bind(this);
@@ -89,8 +89,8 @@ class RecordPage extends Component {
           className="sound-wave"
           onStop={this.onStop}
           onData={this.onData}
-          strokeColor="#000000"
-          backgroundColor="#FF4081" 
+          // strokeColor="#000000"
+          // backgroundColor="#FF4081" 
           mimeType="audio/wav" />
         {/* <button onClick={this.startRecording} type="button">Start</button>
         <button onClick={this.stopRecording} type="button">Stop</button>

@@ -7,15 +7,17 @@ AFRAME.registerComponent('call-assistant',{
     callAssistant: function () {
         var userPos = document.getElementById("cameraRig").getAttribute("position");
         var assistant = document.getElementById("assistant");
-        var isVisible = assistant.getAttribute('visible');
+        var assistantWrapper = document.getElementById("assistantWrapper");
 
-        var newX = userPos.x + 0.08;
-        var newZ = userPos.z -4
+        var newPosZ = userPos.z -3.4;
+        var newPosY = userPos.y + 0.8;
 
-        if(isVisible === 'false')
-            assistant.setAttribute('visible', 'true');
+        // var isVisible = assistant.getAttribute('visible');
 
-        assistant.setAttribute('position', {x: newX, y: userPos.y + 0.95, z: newZ});
-        assistant.setAttribute('animation', {property: "position", to: newX + " " + userPos.y + 1.5 + " " + newZ, dir: "alternate", loop: "true", dur: "2000"})
+        // if(isVisible === 'false')
+        //     assistant.setAttribute('visible', 'true');
+
+        assistantWrapper.setAttribute('position', {x: userPos.x, y: newPosY, z: newPosZ});
+        assistantWrapper.setAttribute('animation', {property: "position", to: userPos.x + " " + newPosY + " " + newPosZ, dir: "alternate", loop: "true", dur: "2000"})
       }
   });

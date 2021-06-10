@@ -131,11 +131,16 @@ class Device extends Component {
     }
 
     async moveObject() {
+        var object = document.getElementById(this.props.id).getAttribute("position");
+        var objectModel = document.getElementById(this.props.id + "-model").getAttribute("position");
+        var newX = object.x + objectModel.x;
+        var newY = object.y + objectModel.y;
+        var newZ = object.z + objectModel.z;
 
         const requestOptions = {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ room: "ICTLab", floor: 7, building: "ECCBuilding", name: "Light01", location: {x: 3.6, y:0.936, z:-4} })
+            body: JSON.stringify({ room: "ICTLab", floor: 7, building: "ECCBuilding", name: "Light01", location: {x: newX, y: newY, z: newZ} })
         };
             console.log(requestOptions);
             fetch(this.props.url + 'mock/update/', requestOptions)   
@@ -202,7 +207,11 @@ class Device extends Component {
                 <Entity
                     id={this.props.id + "-model"} 
                     gltf-model="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome/Lightbulb.gltf" 
-                    
+                    class="stickyMove" 
+                    grabbable=""
+                    ondragend={this.moveObject}
+
+                    position="0 0 0"
                     scale={{ x: 0.001, y: 0.001 , z: 0.001}}
                     rotation={this.props.rotation}
                     shadow={{cast: true}}

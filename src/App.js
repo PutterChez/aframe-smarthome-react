@@ -31,6 +31,7 @@ class App extends Component {
       deviceRef: [],
       readyState: false,
       retrieveObjects: true,
+      loaded: false,
       // deviceList: [<Device key="Lightbulb1" id="Lightbulb1" position='2.04 0.936 -3.043' rotation='0 90 0' tags={[{tag:'ict.HueLight01.onoff', widget:'button'}, {tag:'ict.HueLight01.bright', widget:'brightness_slider'}, {tag:'ict.HueLight01.hue', widget:'rgb_slider'}]} type='lightbulb'></Device>],
     //   deviceList: [
     //     {name: 'lightbulb1', position: '2.04 0.936 -1.5', rotation: '0 90 0', tags: [{tag:'ict.HueLight01.onoff', widget:'button'}, {tag:'ict.HueLight01.bright', widget:'brightness_slider'}, {tag:'ict.HueLight01.hue', widget:'rgb_slider'}], type: 'lightbulb'},
@@ -44,9 +45,17 @@ class App extends Component {
   }
 
   async componentDidMount() {
+    appendScript('https://fernandojsg.com/aframe-camera-transform-controls-component/dist/aframe-camera-transform-controls-component.min.js');
+    appendScript('https://anselm.github.io/aterrain/examples/js/aframe-orbit-controls-component.js');
+    appendScript('https://putterchez.github.io/aframe-smarthome-react/a-terrain/aframe-aterrain-component/Build/CesiumUnminified/Cesium.js');
+    appendScript('https://putterchez.github.io/aframe-smarthome-react/a-terrain/aframe-aterrain-component/dist/aframe-aterrain-component.js', () => {
+      console.log('add terrain');
+      this.setState({loaded: true});
+    })
+
     if(this.state.retrieveObjects){
       this.ws.current = new WebSocket(
-        "wss://23b24c2ee33b.ngrok.io/ws/chat/Test1/",
+        "wss://140a48e12222.ngrok.io/ws/chat/Test1/",
       );
   
       this.ws.current.onopen = () => {
@@ -153,7 +162,9 @@ class App extends Component {
 
   render() {
     return (
-      <Scene physics="gravity: -1.6" environment="preset: default; lighting: none; ground: none" style="position: relative; height: 100%; width: 100%;">
+      <div>
+        {this.state.loaded ? <div>
+      <Scene id="scene" physics="gravity: -1.6" style="position: relative; height: 100%; width: 100%;">
         <a-assets>
           <a-asset-item
             id="tv"
@@ -234,7 +245,7 @@ class App extends Component {
           ></a-asset-item>
 
           <a-asset-item
-            id="book"
+            id="bookModel"
             src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react@v2.0/assets/CHAHIN_NOTEBOOK.gltf"
           ></a-asset-item>
 
@@ -259,18 +270,25 @@ class App extends Component {
           ></a-asset-item>
         </a-assets>
 
+        <Entity id="target"></Entity>
+
+        <Entity a-terrain="fovpad:1;latitude:37.7983222;longitude:-122.3972797;elevation:100;lod:14;">
+        </Entity>
+
         <Entity
           id="cameraRig"
-          rotation={{ x: 0, y: 0, z: 0}}
+          position="0 -100 0"
+          rotation="0 0 0"
         >
           <Entity
             id="head" 
-            camera={{active: "true"}}
+            camera="active: true;"
+            // camera="near:1;far:100000"
             wasd-controls={{ enabled: "true" }}
             look-controls={{ enabled: "true" }}
             position={{ x: 0, y: 1.65, z: 0 }}
             >
-              <Entity gltf-model="#headModel" scale="2 2 2" visible="true"></Entity>
+              {/* <Entity gltf-model="#headModel" position="-0.13 -1.6 -3.1" scale="2 2 2" visible="true" rotation="0 180 0"></Entity> */}
               {/* Enable for PC testing */}
               {/* <Entity gltf-model="#head" position="-0.33 -2.8 -1.6" rotation="0 180 0" scale="2 2 2" visible="false"></Entity> */}
               <a-cursor></a-cursor>
@@ -284,12 +302,8 @@ class App extends Component {
             thumbstick-rotate
             call-assistant
             
-            sphere-collider="objects: a-box;"
+            sphere-collider="objects: .stickyMove;"
             super-hands={{}}
-
-            // static-body="shape: sphere; sphereRadius: 0.02;"
-            // sphere-collider="objects: .throwable"
-            // grab ={{}}
             >
           </Entity>
 
@@ -300,28 +314,24 @@ class App extends Component {
             gltf-model="#leftHand"
             speech-control
             
-            sphere-collider="objects: a-box;"
+            sphere-collider="objects: .stickyMove;"
             super-hands={{}}
           ></Entity>
 
         </Entity>
+        
+        <a-light type="directional" color="#ffffff" intensity="0.1" position="-1 1 1"></a-light>
+        <a-light type="ambient" intensity="0.1" color="#444444"></a-light>
+        <a-light type="point" intensity="0.1" position="2 4 4"></a-light>
 
         {/* <a-light
-          type="ambient"
-          position="0.214 3.281 -2.02969"
-          intensity="0.2"
-          color="white"
-          visible="true"
-        ></a-light> */}
-
-        <a-light
           type="point"
           position="0.214 2.615 -2.02969"
           intensity="0.4"
           distance="10"
           color="white"
           light="castShadow: true"
-        ></a-light>
+        ></a-light> */}
 
         <Entity id="labAll" position="-0.8 0 2.353">
           <Entity
@@ -330,7 +340,7 @@ class App extends Component {
             gltf-model="#labWall"
             position={{ x: -4, y: 0.05, z: 0 }}
             shadow={{cast: true}}
-            visible="false"
+            visible="true"
           />
 
           <Entity geometry-merger="preserveOriginal: false" id="furnitureList">
@@ -649,10 +659,9 @@ class App extends Component {
               rotation="0 -90 0"
             />
           </Entity>
-          
-          <a-box grabbable="" scale="0.5 0.5 0.5" position="3.6 0.9 -3"></a-box>
 
-          <a-gui-button
+
+          {/* <a-gui-button
               id="recordStartButton"
               width="0.75" height="0.25" 
               position="0.9 1.65 -4.4"
@@ -672,7 +681,7 @@ class App extends Component {
               font-family="Arial"
               font-size="30px"
               margin="0 0 0.05 0">
-          </a-gui-button>
+          </a-gui-button> */}
 
           {/* <Entity>
             <Entity 
@@ -694,7 +703,17 @@ class App extends Component {
               margin="0 0 0.05 0">
             </a-gui-button>
           </Entity> */}
-          
+        
+          <Entity
+              class="stickyMove"
+              id="book1"
+              grabbable=""
+              gltf-model="#bookModel"
+              position="-0.15 0.9 -4.3"
+              scale="0.5 0.5 0.5"
+              rotation="0 0 0"
+          />
+
           {/* <Device></Device> */}
           <Entity id="deviceListRender">
             {
@@ -706,21 +725,30 @@ class App extends Component {
 
           </Entity>
           
-          <Entity
-            id="assistant"
-            gltf-model="#assistantModel"
-            visible="true"
-            scale="0.01 0.01 0.01"
-            rotation={{ x: 0, y: -55, z: 0 }}
+          <Entity id="assistantWrapper" position="0 1.4 -3.4" rotation="0 -180 0" >
+            <Entity
+              id="assistant"
+              visible="true"
+              rotation="0 0 0"
+              look-at="#head"
 
-            // Real pos
-            // position="0 -5 0"
-            
-            // Testing pos
-            position="0.08 0.95 -4"
-            // animation={{property: "position", to: "0.08 1.5 -4", dir: "alternate", loop: "true", dur: "2000"}}
-            event-set__mouseenter="visible: true; _target: #querylistUI;"
-          />
+              // Real pos
+              // position="0 -5 0"
+              
+              // Testing pos
+              position="0 0.2 0"
+              // animation={{property: "position", to: "0.08 1.5 -4", dir: "alternate", loop: "true", dur: "2000"}}
+              event-set__mouseenter="visible: true; _target: #querylistUI;"
+            >
+              <Entity 
+                id="asisstantInner"
+                gltf-model="#assistantModel"
+                scale="0.006 0.006 0.006"
+                rotation="0 -90 45">
+
+              </Entity>
+            </Entity>
+          </Entity>
 
           <a-gui-flex-container
               id="querylistUI"
@@ -775,11 +803,11 @@ class App extends Component {
             position={{ x: -3.77, y: 2.5, z: -3.3 }}
             rotation={{ x: 0, y: 90, z: 0 }}
           />
-
-          {/* <DynamicObject></DynamicObject> */}
-
+          
         </Entity>
       </Scene>
+      </div> : ''}
+      </div>
     );
   }
 }
