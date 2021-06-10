@@ -260,7 +260,7 @@ class Device extends Component {
                             panel-rounded="0.3"
                             >
 
-                        <a-gui-button
+                        {/* <a-gui-button
                             id="toggleLightButton"
                             width="2.5" height="0.75"
                             onClick={this.moveObject}
@@ -277,7 +277,7 @@ class Device extends Component {
                             border-color="#2effd5"
                             background-color="#2a8d7a"
                             >
-                        </a-gui-button>
+                        </a-gui-button> */}
 
                             {this.state.lightTag != "" ?
                                 <a-gui-icon-button
@@ -442,19 +442,21 @@ class Device extends Component {
                     }
                 </Entity>
                 
-                <Entity id="uiInfo" visible="false">
+                <Entity id="uiInfo" visible="true">
                     <a-gui-flex-container
                         visible="true"
                         flex-direction="column" 
                         justify-content="center" 
                         align-items="normal" 
                         component-padding="0.1" 
-                        opacity="0.7" 
+                        opacity="0.4" 
                         width="3.5" 
                         height="4.5"
                         rotation="0 -40 0"
                         position="-0.56 1 -1"
                         scale="0.3 0.3 0.3"
+                        panel-color="#2effd5"
+                        panel-rounded="0.3"
                         >
                         
                         <a-gui-label
@@ -462,6 +464,8 @@ class Device extends Component {
                             value={"Device name: " + this.props.id}
                             margin="0 0 0.05 0"
                             font-size="120px"
+                            font-color="#2effd5"
+                            background-color="#2a8d7a"
                         >
                         </a-gui-label>
 
@@ -470,6 +474,8 @@ class Device extends Component {
                             value={"Light Status: " + (this.state.lightOn ? 'On' : 'Off')}
                             margin="0 0 0.05 0"
                             font-size="120px"
+                            font-color="#2effd5"
+                            background-color="#2a8d7a"
                         >
                         </a-gui-label>
 
@@ -478,6 +484,8 @@ class Device extends Component {
                             value={"Brightness Status: " + this.state.brightness}
                             margin="0 0 0.05 0"
                             font-size="120px"
+                            font-color="#2effd5"
+                            background-color="#2a8d7a"
                         >
                         </a-gui-label>
 

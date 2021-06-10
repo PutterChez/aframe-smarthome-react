@@ -137,14 +137,15 @@ class ARApp extends Component {
                         <Entity id="rotationWrapper" position="0 0 0" rotation-reader="enabled: false">
                             <Entity
                                 id="labAll"
-                                position="-8.5 0 5.4"
-                                rotation="0 90 0"
+                                position="-5 -1.2 5.4"
                                 scale='2 2 2'
                             >
                                 <Entity id="arUI" visible={this.state.callibrated}>
-                                    <Entity position="0 0 0" gltf-model="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react@v1.0/assets/Lab.gltf">
+                                    <Entity position="0 0 0" 
+                                    // gltf-model="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react@v1.0/assets/Lab.gltf"
+                                    >
                                     </Entity>
-                                    <Entity id="device" position="0.234 2.5 -3.3">
+                                    <Entity id="device" position="0.234 2.5 -3.3" rotation="0 90 0">
                                         <Entity
                                             id="aircon"
                                             gltf-model="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react@v2.0/assets/devices/Air%20conditioner%201.gltf"
@@ -154,42 +155,86 @@ class ARApp extends Component {
                                         />
                                         
                                         <a-gui-flex-container
-                                            id="deviceUI"
-                                            visible="false"
                                             flex-direction="column" 
                                             justify-content="center" 
                                             align-items="normal" 
                                             component-padding="0.1" 
-                                            opacity="0.7" 
+                                            opacity="0.4" 
                                             width="3.5" 
-                                            height="2"
-                                            position="0.65 0 0"
+                                            height="4.5"
+                                            position="0.5 -0.8 1.5"
                                             scale="0.3 0.3 0.3"
-                                            look-at="#rayCamera"
+                                            panel-color="#2effd5"
+                                            panel-rounded="0.3"
                                             >
-                                            
-                                            <a-gui-flex-container
-                                                flex-direction="row" 
-                                                justify-content="center" 
-                                                align-items="normal" 
-                                                component-padding="0" 
-                                                opacity="0" 
-                                                width="3.5" 
-                                                height="1.5"
-                                                position="0 0 0.04"
+
+                                            <a-gui-icon-button
+                                                id="toggleLightButton"
+                                                width="2.5" height="0.75"
+                                                icon="f011"
+                                                icon-font="https://rdub80.github.io/aframe-gui/examples/assets/fonts/fa-solid-900.ttf"
+
+                                                font-family="Arial"
+                                                font-size="150px"
+                                                margin="0 0 0.15 0"
+                                                opacity="0.4" 
+
+                                                font-color="#2effd5"
+                                                active-color="#4f8278"
+                                                hover-color="#81dbca"
+                                                border-color="#2effd5"
+                                                background-color="#2a8d7a"
                                                 >
+                                            </a-gui-icon-button>
+                                            
+                                            <a-gui-icon-label-button
+                                                width="2.5" height="0.75"
+                                                value="Brightness"
                                                 
+                                                icon="f0eb"
+                                                icon-font="https://rdub80.github.io/aframe-gui/examples/assets/fonts/fa-solid-900.ttf"
+                                                margin="0 0 0.05 0"
+                                                font-size="150px"
+                                                font-color="#2effd5"
+                                                active-color="#2a8d7a"
+                                                hover-color="#2a8d7a"
+                                                border-color="#2a8d7a"
+                                                background-color="#2a8d7a"
+                                            >
+                                            </a-gui-icon-label-button>
+
+                                            
+                                            <a-gui-slider
+                                                width="2.5" height="0.75"
+                                                percent="0.3"
+                                                margin="0 0 0.05 0"
+                                                font-color="#2effd5"
+                                                background-color="#2a8d7a"
+                                                active-color="grey"
+                                                border-color="#2effd5"
+                                            >
+                                            </a-gui-slider>
+                                            
+                                            <a-gui-icon-button
+                                                id="changeMenuButton"
+                                                width="2.5" height="0.75"
+                                                value="Change Color"
+                                                font-family="Arial"
+                                                font-size="150px"
+                                                margin="0 0 0.15 0"
+                                                icon="f53f"
+                                                icon-font="https://rdub80.github.io/aframe-gui/examples/assets/fonts/fa-solid-900.ttf"
                                                 
-                                            </a-gui-flex-container>
+                                                font-color="#2effd5"
+                                                active-color="#4f8278"
+                                                hover-color="#81dbca"
+                                                border-color="#2effd5"
+                                                background-color="#2a8d7a"
+                                                >
+                                            </a-gui-icon-button>
+
                                         </a-gui-flex-container>
                                     </Entity>
-
-                                    <Entity
-                                        id="aircon2"
-                                        gltf-model="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react@v2.0/assets/devices/Air%20conditioner%201.gltf"
-                                        scale="0.0025 0.0025 0.0025"
-                                        position="0.234 2.5 -8.3"
-                                    />
                                 </Entity>
                             </Entity>
                         </Entity>

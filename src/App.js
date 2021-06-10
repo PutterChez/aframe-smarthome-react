@@ -55,7 +55,7 @@ class App extends Component {
 
     if(this.state.retrieveObjects){
       this.ws.current = new WebSocket(
-        "wss://140a48e12222.ngrok.io/ws/chat/Test1/",
+        "wss://c2c942b8fd23.ngrok.io/ws/chat/Test1/",
       );
   
       this.ws.current.onopen = () => {
@@ -274,6 +274,7 @@ class App extends Component {
 
         <Entity a-terrain="fovpad:1;latitude:37.7983222;longitude:-122.3972797;elevation:100;lod:14;">
         </Entity>
+        <a-sky radius="4000" color="#6EBAA7"></a-sky>
 
         <Entity
           id="cameraRig"
@@ -298,7 +299,6 @@ class App extends Component {
             id="rightHand" 
             oculus-touch-controls="hand: right"
             teleport-controls="cameraRig: #cameraRig; teleportOrigin: #head; button: trigger;"
-            gltf-model="#rightHand"
             thumbstick-rotate
             call-assistant
             
@@ -311,7 +311,6 @@ class App extends Component {
             id="leftHand" 
             oculus-touch-controls="hand: left"
             controller-cursor={{}}
-            gltf-model="#leftHand"
             speech-control
             
             sphere-collider="objects: .stickyMove;"

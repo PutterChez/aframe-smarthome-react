@@ -35,7 +35,7 @@ class GeoSpatial extends Component {
                 <img id="sky" src="https://anselm.github.io/aterrain/examples/assets/PIA12348_hires.jpg"/>
               </a-assets>
                 
-              <a-entity id="target"></a-entity>
+              {/* <a-entity id="target"></a-entity>
 
               <a-entity a-terrain="fovpad:1;
                      latitude:37.7983222;
@@ -54,9 +54,9 @@ class GeoSpatial extends Component {
 
               <a-light type="directional" color="#ffffff" intensity="1" position="-1 1 1"></a-light>
               <a-light type="ambient" color="#444444"></a-light>
-              <a-light type="point" intensity="1" position="2 4 4"></a-light>
+              <a-light type="point" intensity="1" position="2 4 4"></a-light> */}
 
-            {/* <a-entity id="world" position="0 0 0" rotation="0 180 0" visible="true" a-terrain="radius:1000; observer:camera">
+            <a-entity id="world" position="0 0 0" rotation="0 180 0" visible="true" a-terrain="radius:1000; observer:camera">
               <a-entity a-location="lat:45; lon:-122; radius:1010;">
                 <a-entity rotation="-90 0 0">
                   <a-gltf-model scale="10 10 10" rotation="0 180 0" src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react@v1.0/assets/Lab.gltf"></a-gltf-model>
@@ -81,13 +81,13 @@ class GeoSpatial extends Component {
               </a-entity>
               <a-entity id="lefthand" camera-transform-controls-hand="hand:left" vive-controls="hand: left" oculus-touch-controls="hand: left" windows-motion-controls="hand: left"></a-entity>
               <a-entity id="righthand" camera-transform-controls-hand="hand:right" vive-controls="hand: right" oculus-touch-controls="hand: right" windows-motion-controls="hand: right"></a-entity>
-            </a-entity> */}
+            </a-entity>
 
-                {/* <a-entity id="environment" environment="playArea:100; xground: none; preset: starry; fog: 0"></a-entity>
+                 <a-entity id="environment" environment="playArea:100; xground: none; preset: starry; fog: 0"></a-entity>
 
                 <a-entity light="type: directional; color: #EED; intensity: 3" position="-1 1 1"></a-entity>
 
-                <a-sky src="#sky" radius="4000" color="#6EBAA7" ></a-sky> */}
+                <a-sky src="#sky" radius="4000" color="#6EBAA7" ></a-sky>
               
             </Scene>
             </div> : ''}

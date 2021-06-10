@@ -14,7 +14,7 @@ class DeviceInfo extends Component {
                 component-padding="0"
                 rounded="enabled: false">
                 <a-gui-label
-                    width="2" height="0.75"
+                    width="3" height="0.75"
                     value={this.props.name}
                     margin="0 0 0.05 0"
                     font-size="100px"
@@ -22,18 +22,6 @@ class DeviceInfo extends Component {
                     font-color="#2effd5"
                 >
                 </a-gui-label>
-                <a-gui-button
-                    width="1" height="0.75"
-                    value="Status: On"
-                    margin="0 0 0.05 0"
-                    font-size="80px"
-                    font-color="#2effd5"
-                    active-color="#4f8278"
-                    hover-color="#81dbca"
-                    border-color="#2effd5"
-                    background-color="#2c5e54"
-                >
-                </a-gui-button>
             </a-gui-flex-container>
         )
     }
