@@ -39,7 +39,7 @@ class ARApp extends Component {
 
                 console.log('position: ' + positionModel.x + ',' + positionModel.y + ',' + positionModel.z);
                 
-                this.setState({callibratedPos: "positionModel.x " + "positionModel.y " + "positionModel.z"})
+                this.setState({callibratedPos: positionModel.x + " " + positionModel.y + " " + positionModel.z})
                 this.setState({callibrated: true});
               })
             
@@ -137,16 +137,18 @@ class ARApp extends Component {
                         <Entity id="rotationWrapper" position="0 0 0" rotation-reader="enabled: false">
                             <Entity
                                 id="labAll"
-                                position={this.state.callibratedPos}
+                                position="-8.5 0 5.4"
+                                rotation="0 90 0"
                                 scale='2 2 2'
                             >
                                 <Entity id="arUI" visible={this.state.callibrated}>
+                                    <Entity position="0 0 0" gltf-model="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react@v1.0/assets/Lab.gltf">
+                                    </Entity>
                                     <Entity id="device" position="0.234 2.5 -3.3">
                                         <Entity
                                             id="aircon"
-                                            gltf-model="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/devices/Air%20conditioner%201.gltf"
+                                            gltf-model="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react@v2.0/assets/devices/Air%20conditioner%201.gltf"
                                             scale="0.0025 0.0025 0.0025"
-                                            rotation="0 90 0"
                                             class="clickable"
                                             event-set__1="_event: mouseenter; _target:#deviceUI; visible: true"
                                         />
@@ -177,41 +179,16 @@ class ARApp extends Component {
                                                 position="0 0 0.04"
                                                 >
                                                 
-                                                <a-gui-button
-                                                    id="upChannel"
-                                                    width="1" height="0.75"
-                                                    value="+"
-                                                    font-family="Arial"
-                                                    font-size="150px"
-                                                    margin="0 0 0.05 0">
-                                                </a-gui-button>
                                                 
-                                                <a-gui-label
-                                                    width="1" height="0.75"
-                                                    margin="0 0 0.05 0"
-                                                    value="26 C"
-                                                    font-size="150px"
-                                                >
-                                                </a-gui-label>
-
-                                                <a-gui-button
-                                                    id="downChannel"
-                                                    width="1" height="0.75"
-                                                    value="-"
-                                                    font-family="Arial"
-                                                    font-size="150px"
-                                                    margin="0 0 0.05 0">
-                                                </a-gui-button>
                                             </a-gui-flex-container>
                                         </a-gui-flex-container>
                                     </Entity>
 
                                     <Entity
                                         id="aircon2"
-                                        gltf-model="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/devices/Air%20conditioner%201.gltf"
+                                        gltf-model="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react@v2.0/assets/devices/Air%20conditioner%201.gltf"
                                         scale="0.0025 0.0025 0.0025"
                                         position="0.234 2.5 -8.3"
-                                        rotation="0 90 0"
                                     />
                                 </Entity>
                             </Entity>

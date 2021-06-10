@@ -17,12 +17,12 @@ import AppTest from './WebSockettest';
 ReactDOM.render(
   <React.StrictMode>
     {/* <App /> */}
-    {/* <Sensor></Sensor> */}
+    {/* <ARApp></ARApp> */}
 
     {/* Finished pages: AR, VR, Cesium */}
 
-    {/* <ARApp></ARApp> */}
-    <RecordPage></RecordPage>
+    <Sensor></Sensor>
+    {/* <RecordPage></RecordPage> */}
     {/* <GeoSpatial></GeoSpatial> */}
   </React.StrictMode>,
   document.getElementById('root')

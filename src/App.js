@@ -333,7 +333,7 @@ class App extends Component {
           light="castShadow: true"
         ></a-light> */}
 
-        <Entity id="labAll" position="-0.8 0 2.353">
+        <Entity id="labAll" position="-0.8 -100 2.353">
           <Entity
             static-body={{}}
             id="labWall"
