@@ -167,6 +167,11 @@ class App extends Component {
     this.props.recordStop();
   }
 
+  moveCamera(){
+    var camera = document.getElementById("cameraRig");
+    camera.setAttribute('animation', {property: "position", to:"0 0 0", dir: "alternate", loop: "false", dur: "3500"})
+  }
+
   render() {
     return (
       <div>
@@ -284,9 +289,29 @@ class App extends Component {
 
         <Entity id="target"></Entity>
 
-        {/* <Entity a-terrain="fovpad:1;latitude:37.7983222;longitude:-122.3972797;elevation:0;lod:14;"> </Entity> */}
+        <Entity a-terrain="fovpad:1;latitude:37.7983222;longitude:-122.3972797;elevation:0;lod:14;"> </Entity>
         <a-sky radius="4000" color="#6EBAA7"></a-sky>
+        
+        <a-gui-button
+          id="moveCamera"
+          width="2.5" height="0.75"
+          onClick={this.moveCamera}
+          value="Go to Smarthome"
+          position="0 1002 -1.5"
 
+          font-family="Arial"
+          font-size="150px"
+          margin="0 0 0.15 0"
+          opacity="0.4" 
+
+          font-color="#2effd5"
+          active-color="#4f8278"
+          hover-color="#81dbca"
+          border-color="#2effd5"
+          background-color="#2a8d7a"
+          >
+      </a-gui-button>
+                        
         <Entity
           id="cameraRig"
           position="0 0 0"
@@ -303,7 +328,7 @@ class App extends Component {
               {/* <Entity gltf-model="#headModel" position="-0.13 -1.6 -3.1" scale="2 2 2" visible="true" rotation="0 180 0"></Entity> */}
               {/* Enable for PC testing */}
               {/* <Entity gltf-model="#head" position="-0.33 -2.8 -1.6" rotation="0 180 0" scale="2 2 2" visible="false"></Entity> */}
-              <a-cursor></a-cursor>
+              {/* <a-cursor></a-cursor> */}
           </Entity>
 
           <Entity 
@@ -313,6 +338,7 @@ class App extends Component {
             thumbstick-rotate
             call-assistant
             
+            static-body="shape: sphere; sphereRadius: 0.02"
             sphere-collider="objects: .stickyMove;"
             super-hands={{}}
             >
@@ -324,6 +350,7 @@ class App extends Component {
             controller-cursor={{}}
             speech-control=""
             
+            static-body="shape: sphere; sphereRadius: 0.02"
             sphere-collider="objects: .stickyMove;"
             super-hands={{}}
           ></Entity>
@@ -732,7 +759,7 @@ class App extends Component {
           <Entity id="assistantWrapper" position="0 1.4 -3.4" rotation="0 -180 0" >
             <Entity
               id="assistant"
-              visible="false"
+              visible="true"
               rotation="0 0 0"
               look-at="#head"
 
@@ -815,7 +842,7 @@ class App extends Component {
           
           <a-gui-flex-container
                 id="createUI"
-                visible="true"
+                visible="false"
                 flex-direction="column" 
                 justify-content="center" 
                 align-items="normal" 

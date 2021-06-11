@@ -4,6 +4,7 @@ import { Entity, Scene } from "aframe-react";
 import React, { Component } from "react";
 
 import {appendScript} from './appendScript';
+import RecordPage from "./RecordPage";
 require('aframe');
 require('aframe-gui');
 require('aframe-event-set-component');
@@ -14,7 +15,10 @@ class GeoSpatial extends Component {
     super(props);
     this.state = {
         loaded: false  ,
+        loadVR: false,
     };
+
+    this.loadSmartHome = this.loadSmartHome.bind(this);
   }
   
   componentDidMount() {
@@ -28,36 +32,21 @@ class GeoSpatial extends Component {
     })
   }
 
+  loadSmartHome() {
+    this.setState({loadVR: true})
+  }
+
 
   render() {
     return (
             <div>
                 {this.state.loaded ? <div>
+              
+              {this.state.loadVR ? <RecordPage></RecordPage> : 
               <Scene id="scene" cursor="rayOrigin: mouse" style="position: relative; height: 100%; width: 100%;">
               <a-assets>
                 <img id="sky" src="https://anselm.github.io/aterrain/examples/assets/PIA12348_hires.jpg"/>
               </a-assets>
-                
-              {/* <a-entity id="target"></a-entity>
-
-              <a-entity a-terrain="fovpad:1;
-                     latitude:37.7983222;
-                     longitude:-122.3972797;
-                     elevation:100;
-                     lod:14;
-                      ">
-              </a-entity>
-
-              <a-entity id="cameraRig" position="0 0 0" >
-                <a-entity id="camera" camera="near:1;far:100000" wasd-controls="fly:true" look-controls></a-entity>
-                <a-entity id="lefthand" camera-transform-controls-hand="hand:left" vive-controls="hand: left" oculus-touch-controls="hand: left" windows-motion-controls="hand: left"></a-entity>
-                <a-entity id="righthand" camera-transform-controls-hand="hand:right" vive-controls="hand: right" oculus-touch-controls="hand: right" windows-motion-controls="hand: right"></a-entity>
-              </a-entity>
-
-
-              <a-light type="directional" color="#ffffff" intensity="1" position="-1 1 1"></a-light>
-              <a-light type="ambient" color="#444444"></a-light>
-              <a-light type="point" intensity="1" position="2 4 4"></a-light> */}
 
             <a-entity id="world" position="0 0 0" rotation="0 180 0" visible="true" a-terrain="radius:1000; observer:camera">
               <a-entity a-location="lat:45; lon:-122; radius:1010;">
@@ -84,6 +73,7 @@ class GeoSpatial extends Component {
                 <a-gui-button 
                     width="2.5" height="0.75"
                     value="San Francisco Lab"
+                    onClick={this.loadSmartHome}
                     align="center"
                     margin="0 0 0.05 0"
                     font-size="150px"
@@ -154,6 +144,7 @@ class GeoSpatial extends Component {
                 <a-gui-button 
                     width="2.5" height="0.75"
                     value="ICT Lab KMITL"
+                    onClick={this.loadSmartHome}
                     align="center"
                     margin="0 0 0.05 0"
                     font-size="150px"
@@ -222,7 +213,7 @@ class GeoSpatial extends Component {
                 <a-sky src="#sky" radius="4000" color="#6EBAA7" ></a-sky>
               
             </Scene>
-            </div> : ''}
+                } </div> : ''}
           </div>
     );
   }

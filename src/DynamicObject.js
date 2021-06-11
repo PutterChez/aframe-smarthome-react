@@ -14,6 +14,8 @@ class DynamicObject extends PureComponent {
               class="stickyMove"
               id={this.props.id}
               grabbable=""
+              geometry="primitive: box; width: 0.33; height: 0.33; depth: 0.33"
+            //   dynamic-body=""
               gltf-model={this.props.model}
               position={this.props.position}
               scale={this.props.scale}

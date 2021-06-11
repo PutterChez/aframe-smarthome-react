@@ -16,7 +16,7 @@ AFRAME.registerComponent('call-assistant',{
         assistant.setAttribute('visible', 'true');
 
         assistantWrapper.setAttribute('position', {x: userPos.x, y: newPosY, z: newPosZ});
-        assistantWrapper.setAttribute('animation', {property: "position", to: userPos.x + " " + newPosY + 0.5 + " " + newPosZ, dir: "alternate", loop: "true", dur: "2000"})
+        // assistantWrapper.setAttribute('animation', {property: "position", to: userPos.x + " " + newPosY + 0.5 + " " + newPosZ, dir: "alternate", loop: "true", dur: "2000"})
     },
     createObject: function() {
         var createUI = document.getElementById("createUI");

@@ -19,9 +19,9 @@ AFRAME.registerComponent('speech-control',{
 
         recordUI.setAttribute('visible',"false");
         replyUI.setAttribute('visible',"true");
-        setTimeout(() => {
-            replyUI.setAttribute('visible', "false");
-        }, 5000)
+        // setTimeout(() => {
+        //     replyUI.setAttribute('visible', "false");
+        // }, 5000)
         recordPage.recordStop();
     }
   });
