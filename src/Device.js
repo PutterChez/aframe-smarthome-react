@@ -3,6 +3,7 @@ import { Entity } from "aframe-react";
 
 require('./on-hover');
 require('super-hands');
+const axios = require('axios');
 
 class Device extends Component {
     constructor(props) {
@@ -26,6 +27,7 @@ class Device extends Component {
         this.closeMenu = this.closeMenu.bind(this);
         this.openMenu = this.openMenu.bind(this);
         this.moveObject = this.moveObject.bind(this);
+        this.testHandler = this.testHandler.bind(this);
     }
 
     componentDidMount() {
@@ -55,20 +57,22 @@ class Device extends Component {
     updateDevice(tag, value) {
         console.log(tag + " === " + this.state.colorTag);
         if(tag === this.state.lightTag){
-            this.toggle();
+            if(this.state.lightOn)
+                this.setState({lightOn: false});
+            
+            else
+                this.setState({lightOn: true});
         }
         else if(tag === this.state.colorTag){
             this.setState({finalColor: value});
             console.log("FINAL COLOR: " + this.state.finalColor);
-            this.changeColor();
         }
         else if(tag === this.state.brightTag){
             this.setState({brightness: value});
-            this.changeBright();
         }
     }
 
-    async toggle() {
+    toggle() {
         if(this.state.lightOn){
             console.log("turn off light");
 
@@ -79,6 +83,15 @@ class Device extends Component {
             };
             fetch(this.props.url + 'mock/sendTag/', requestOptions)
                 this.setState({lightOn: false});
+            
+            // axios({
+            //     method: 'POST',
+            //     url: this.props.url + 'mock/sendTag/',
+            //     headers: { 'Content-Type': 'application/json' },
+            //     data: JSON.stringify({ tag: this.state.lightTag, value: 0.0 }),
+            //     processData: false,
+            //     contentType: false
+            // })
         }
 
         else{
@@ -95,7 +108,7 @@ class Device extends Component {
         }
     }   
 
-    async changeBright() {
+    changeBright() {
         console.log("change bright: " +  this.state.brightness);
 
         const requestOptions = {
@@ -119,7 +132,7 @@ class Device extends Component {
         this.changeBright();
     }
 
-    async changeColor() {
+    changeColor() {
         console.log("change color");
 
         const requestOptions = {
@@ -130,7 +143,7 @@ class Device extends Component {
             fetch(this.props.url + 'mock/sendTag/', requestOptions)   
     }
 
-    async moveObject() {
+    moveObject() {
         var object = document.getElementById(this.props.id).getAttribute("position");
         var objectModel = document.getElementById(this.props.id + "-model").getAttribute("position");
         var newX = object.x + objectModel.x;
@@ -144,6 +157,10 @@ class Device extends Component {
         };
             console.log(requestOptions);
             fetch(this.props.url + 'mock/update/', requestOptions)   
+    }
+
+    testHandler(e) {
+        console.log(e);
     }
 
     colorPicker() {

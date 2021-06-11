@@ -67,6 +67,7 @@ class GeoSpatial extends Component {
                 <a-entity rotation="-90 0 0">
                   <a-gltf-model scale="10 10 10" rotation="0 180 0" src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react@v1.0/assets/Lab.gltf"></a-gltf-model>
                 </a-entity>
+                <a-entity link="href: index.html; title: My Homepage; image: https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/src/lab_preview.png"></a-entity>
               </a-entity>
             </a-entity>
 

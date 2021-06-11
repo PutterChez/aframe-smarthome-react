@@ -46,7 +46,7 @@ class Device extends Component {
         }
     }
 
-    async changeChannel() {
+    changeChannel() {
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -55,7 +55,7 @@ class Device extends Component {
         fetch(this.props.url + 'mock/sendTag/', requestOptions)
     }
 
-    async channelUp() {
+    channelUp() {
         const upChannel = (parseInt(this.state.channel) + 1) + '';
         console.log(upChannel);
 
@@ -69,7 +69,7 @@ class Device extends Component {
         this.setState({channel: upChannel})
     }   
 
-    async channelDown() {
+    channelDown() {
         console.log("channel down");
         const downChannel = (parseInt(this.state.channel) - 1) + '';
 
@@ -83,7 +83,7 @@ class Device extends Component {
         this.setState({channel: downChannel})
     }   
 
-    async changeVolume() {
+    changeVolume() {
         console.log("change volume: " +  this.state.volume);
 
         const requestOptions = {
@@ -94,9 +94,11 @@ class Device extends Component {
         fetch(this.props.url + 'mock/sendTag/', requestOptions)
     }
 
-    async moveObject() {
+    moveObject() {
         var object = document.getElementById(this.props.id).getAttribute("position");
         var objectModel = document.getElementById(this.props.id + "-model").getAttribute("position");
+
+        
         var newX = object.x + objectModel.x;
         var newY = object.y + objectModel.y;
         var newZ = object.z + objectModel.z;
@@ -108,6 +110,8 @@ class Device extends Component {
         };
             console.log(requestOptions);
             fetch(this.props.url + 'mock/update/', requestOptions)   
+        
+      
     }
 
     volumeSlider = (e) => {
@@ -133,6 +137,8 @@ class Device extends Component {
                 <Entity
                     id="TV" 
                     gltf-model="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome/TV_01.gltf" 
+                    class="stickyMove" 
+                    grabbable=""
                     
                     scale={{ x: 0.06, y: 0.06 , z: 0.06}}
                     rotation={this.props.rotation}
@@ -141,7 +147,7 @@ class Device extends Component {
                 >
                 </Entity>
                 
-                <Entity position={this.state.menuOpen ? "0 0 0": "0 -4 0"}>
+                <Entity id={this.props.id + "-uiContainer"} position={this.state.menuOpen ? "0 0 0": "0 -4 0"}>
                     
                     <a-gui-icon-button
                             height="0.5"

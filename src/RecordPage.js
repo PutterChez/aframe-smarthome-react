@@ -70,14 +70,18 @@ class RecordPage extends Component {
         data: fd,
         processData: false,
         contentType: false
-      }).then(function(data) {
-        console.log(data);
-        self.setState({speech: '' + data.data});
+      }).then(function(e) {
+        console.log(e.data);
+        const dataParse = JSON.parse(e.data);
+
+        self.setState({speech: '' + dataParse.message});
+      }).catch(function(error){
+        console.log("Speech recognition error");
+        self.setState({speech: 'Sorry, I could not understand that.'})
       });
 
     })}
 
-    
     this.setState({audioLink: '' + recordedBlob.blobURL});
   }
 
@@ -96,7 +100,7 @@ class RecordPage extends Component {
         <button onClick={this.stopRecording} type="button">Stop</button>
         <a href={this.state.audioLink}> Click for audio</a>
         <h1> Speech recognition: {this.state.speech}</h1> */}
-        <App url={this.state.apiUrl} recordStart={this.startRecording} recordStop={this.stopRecording}></App>
+        <App url={this.state.apiUrl} reply={this.state.speech} recordStart={this.startRecording} recordStop={this.stopRecording}></App>
       </div>
     );
   }

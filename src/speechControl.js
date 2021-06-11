@@ -15,8 +15,13 @@ AFRAME.registerComponent('speech-control',{
     recordStop: function () {
         var recordPage = window['recordPage'];
         var recordUI = document.getElementById("speechUI");
+        var replyUI = document.getElementById("replyUI");
 
         recordUI.setAttribute('visible',"false");
+        replyUI.setAttribute('visible',"true");
+        setTimeout(() => {
+            replyUI.setAttribute('visible', "false");
+        }, 5000)
         recordPage.recordStop();
     }
   });

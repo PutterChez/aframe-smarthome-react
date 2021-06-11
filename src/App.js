@@ -311,7 +311,7 @@ class App extends Component {
             id="leftHand" 
             oculus-touch-controls="hand: left"
             controller-cursor={{}}
-            speech-control
+            speech-control=""
             
             sphere-collider="objects: .stickyMove;"
             super-hands={{}}
@@ -706,10 +706,22 @@ class App extends Component {
           <Entity
               class="stickyMove"
               id="book1"
+              // dynamic-body=""
               grabbable=""
               gltf-model="#bookModel"
-              position="-0.15 0.9 -4.3"
-              scale="0.5 0.5 0.5"
+              position="-0.15 1 -4.3"
+              scale="0.7 0.7 0.7"
+              rotation="0 0 0"
+          />
+
+          <Entity
+              class="stickyMove"
+              id="box"
+              // dynamic-body=""
+              grabbable=""
+              gltf-model="#bookModel"
+              position="-0.15 1 -4.3"
+              scale="0.7 0.7 0.7"
               rotation="0 0 0"
           />
 
@@ -747,6 +759,36 @@ class App extends Component {
 
               </Entity>
 
+                <a-gui-flex-container
+                  id="replyUI"
+                  visible="false"
+                  flex-direction="column" 
+                  justify-content="center" 
+                  align-items="normal" 
+                  component-padding="0" 
+                  opacity="0.4" 
+                  width="2.5" 
+                  height="1"
+                  position="0.6 0.65 0"
+                  scale="0.3 0.3 0.3"
+                  panel-color="#2effd5"
+                  panel-rounded="0.3">
+
+                  <a-gui-label
+                    width="2"
+                    height="0.5"
+
+                    value={this.props.reply}
+                    font-size="80px"
+                    font-color="#2effd5"
+                    active-color="#2a8d7a"
+                    hover-color="#2a8d7a"
+                    border-color="#2a8d7a"
+                    background-color="#2a8d7a"
+                  >
+                  </a-gui-label>
+              </a-gui-flex-container>
+
               <a-gui-flex-container
                 id="speechUI"
                 visible="false"
@@ -760,8 +802,7 @@ class App extends Component {
                 position="0 0.65 0"
                 scale="0.3 0.3 0.3"
                 panel-color="#2effd5"
-                panel-rounded="0.3"
-                look-at="#head">
+                panel-rounded="0.3">
 
                 <a-gui-icon-button
                   height="0.5"
@@ -778,6 +819,69 @@ class App extends Component {
             </a-gui-flex-container>
             </Entity>
           </Entity>
+          
+          <a-gui-flex-container
+                id="createUI"
+                visible="true"
+                flex-direction="column" 
+                justify-content="center" 
+                align-items="normal" 
+                component-padding="0" 
+                opacity="0.4" 
+                width="3.5" 
+                height="3"
+                position="-0.94 1.25 -4.3"
+                scale="0.3 0.3 0.3"
+                panel-color="#2effd5"
+                panel-rounded="0.3">
+
+              <a-gui-button
+                  width="2.5" height="0.75"
+                  value="Create Object Presets"
+                  align="center"
+                  margin="0 0 0.05 0"
+                  font-size="150px"
+                  font-color="#2effd5"
+                  active-color="#2a8d7a"
+                  hover-color="#2a8d7a"
+                  border-color="#2a8d7a"
+                  background-color="#2a8d7a"
+              >
+              </a-gui-button>
+
+              <a-gui-icon-label-button
+                  width="2.5" height="0.75"
+                  value="Box"
+                  
+                  icon="f49e"
+                  icon-font="https://rdub80.github.io/aframe-gui/examples/assets/fonts/fa-solid-900.ttf"
+                  margin="0 0 0.05 0"
+                  font-size="150px"
+                  font-color="#2effd5"
+
+                  active-color="#4f8278"
+                  hover-color="#81dbca"
+                  border-color="#2effd5"
+                  background-color="#2a8d7a"
+              >
+              </a-gui-icon-label-button>
+              <a-gui-icon-label-button
+                  width="2.5" height="0.75"
+                  value="Book"
+                  
+                  icon="f02d"
+                  icon-font="https://rdub80.github.io/aframe-gui/examples/assets/fonts/fa-solid-900.ttf"
+                  margin="0 0 0.05 0"
+                  font-size="150px"
+                  font-color="#2effd5"
+                  
+                  active-color="#4f8278"
+                  hover-color="#81dbca"
+                  border-color="#2effd5"
+                  background-color="#2a8d7a"
+              >
+              </a-gui-icon-label-button>
+            </a-gui-flex-container>
 
           <a-gui-flex-container
               id="querylistUI"
