@@ -7,10 +7,16 @@ AFRAME.registerComponent('speech-control',{
     },
     recordStart: function () {
         var recordPage = window['recordPage'];
+        var recordUI = document.getElementById("speechUI");
+
+        recordUI.setAttribute('visible',"true");
         recordPage.recordStart();
     },
     recordStop: function () {
         var recordPage = window['recordPage'];
+        var recordUI = document.getElementById("speechUI");
+
+        recordUI.setAttribute('visible',"false");
         recordPage.recordStop();
     }
   });

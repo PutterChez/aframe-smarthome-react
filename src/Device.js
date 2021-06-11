@@ -209,7 +209,7 @@ class Device extends Component {
                     gltf-model="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome/Lightbulb.gltf" 
                     class="stickyMove" 
                     grabbable=""
-                    ondragend={this.moveObject}
+                    // event-set__dragoff={this.moveObject}
 
                     position="0 0 0"
                     scale={{ x: 0.001, y: 0.001 , z: 0.001}}
@@ -260,8 +260,8 @@ class Device extends Component {
                             panel-rounded="0.3"
                             >
 
-                        {/* <a-gui-button
-                            id="toggleLightButton"
+                        <a-gui-button
+                            id="moveObjectButton"
                             width="2.5" height="0.75"
                             onClick={this.moveObject}
                             value="Move Object"
@@ -277,7 +277,7 @@ class Device extends Component {
                             border-color="#2effd5"
                             background-color="#2a8d7a"
                             >
-                        </a-gui-button> */}
+                        </a-gui-button>
 
                             {this.state.lightTag != "" ?
                                 <a-gui-icon-button
@@ -442,7 +442,7 @@ class Device extends Component {
                     }
                 </Entity>
                 
-                <Entity id="uiInfo" visible="true">
+                {/* <Entity id="uiInfo" visible="true">
                     <a-gui-flex-container
                         visible="true"
                         flex-direction="column" 
@@ -498,7 +498,7 @@ class Device extends Component {
                         >
                         </a-gui-label>
                     </a-gui-flex-container>
-                </Entity>
+                </Entity> */}
                 
             </Entity>
         )

@@ -55,7 +55,7 @@ class App extends Component {
 
     if(this.state.retrieveObjects){
       this.ws.current = new WebSocket(
-        "wss://c2c942b8fd23.ngrok.io/ws/chat/Test1/",
+        "wss://85ebcdb68220.ngrok.io/ws/chat/Test1/",
       );
   
       this.ws.current.onopen = () => {
@@ -272,13 +272,13 @@ class App extends Component {
 
         <Entity id="target"></Entity>
 
-        <Entity a-terrain="fovpad:1;latitude:37.7983222;longitude:-122.3972797;elevation:100;lod:14;">
+        <Entity a-terrain="fovpad:1;latitude:37.7983222;longitude:-122.3972797;elevation:0;lod:14;">
         </Entity>
         <a-sky radius="4000" color="#6EBAA7"></a-sky>
 
         <Entity
           id="cameraRig"
-          position="0 -100 0"
+          position="0 0 0"
           rotation="0 0 0"
         >
           <Entity
@@ -332,7 +332,7 @@ class App extends Component {
           light="castShadow: true"
         ></a-light> */}
 
-        <Entity id="labAll" position="-0.8 -100 2.353">
+        <Entity id="labAll" position="-0.8 0 2.353">
           <Entity
             static-body={{}}
             id="labWall"
@@ -660,7 +660,7 @@ class App extends Component {
           </Entity>
 
 
-          {/* <a-gui-button
+          <a-gui-button
               id="recordStartButton"
               width="0.75" height="0.25" 
               position="0.9 1.65 -4.4"
@@ -680,7 +680,7 @@ class App extends Component {
               font-family="Arial"
               font-size="30px"
               margin="0 0 0.05 0">
-          </a-gui-button> */}
+          </a-gui-button>
 
           {/* <Entity>
             <Entity 
@@ -737,7 +737,7 @@ class App extends Component {
               // Testing pos
               position="0 0.2 0"
               // animation={{property: "position", to: "0.08 1.5 -4", dir: "alternate", loop: "true", dur: "2000"}}
-              event-set__mouseenter="visible: true; _target: #querylistUI;"
+              // event-set__mouseenter="visible: true; _target: #querylistUI;"
             >
               <Entity 
                 id="asisstantInner"
@@ -746,6 +746,36 @@ class App extends Component {
                 rotation="0 -90 45">
 
               </Entity>
+
+              <a-gui-flex-container
+                id="speechUI"
+                visible="false"
+                flex-direction="column" 
+                justify-content="center" 
+                align-items="normal" 
+                component-padding="0" 
+                opacity="0.4" 
+                width="2.5" 
+                height="1"
+                position="0 0.65 0"
+                scale="0.3 0.3 0.3"
+                panel-color="#2effd5"
+                panel-rounded="0.3"
+                look-at="#head">
+
+                <a-gui-icon-button
+                  height="0.5"
+                  icon="f130"
+                  icon-font="https://rdub80.github.io/aframe-gui/examples/assets/fonts/fa-solid-900.ttf"
+
+                  font-color="#2effd5"
+                  active-color="#4f8278"
+                  hover-color="#81dbca"
+                  border-color="#2effd5"
+                  background-color="#2a8d7a"
+              >
+              </a-gui-icon-button>
+            </a-gui-flex-container>
             </Entity>
           </Entity>
 
@@ -770,7 +800,6 @@ class App extends Component {
                 width="3" height="0.75"
                 position="-0.2 1.8 -3.4"
                 value="Query Result"
-                onClick={this.playAudio}
                 font-family="Arial"
                 font-size="100px"
                 margin="0 0 0.05 0"

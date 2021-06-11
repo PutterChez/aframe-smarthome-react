@@ -12,7 +12,7 @@ class RecordPage extends Component {
       record: false,
       audioLink: "",
       speech: "",
-      apiUrl: "https://c2c942b8fd23.ngrok.io/",
+      apiUrl: "https://85ebcdb68220.ngrok.io/",
     }
 
     this.onStop = this.onStop.bind(this);
@@ -66,7 +66,7 @@ class RecordPage extends Component {
       var self = this;
       axios({
         method: 'post',
-        url: apiUrl + '/mock/audio/',
+        url: apiUrl + 'mock/audio/',
         data: fd,
         processData: false,
         contentType: false

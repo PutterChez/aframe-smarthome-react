@@ -94,6 +94,22 @@ class Device extends Component {
         fetch(this.props.url + 'mock/sendTag/', requestOptions)
     }
 
+    async moveObject() {
+        var object = document.getElementById(this.props.id).getAttribute("position");
+        var objectModel = document.getElementById(this.props.id + "-model").getAttribute("position");
+        var newX = object.x + objectModel.x;
+        var newY = object.y + objectModel.y;
+        var newZ = object.z + objectModel.z;
+
+        const requestOptions = {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ room: "ICTLab", floor: 7, building: "ECCBuilding", name: "Light01", location: {x: newX, y: newY, z: newZ} })
+        };
+            console.log(requestOptions);
+            fetch(this.props.url + 'mock/update/', requestOptions)   
+    }
+
     volumeSlider = (e) => {
         const percent = e.currentTarget.getAttribute('gui-slider').percent;
         const value = parseInt(percent * 100);
@@ -148,13 +164,31 @@ class Device extends Component {
                         component-padding="0.1" 
                         opacity="0.4" 
                         width="3.5" 
-                        height="2.7"
+                        height="3.7"
                         rotation={this.props.rotation}
                         position= "0 1.1 0"
                         scale="0.3 0.3 0.3"
                         panel-color="#2effd5"
                         panel-rounded="0.3">
                     
+                        <a-gui-button
+                            id="moveObjectButton"
+                            width="2.5" height="0.75"
+                            onClick={this.moveObject}
+                            value="Move Object"
+
+                            font-family="Arial"
+                            font-size="150px"
+                            margin="0 0 0.15 0"
+                            opacity="0.4" 
+
+                            font-color="#2effd5"
+                            active-color="#4f8278"
+                            hover-color="#81dbca"
+                            border-color="#2effd5"
+                            background-color="#2a8d7a"
+                            >
+                        </a-gui-button>
 
                         <a-gui-flex-container
                             flex-direction="row" 
