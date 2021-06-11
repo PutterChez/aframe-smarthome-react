@@ -33,23 +33,25 @@ class Device extends Component {
     componentDidMount() {
         this.setState({name: this.props.id});
 
-        for (let tag of this.props.tags){
+        if(this.props.tags){
+            for (let tag of this.props.tags){
 
-            if(tag.widget === "button"){
-                if(tag.value == 0)
-                    this.setState({lightOn: false})
-                else if(tag.value == 1)
-                    this.setState({lightOn: true})
+                if(tag.widget === "button"){
+                    if(tag.value == 0)
+                        this.setState({lightOn: false})
+                    else if(tag.value == 1)
+                        this.setState({lightOn: true})
 
-                this.setState({lightTag: tag.tags})
-            }
+                    this.setState({lightTag: tag.tags})
+                }
 
-            else if(tag.widget === "rgb_slider"){
-                this.setState({colorTag: tag.tags, finalColor: tag.value})
-            }
+                else if(tag.widget === "rgb_slider"){
+                    this.setState({colorTag: tag.tags, finalColor: tag.value})
+                }
 
-            else if(tag.widget === "brightness_slider"){
-                this.setState({brightTag: tag.tags, brightness: tag.value})
+                else if(tag.widget === "brightness_slider"){
+                    this.setState({brightTag: tag.tags, brightness: tag.value})
+                }
             }
         }
     }
@@ -83,15 +85,6 @@ class Device extends Component {
             };
             fetch(this.props.url + 'mock/sendTag/', requestOptions)
                 this.setState({lightOn: false});
-            
-            // axios({
-            //     method: 'POST',
-            //     url: this.props.url + 'mock/sendTag/',
-            //     headers: { 'Content-Type': 'application/json' },
-            //     data: JSON.stringify({ tag: this.state.lightTag, value: 0.0 }),
-            //     processData: false,
-            //     contentType: false
-            // })
         }
 
         else{

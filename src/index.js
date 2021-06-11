@@ -22,8 +22,8 @@ ReactDOM.render(
     {/* Finished pages: AR, VR, Cesium */}
 
     {/* <Sensor></Sensor> */}
-    <RecordPage></RecordPage>
-    {/* <GeoSpatial></GeoSpatial> */}
+    {/* <RecordPage></RecordPage> */}
+    <GeoSpatial></GeoSpatial>
   </React.StrictMode>,
   document.getElementById('root')
 );

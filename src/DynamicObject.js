@@ -5,42 +5,21 @@ class DynamicObject extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {
-            url: 'https://a28bc3f35b14.ngrok.io/',
-            scale: "0.5 0.5 0.5",
         };
     }
 
     render() {
         return(
             <Entity
-                ref={this.deviceRef}
-                dynamic-body={{}}
-                shadow={{cast: true}}
-                id="book"
-                class="throwable"
-                gltf-model="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/CHAHIN_NOTEBOOK.gltf"
-                position="-0.07672 1 -4.46525"
-                scale={this.state.scale}
-            >
-            </Entity>
+              class="stickyMove"
+              id={this.props.id}
+              grabbable=""
+              gltf-model={this.props.model}
+              position={this.props.position}
+              scale={this.props.scale}
+              rotation={this.props.rotation}
+          />
         )
-    }
-
-    componentDidMount() {
-        // TODO: USE ON HIT TO CHECK FOR BOTH OBJECTS COLLISON + GRIPDOWN
-
-        // document.getElementsByClassName("throwable")[0].addEventListener('hit', this.move);
-        // document.getElementsByClassName("throwable")[0].addEventListener('gripdown', this.move);
-        // document.getElementsByClassName("throwable")[0].addEventListener('gripup', this.move);
-        // document.getElementsByClassName("throwable")[0].addEventListener('trackpaddown', this.move);
-        // document.getElementsByClassName("throwable")[0].addEventListener('trackpadup', this.move);
-        // document.getElementsByClassName("throwable")[0].addEventListener('triggerdown', this.move);
-        // document.getElementsByClassName("throwable")[0].addEventListener('triggerup', this.move);
-    }
-
-    move = (event) => {
-        console.log("Object moved:", event);
-        this.setState({scale: "1 1 1"});
     }
 }
 

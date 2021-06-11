@@ -22,16 +22,18 @@ class Device extends Component {
     }
 
     componentDidMount() {
-        for (let tag of this.props.tags){
+        if(this.props.tags){
+            for (let tag of this.props.tags){
 
-            if(tag.widget === "channel_button"){
-                
-                this.setState({channelTag: tag.tags})
-                this.setState({channel: tag.value})
+                if(tag.widget === "channel_button"){
+                    
+                    this.setState({channelTag: tag.tags})
+                    this.setState({channel: tag.value})
+                }
+
+                else if(tag.widget === "volume_slider")
+                    this.setState({volumeTag: tag.tags, volume: tag.value})
             }
-
-            else if(tag.widget === "volume_slider")
-                this.setState({volumeTag: tag.tags, volume: tag.value})
         }
     }
 

@@ -51,7 +51,7 @@ class App extends Component {
 
     if(this.state.retrieveObjects){
       this.ws.current = new WebSocket(
-        "wss://85ebcdb68220.ngrok.io/ws/chat/Test1/",
+        "wss://c4fd98950efa.ngrok.io/ws/chat/Test1/",
       );
   
       this.ws.current.onopen = () => {
@@ -135,6 +135,29 @@ class App extends Component {
       }))
     }
   }
+
+  createObject(objectName, objectType){
+    console.log("creating a " + objectType + "object in VR");
+
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: objectName, type: objectType})
+    };
+    fetch(this.props.url + 'mock/createObj/', requestOptions).then(
+      async response => {
+        const data = await response.json();
+        const objectData = JSON.parse(data)
+
+        console.log(objectData)
+
+        this.setState(prevState => ({
+          deviceList: [...prevState.deviceList, <DynamicObject key={objectData.name} id={objectData.name} position={objectData.location} scale={objectData.scale} rotation={objectData.rotation} model={objectData["gltf-model"]}/>]
+        }))
+        console.log("Device list added:" + this.state.deviceList);
+      }
+    )
+}
 
   recordStart() {
     this.props.recordStart();
@@ -261,8 +284,7 @@ class App extends Component {
 
         <Entity id="target"></Entity>
 
-        <Entity a-terrain="fovpad:1;latitude:37.7983222;longitude:-122.3972797;elevation:0;lod:14;">
-        </Entity>
+        {/* <Entity a-terrain="fovpad:1;latitude:37.7983222;longitude:-122.3972797;elevation:0;lod:14;"> </Entity> */}
         <a-sky radius="4000" color="#6EBAA7"></a-sky>
 
         <Entity
@@ -281,7 +303,7 @@ class App extends Component {
               {/* <Entity gltf-model="#headModel" position="-0.13 -1.6 -3.1" scale="2 2 2" visible="true" rotation="0 180 0"></Entity> */}
               {/* Enable for PC testing */}
               {/* <Entity gltf-model="#head" position="-0.33 -2.8 -1.6" rotation="0 180 0" scale="2 2 2" visible="false"></Entity> */}
-              {/* <a-cursor></a-cursor> */}
+              <a-cursor></a-cursor>
           </Entity>
 
           <Entity 
@@ -671,18 +693,21 @@ class App extends Component {
               margin="0 0 0.05 0">
           </a-gui-button> */}
         
-          <Entity
-              class="stickyMove"
-              id="book1"
-              // dynamic-body=""
-              grabbable=""
-              gltf-model="#bookModel"
-              position="-0.15 1 -4.3"
-              scale="0.7 0.7 0.7"
-              rotation="0 0 0"
-          />
+          {/* <Entity 
+                class="stickyMove"
+                id="book1"
+                grabbable=""
+                position="-0.15 1 -4.3"
+                scale="0.7 0.7 0.7"
+                rotation="0 0 0">
+            <Entity
+                id="bookModel"
+                gltf-model="#bookModel"
+                scale="0.7 0.7 0.7"
+            />
+          </Entity> */}
 
-          <Entity
+          {/* <Entity
               class="stickyMove"
               id="box"
               // dynamic-body=""
@@ -691,7 +716,7 @@ class App extends Component {
               position="-1.854 0.57443 -4.0344"
               scale="0.7 0.7 0.7"
               rotation="0 0 0"
-          />
+          /> */}
 
           {/* <Device></Device> */}
           <Entity id="deviceListRender">
@@ -790,7 +815,7 @@ class App extends Component {
           
           <a-gui-flex-container
                 id="createUI"
-                visible="false"
+                visible="true"
                 flex-direction="column" 
                 justify-content="center" 
                 align-items="normal" 
@@ -820,7 +845,8 @@ class App extends Component {
               <a-gui-icon-label-button
                   width="2.5" height="0.75"
                   value="Box"
-                  
+                  onClick={() => this.createObject("cardboard","box")}
+
                   icon="f49e"
                   icon-font="https://rdub80.github.io/aframe-gui/examples/assets/fonts/fa-solid-900.ttf"
                   margin="0 0 0.05 0"
@@ -836,6 +862,7 @@ class App extends Component {
               <a-gui-icon-label-button
                   width="2.5" height="0.75"
                   value="Book"
+                  onClick={() => this.createObject("bigbook","book")}
                   
                   icon="f02d"
                   icon-font="https://rdub80.github.io/aframe-gui/examples/assets/fonts/fa-solid-900.ttf"
