@@ -250,6 +250,11 @@ class App extends Component {
           ></a-asset-item>
 
           <a-asset-item
+            id="boxModel"
+            src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react/assets/box/model.gltf"
+          ></a-asset-item>
+
+          <a-asset-item
             id="assistantModel"
             src="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react@v2.0/assets/1332 Robot.gltf"
           ></a-asset-item>
@@ -719,8 +724,8 @@ class App extends Component {
               id="box"
               // dynamic-body=""
               grabbable=""
-              gltf-model="#bookModel"
-              position="-0.15 1 -4.3"
+              gltf-model="#boxModel"
+              position="-1.854 0.57443 -4.0344"
               scale="0.7 0.7 0.7"
               rotation="0 0 0"
           />
