@@ -28,11 +28,11 @@ AFRAME.registerComponent('rotation-reader', {
         // console.log("w:" + data.w); 
         
         // Rearrange ZYX for portrait mode
-        var quaternion = [data.z, data.y, data.x, data.w];
+        var quaternion = [data.x, data.y, data.z, data.w];
         
         var euler = qte(quaternion);
         
-        var callibratedEuler = [-euler[0], euler[2], -euler[1] ];
+        var callibratedEuler = [-euler[2], euler[1], -euler[0] ];
         // var callibratedEuler = [euler[0], euler[2], euler[1] -3.14159 ];
 
         var finalEuler = new THREE.Euler().fromArray(callibratedEuler);

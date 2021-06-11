@@ -33,11 +33,7 @@ class App extends Component {
       retrieveObjects: true,
       loaded: false,
       // deviceList: [<Device key="Lightbulb1" id="Lightbulb1" position='2.04 0.936 -3.043' rotation='0 90 0' tags={[{tag:'ict.HueLight01.onoff', widget:'button'}, {tag:'ict.HueLight01.bright', widget:'brightness_slider'}, {tag:'ict.HueLight01.hue', widget:'rgb_slider'}]} type='lightbulb'></Device>],
-    //   deviceList: [
-    //     {name: 'lightbulb1', position: '2.04 0.936 -1.5', rotation: '0 90 0', tags: [{tag:'ict.HueLight01.onoff', widget:'button'}, {tag:'ict.HueLight01.bright', widget:'brightness_slider'}, {tag:'ict.HueLight01.hue', widget:'rgb_slider'}], type: 'lightbulb'},
-    //   {name: 'lightbulb2', position: '2.04 0.936 -3.043', rotation: '0 90 0', tags: [{tag:'ict.HueLight02.onoff', widget:'button'}, {tag:'ict.HueLight02.bright', widget:'brightness_slider'}, {tag:'ict.HueLight02.hue', widget:'rgb_slider'}], type: 'lightbulb'}, 
-    //   {name: 'tv1', position: '3.466 0.85 -1.25', rotation: '0 -140 0', tags:  [{tag:'ict.tv.channel', widget:'channel_button', value: '20'}], type: 'tv'}
-    // ],
+
     };
     this.ws = React.createRef();
     this.recordStart = this.recordStart.bind(this);
@@ -82,15 +78,12 @@ class App extends Component {
 
               const zodbData = JSON.parse(data)
               console.log(zodbData);
-
-              // console.log("Name: " + id + "\nLocation: " + zodbData[id].location + "\nRotation: " + zodbData[id].rotation + "\nTag: " +  zodbData[id].tag[0].tags)
               
               zodbData.ICTLab.devices.map((devices) => {
                 this.addDevice(devices.name, devices.location, devices.rotation, devices.tags, devices.type);
               })
               
 
-              // this.addDevice(id, zodbData[id].location, zodbData[id].rotation, zodbData[id].tag[0].tags);
           })
           .catch(error => {
               console.error('There was an error!', error);
@@ -122,16 +115,7 @@ class App extends Component {
           }
         }
       }
-
-      // this.state.deviceRef[0].current.updateDevice(tag, value);
-      
     }
-  }
-
-  playAudio() {
-    console.log('playing audio')
-    // var player = new talkify.TtsPlayer(); //or new talkify.Html5Player()
-    // player.playText('Hello world');
   }
 
   addDevice(newName, newPosition, newRotation, newTags, newType) {
@@ -297,7 +281,7 @@ class App extends Component {
               {/* <Entity gltf-model="#headModel" position="-0.13 -1.6 -3.1" scale="2 2 2" visible="true" rotation="0 180 0"></Entity> */}
               {/* Enable for PC testing */}
               {/* <Entity gltf-model="#head" position="-0.33 -2.8 -1.6" rotation="0 180 0" scale="2 2 2" visible="false"></Entity> */}
-              <a-cursor></a-cursor>
+              {/* <a-cursor></a-cursor> */}
           </Entity>
 
           <Entity 
@@ -665,7 +649,7 @@ class App extends Component {
           </Entity>
 
 
-          <a-gui-button
+          {/* <a-gui-button
               id="recordStartButton"
               width="0.75" height="0.25" 
               position="0.9 1.65 -4.4"
@@ -685,28 +669,7 @@ class App extends Component {
               font-family="Arial"
               font-size="30px"
               margin="0 0 0.05 0">
-          </a-gui-button>
-
-          {/* <Entity>
-            <Entity 
-              id="fan"
-              gltf-model="#dysonModel"
-              position={{ x: 0.9, y: 0.06, z: -4.3 }}
-              scale={{x: 1.0, y: 1.2, z: 1}}
-              rotation={{ x: 0, y: 0, z: 0 }}
-              animation={{property: "rotation", to: "0 115 0", dir: "alternate", loop: "true", dur: "5000"}}
-              />
-            <a-gui-button
-              id="fanButton"
-              width="0.75" height="0.25" 
-              position="0.9 1.33 -4.4"
-              // onClick="  "
-              value="Toggle Fan"
-              font-family="Arial"
-              font-size="30px"
-              margin="0 0 0.05 0">
-            </a-gui-button>
-          </Entity> */}
+          </a-gui-button> */}
         
           <Entity
               class="stickyMove"
@@ -744,7 +707,7 @@ class App extends Component {
           <Entity id="assistantWrapper" position="0 1.4 -3.4" rotation="0 -180 0" >
             <Entity
               id="assistant"
-              visible="true"
+              visible="false"
               rotation="0 0 0"
               look-at="#head"
 
@@ -827,7 +790,7 @@ class App extends Component {
           
           <a-gui-flex-container
                 id="createUI"
-                visible="true"
+                visible="false"
                 flex-direction="column" 
                 justify-content="center" 
                 align-items="normal" 

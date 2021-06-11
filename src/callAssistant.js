@@ -13,10 +13,7 @@ AFRAME.registerComponent('call-assistant',{
         var newPosZ = userPos.z -3.4;
         var newPosY = userPos.y + 0.8;
 
-        // var isVisible = assistant.getAttribute('visible');
-
-        // if(isVisible === 'false')
-        //     assistant.setAttribute('visible', 'true');
+        assistant.setAttribute('visible', 'true');
 
         assistantWrapper.setAttribute('position', {x: userPos.x, y: newPosY, z: newPosZ});
         assistantWrapper.setAttribute('animation', {property: "position", to: userPos.x + " " + newPosY + 0.5 + " " + newPosZ, dir: "alternate", loop: "true", dur: "2000"})

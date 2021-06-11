@@ -130,7 +130,7 @@ class ARApp extends Component {
                                 id="previewModel"
                                 gltf-model="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react@v1.0/assets/Lab.gltf"
                                 position="0 0 0"
-                                scale='2 2 2'
+                                scale='0.5 0.5 0.5'
                             />
                         </a-marker>
                         
@@ -138,11 +138,12 @@ class ARApp extends Component {
                             <Entity
                                 id="labAll"
                                 position="-5 -1.2 5.4"
-                                scale='2 2 2'
+                                scale='2 2 2' 
+                                visible={this.state.preview}
                             >
-                                <Entity id="arUI" visible={this.state.callibrated}>
+                                <Entity id="arUI" visible={this.state.callibrated} rotation="0 0 0">
                                     <Entity position="0 0 0" 
-                                    // gltf-model="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react@v1.0/assets/Lab.gltf"
+                                    gltf-model="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react@v1.0/assets/Lab.gltf"
                                     >
                                     </Entity>
                                     <Entity id="device" position="0.234 2.5 -3.3" rotation="0 90 0">

@@ -23,7 +23,7 @@ class Sensor extends Component {
         navigator.permissions.query({name:'gyroscope'}).then(function(result) {    console.log(result.state); });
 
         if ( 'Gyroscope' in window ) {
-            let sensor = new RelativeOrientationSensor({frequency: 60});
+            let sensor = new RelativeOrientationSensor({frequency: 30});
             sensor.addEventListener('reading', (e)=> {
                 console.log('val: ' + sensor.quaternion);
 
