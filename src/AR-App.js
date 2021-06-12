@@ -128,22 +128,23 @@ class ARApp extends Component {
                             <Entity
                                 visible={!this.state.callibrated}
                                 id="previewModel"
-                                gltf-model="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react@v1.0/assets/Lab.gltf"
+                                gltf-model="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react@v2.0/assets/CHAHIN_NOTEBOOK.gltf"
                                 position="0 0 0"
-                                scale='0.5 0.5 0.5'
+                                scale='1 1 1'
                             />
                         </a-marker>
                         
-                        <Entity id="rotationWrapper" position="0 0 0" rotation-reader="enabled: false">
+                        <Entity id="rotationWrapper" position="-5 -0.5 5.4" rotation-reader="enabled: false">
                             <Entity
                                 id="labAll"
-                                position="-5 -1.2 5.4"
+                                position="0 0 0"
                                 scale='2 2 2' 
                                 visible={this.state.preview}
+                                rotation="0 0 0"
                             >
                                 <Entity id="arUI" visible={this.state.callibrated} rotation="0 0 0">
-                                    <Entity position="0 0 0" 
-                                    gltf-model="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react@v1.0/assets/Lab.gltf"
+                                    <Entity position="0 0 0" visible="false"
+                                        gltf-model="https://cdn.jsdelivr.net/gh/PutterChez/aframe-smarthome-react@v1.0/assets/Lab.gltf"
                                     >
                                     </Entity>
                                     <Entity id="device" position="0.234 2.5 -3.3" rotation="0 90 0">

@@ -12,7 +12,7 @@ class RecordPage extends Component {
       record: false,
       audioLink: "",
       speech: "",
-      apiUrl: "https://c4fd98950efa.ngrok.io/",
+      apiUrl: "https://a75da89c0831.ngrok.io/",
     }
 
     this.onStop = this.onStop.bind(this);

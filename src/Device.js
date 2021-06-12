@@ -146,7 +146,7 @@ class Device extends Component {
         const requestOptions = {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ room: "ICTLab", floor: 7, building: "ECCBuilding", name: "Light01", location: {x: newX, y: newY, z: newZ} })
+            body: JSON.stringify({ room: "ICTLab", floor: 7, building: "ECCBuilding", name: this.props.id, location: {x: newX, y: newY, z: newZ} })
         };
             console.log(requestOptions);
             fetch(this.props.url + 'mock/update/', requestOptions)   

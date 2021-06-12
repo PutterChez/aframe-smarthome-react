@@ -32,7 +32,7 @@ AFRAME.registerComponent('rotation-reader', {
         
         var euler = qte(quaternion);
         
-        var callibratedEuler = [-euler[2], euler[1], -euler[0] ];
+        var callibratedEuler = [-euler[2], -euler[1], -euler[0] ];
         // var callibratedEuler = [euler[0], euler[2], euler[1] -3.14159 ];
 
         var finalEuler = new THREE.Euler().fromArray(callibratedEuler);

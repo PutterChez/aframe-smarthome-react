@@ -18,6 +18,7 @@ class Device extends Component {
         this.channelDown = this.channelDown.bind(this);
         this.volumeSlider = this.volumeSlider.bind(this);
         this.closeMenu = this.closeMenu.bind(this);
+        this.moveObject = this.moveObject.bind(this);
         this.openMenu = this.openMenu.bind(this);
     }
 
@@ -108,7 +109,7 @@ class Device extends Component {
         const requestOptions = {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ room: "ICTLab", floor: 7, building: "ECCBuilding", name: "Light01", location: {x: newX, y: newY, z: newZ} })
+            body: JSON.stringify({ room: "ICTLab", floor: 7, building: "ECCBuilding", name: this.props.id, location: {x: newX, y: newY, z: newZ} })
         };
             console.log(requestOptions);
             fetch(this.props.url + 'mock/update/', requestOptions)   
@@ -137,7 +138,7 @@ class Device extends Component {
         return(
             <Entity id={this.props.id} position={this.props.position} >
                 <Entity
-                    id="TV" 
+                    id={this.props.id + "-model"} 
                     gltf-model="https://cdn.jsdelivr.net/gh/PutterChez/AFrame-SmartHome/TV_01.gltf" 
                     class="stickyMove" 
                     grabbable=""

@@ -51,7 +51,7 @@ class App extends Component {
 
     if(this.state.retrieveObjects){
       this.ws.current = new WebSocket(
-        "wss://c4fd98950efa.ngrok.io/ws/chat/Test1/",
+        "wss://a75da89c0831.ngrok.io/ws/chat/Test1/",
       );
   
       this.ws.current.onopen = () => {
